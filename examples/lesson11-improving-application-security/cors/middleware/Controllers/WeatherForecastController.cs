@@ -35,5 +35,14 @@ namespace middleware.Controllers
             })
             .ToArray();
         }
+
+        [HttpPost]
+        public ActionResult<Data> Post(Data myString) {
+            return Ok(myString);
+        }
+
+        public class Data {
+            public string data {get; set; }
+        }
     }
 }

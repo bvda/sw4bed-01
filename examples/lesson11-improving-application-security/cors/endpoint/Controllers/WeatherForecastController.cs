@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -35,5 +35,16 @@ namespace endpoint.Controllers
             })
             .ToArray();
         }
+
+        [EnableCors("Localhost")]
+        [HttpPost]
+        public ActionResult<Data> Post(Data myString) {
+            return Ok(myString);
+        }
+
+        public class Data {
+            public string data {get; set; }
+        }
     }
+
 }
