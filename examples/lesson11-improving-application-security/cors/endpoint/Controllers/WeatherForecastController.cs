@@ -47,9 +47,6 @@ namespace endpoint.Controllers
             return NoContent();
         }
 
-        public class Data {
-            public string data {get; set; }
-        }
     }
 
 
