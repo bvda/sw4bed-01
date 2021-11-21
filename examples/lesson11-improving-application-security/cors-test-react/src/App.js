@@ -1,51 +1,81 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
-
-// const url = 'https://cors-fixes.azurewebsites.net/weatherforecast' 
-const url = 'https://localhost:5001/weatherforecast'
+ 
+const URL = 'https://localhost:5001/weatherforecast'
+const HTTP_BODY = { data: "hej" }
 
 function App() {
-  axios.post(url, 
-    { data: "hej" }
-  ).then(function (response) {
-    console.log(response);
-  }).catch(function (error) {
-    console.log(error);
-  })
+  
+  const [fetchStatus, setFetchStatus] = useState(null)
+  const [axiosStatus, setAxiosStatus] = useState(null)
+  
+  useEffect(() => {
+    usingFetch(setFetchStatus)
+  }, [])
 
-  fetch(url, {
-    method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    body: JSON.stringify({ data: "hej" })
-  })
-  .then(response => response.json())
-  .then(data => console.log(data))
+  useEffect(() => {
+    usingAxios(setAxiosStatus)
+  }, [])
 
+  let isFetchingAxios = ''
+  if(axiosStatus === null) {
+    isFetchingAxios = 'Loading...'
+  } else {
+    isFetchingAxios = axiosStatus ? 'Success': 'Fail'
+  }
+
+  let isFetchingFetch = ''
+  if(fetchStatus === null) {
+    isFetchingFetch = 'Loading...'
+  } else {
+    isFetchingFetch = fetchStatus ? 'Success': 'Fail'
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>CORS test app</h1>
+        <ul>
+          <li>Fetch: {isFetchingFetch}</li>
+          <li>Axios: {isFetchingAxios}</li>
+        </ul>
+      </div>
     </div>
   );
+}
+
+function usingFetch(handleStatusChange) {
+
+  const HTTP_METHOD = 'POST' 
+  const CONTENT_TYPE = {
+    'Content-Type': 'application/json'
+  }
+
+  fetch(URL, {
+    method: HTTP_METHOD,
+      headers: CONTENT_TYPE,
+    body: JSON.stringify(HTTP_BODY)
+  })
+  .then(response => response.json())
+  .then(data => {
+    handleStatusChange(true)
+    console.log(data)
+  })
+  .catch(error => {
+    handleStatusChange(false)
+    console.log(error.message)
+  })
+}
+
+function usingAxios(handleStatusChange) {
+  axios.post(URL, HTTP_BODY)
+  .then(function (response) {
+    handleStatusChange(true)
+    console.log(response);
+  }).catch(function (error) {
+    handleStatusChange(false)
+    console.log(error);
+  })
 }
 
 export default App;

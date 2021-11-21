@@ -36,15 +36,21 @@ namespace endpoint.Controllers
             .ToArray();
         }
 
-        [EnableCors("Localhost")]
         [HttpPost]
         public ActionResult<Data> Post(Data myString) {
             return Ok(myString);
+        }
+
+        [HttpOptions]
+        public IActionResult PreflightRoute(int id)
+        {
+            return NoContent();
         }
 
         public class Data {
             public string data {get; set; }
         }
     }
+
 
 }

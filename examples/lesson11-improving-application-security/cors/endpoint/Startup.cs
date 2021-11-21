@@ -28,13 +28,15 @@ namespace endpoint
         {
             services.AddCors(options => {
                 options.AddPolicy("swafe-01.dk", builder => {
-                    builder.WithOrigins("https://swafe-01.dk").AllowAnyHeader().AllowAnyMethod();
-                });
-                options.AddPolicy("LocalhostReact", builder => {
-                    builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins(
+                        "https://swafe-01.dk"
+                    ).AllowAnyHeader().AllowAnyMethod();
                 });                
-                options.AddPolicy("LocalhostAngular", builder => {
-                    builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                options.AddPolicy("MyLocalhostPolicy", builder => {
+                    builder.WithOrigins(
+                        "http://localhost:4200",
+                        "http://localhost:3000"
+                    ).AllowAnyHeader().AllowAnyMethod();
                 });                
             });
 
@@ -65,7 +67,7 @@ namespace endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireCors("MyLocalhostPolicy");
             });
         }
     }
