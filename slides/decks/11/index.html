@@ -38,6 +38,17 @@
 					</ul>
 				</section>
 				<section>
+					<h2>Same-origin policy</h2>
+				</section>
+				<section>
+					<h2></h2>
+					<ul>
+						<li>Is a W3C standard that allows a server to relax the same-origin policy</li>
+						<li>Is not a security feature, CORS relaxes security. An API is not safer by allowing CORS</li>
+						<li>Allows a server to explicitly allow some cross-origin requests while rejecting others</li>
+					</ul>
+				</section>
+				<section>
 					<h2>Enabling CORS</h2>
 					<ul>
 						<li>There are three different ways to enable CORS in a .NET application:
@@ -49,12 +60,24 @@
 								</li>
 								<li>Endpoint routing
 									<ul>
-										<li>Apply named policies to specific endpoints</li>
+										<li>Apply policies on a per-endpoint basis</li>
+										<li>Does not support automatic pre-flight requests</li>
 									</ul>
 								</li>
-								<li>Attributes</li>
+								<li>Attributes
+									<ul>
+										<li>Apply named policies for selected endpoints</li>
+										<li>Different policies can be applied to controllers, page models, or action methods</li>
+									</ul>
+								</li>
 						</li>
 					</ul>
+					<aside class="notes" aria-label="notes">
+						<h4>References</h4>
+						<ul>
+							<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/cors">Enable Cross-Origin Requests (CORS) in ASP.NET Core | Microsoft Docs</a></li>
+						</ul>
+					</aside>
 				</section>
 			</div>
 		</div>
