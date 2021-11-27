@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="480" preserveAspectRatio="none" style="width:514px;height:480px;" width="514">
+  <path style="stroke:#FFF;stroke-width:1;stroke-dasharray:5,5" d="M48 36.297v408.922M477 36.297v408.922"/>
+  <path style="stroke:#FFF;stroke-width:1" d="M20 5h57v30.297H20z" fill="none"/>
+  <text fill="#FFF" font-family="Verdana" font-size="14" textLength="43" x="27" y="24.995">Client</text>
+  <path style="stroke:#FFF;stroke-width:1" d="M447 5h61v30.297h-61z" fill="none"/>
+  <text fill="#FFF" font-family="Verdana" font-size="14" textLength="47" x="454" y="24.995">Server</text>
+  <path style="stroke:#fff;stroke-width:1;fill:#fff" d="m465.5 123.961 10 4-10 4 4-4zM48.5 127.961h423"/>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="62.364">OPTIONS /doc HTTP/1.1</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="77.497">Origin: https://foo.example</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="92.629">Access-Control-Request-Method: POST</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="107.762">Access-Control-Request-Headers: X-PINGOTHER, Content-Type</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="122.895">...</text>
+  <path style="stroke:#FFF;stroke-width:1;fill:#fff" d="m59.5 228.758-10 4 10 4-4-4zM53.5 232.758h423"/>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="152.028">HTTP/1.1 204 No Content</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="167.161">Access-Control-Allow-Origin: https://foo.example</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="182.293">Access-Control-Allow-Methods: POST, GET, OPTIONS</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="197.426">Access-Control-Allow-Headers: Content-Type</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="212.559">Access-Control-Max-Age: 86400</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="227.692">...</text>
+  <path style="stroke:#FFF;stroke-width:1;fill:#fff" d="m465.5 318.422 10 4-10 4 4-4zM48.5 322.422h423"/>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="256.825">POST /doc HTTP/1.1</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="271.957">X-PINGOTHER: pingpong</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="287.09">Content-Type: text/xml; charset=UTF-8</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="302.223">Origin: https://foo.example</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="317.356">...</text>
+  <path style="stroke:#FFF;stroke-width:1;fill:#fff" d="m59.5 423.219-10 4 10 4-4-4zM53.5 427.219h423"/>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="346.489">HTTP/1.1 200 OK</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="361.622">Access-Control-Allow-Origin: https://foo.example</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="376.754">Vary: Accept-Encoding, Origin</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="391.887">Content-Encoding: gzip</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="407.02">Content-Length: 235</text>
+  <text font-family="monospace" fill="#fff" font-size="10"  x="65.5" y="422.153">...</text>
+</svg>

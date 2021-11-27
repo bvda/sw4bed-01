@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using shared;
 
 namespace endpoint.Controllers
 {
@@ -35,5 +35,19 @@ namespace endpoint.Controllers
             })
             .ToArray();
         }
+
+        [HttpPost]
+        public ActionResult<Data> Post(Data myString) {
+            return Ok(myString);
+        }
+
+        [HttpOptions]
+        public IActionResult PreflightRoute(int id)
+        {
+            return NoContent();
+        }
+
     }
+
+
 }

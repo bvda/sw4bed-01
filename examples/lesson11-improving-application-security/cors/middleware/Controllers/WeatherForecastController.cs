@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using shared;
 
 namespace middleware.Controllers
 {
@@ -34,6 +35,11 @@ namespace middleware.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost]
+        public ActionResult<Data> Post(Data myString) {
+            return Ok(myString);
         }
     }
 }

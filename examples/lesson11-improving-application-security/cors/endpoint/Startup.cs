@@ -26,6 +26,19 @@ namespace endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => {
+                options.AddPolicy("swafe-01.dk", builder => {
+                    builder.WithOrigins(
+                        "https://swafe-01.dk"
+                    ).AllowAnyHeader().AllowAnyMethod();
+                });                
+                options.AddPolicy("MyLocalhostPolicy", builder => {
+                    builder.WithOrigins(
+                        "http://localhost:4200",
+                        "http://localhost:3000"
+                    ).AllowAnyHeader().AllowAnyMethod();
+                });                
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -47,12 +60,14 @@ namespace endpoint
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireCors("MyLocalhostPolicy");
             });
         }
     }

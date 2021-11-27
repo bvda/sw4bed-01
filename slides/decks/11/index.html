@@ -1,47 +1,135 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Lesson 11</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="../../dist/reset.css">
-		<link rel="stylesheet" href="../../dist/reveal.css">
-		<link rel="stylesheet" href="../../dist/theme/black.css">
-		<link rel="stylesheet" type="text/css" href="../../css/asciinema-player.css" />
+	<title>Lesson 11</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="../../plugin/highlight/github-dark.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section id="introduction">
-					<h1>Improving application security</h1>
-					<h3>Lesson 11</h3>
-					<h4>SW4BED-01</h4>
-				</section>
-			</div>
+	<link rel="stylesheet" href="../../dist/reset.css">
+	<link rel="stylesheet" href="../../dist/reveal.css">
+	<link rel="stylesheet" href="../../dist/theme/black.css">
+	<link rel="stylesheet" type="text/css" href="../../css/asciinema-player.css" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="../../plugin/highlight/github-dark.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section id="improving-application-security">
+				<h1>Improving application security</h1>
+				<h3>Lesson 11</h3>
+				<h4>SW4BED-01</h4>
+			</section>
+			<section id="agenda">
+				<h2>Agenda</h2>
+				<ul>
+					<li>Encrypting traffic using HTTPS</li>
+					<li>Defending against cross-site scripting attacks</li>
+					<li>Protecting from cross-site request forgery attacks</li>
+					<li>Allowing calls from other origins using CORS</li>
+				</ul>
+			</section>
+			<section id="introduction">
+				<h2>Introduction</h2>
+				<ul>
+					<li>Web application security is a hot topic at the moment</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Same-origin policy</h2>
+				<ul>
+					<li>Two URLs have the same origin if they have identical schemes, hosts, and ports</li>
+					<li>These two URLs have the same origin
+						<ul>
+							<li><code>https://example.com/foo.html</code></li>
+							<li><code>https://example.com/bar.html</code></li>
+						</ul>
+					</li>
+					<li>These URLs have different origins than the previous two URLs
+						<ul>
+							<li><code>https://example.net</code>: Different domain</li>
+							<li><code>https://www.example.com/foo.html</code>: Different subdomain</li>
+							<li><code>http://example.com/foo.html</code>: Different scheme</li>
+							<li><code>https://example.com:9000/foo.html</code>: Different port</li>
+						</ul>
+					</li>
+					<li>Defined in <a href="https://datatracker.ietf.org/doc/html/rfc6454">RFC 6454</a></li>
+				</ul>
+				<aside class="notes" aria-label="">
+					<h4>References</h4>
+					<ul>
+						<li><a href="https://datatracker.ietf.org/doc/html/rfc6454">rfc6454</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section>
+				<h2>Cross-origin resource sharing</h2>
+				<ul>
+					<li>Is a W3C standard that allows a server to relax the same-origin policy</li>
+					<li>Is not a security feature, CORS relaxes security. An API is not safer by allowing CORS</li>
+					<li>Allows a server to explicitly allow some cross-origin requests while rejecting others</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Pre-flight</h2>
+				<img src="../../assets/cors-full-request.svg" alt="catcherror" width="50%" />
+			</section>
+			<section>
+				<h2>Enabling CORS</h2>
+				<ul>
+					<li>There are three different ways to enable CORS in a .NET application:
+						<ul>
+							<li>Middleware
+								<ul>
+									<li>Apply default and named policies to all endpoints</li>
+								</ul>
+							</li>
+							<li>Endpoint routing
+								<ul>
+									<li>Apply policies on a per-endpoint basis</li>
+									<li>Does not support automatic pre-flight requests</li>
+								</ul>
+							</li>
+							<li>Attributes
+								<ul>
+									<li>Apply named policies for selected endpoints</li>
+									<li>Different policies can be applied to controllers, page models, or action methods</li>
+								</ul>
+							</li>
+					</li>
+				</ul>
+				<aside class="notes" aria-label="notes">
+					<h4>References</h4>
+					<ul>
+						<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/cors">Enable Cross-Origin Requests (CORS) in ASP.NET Core | Microsoft Docs</a></li>
+					</ul>
+				</aside>
+			</section>
 		</div>
+	</div>
 
-		<script src="../../dist/reveal.js"></script>
-		<script src="../../plugin/notes/notes.js"></script>
-		<script src="../../plugin/markdown/markdown.js"></script>
-		<script src="../../plugin/highlight/highlight.js"></script>
-		<script src="../../js/asciinema-player.js"></script>
+	<script src="../../dist/reveal.js"></script>
+	<script src="../../plugin/notes/notes.js"></script>
+	<script src="../../plugin/markdown/markdown.js"></script>
+	<script src="../../plugin/highlight/highlight.js"></script>
+	<script src="../../js/asciinema-player.js"></script>
 
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-				slideNumber: true,
-				pdfSeparateFragments: false,
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			slideNumber: true,
+			pdfSeparateFragments: false,
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>

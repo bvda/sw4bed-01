@@ -1,6 +1,6 @@
 using System;
 
-namespace endpoint
+namespace shared
 {
     public class WeatherForecast
     {
