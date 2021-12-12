@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -67,7 +68,14 @@ namespace endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers().RequireCors("MyLocalhostPolicy");
+                endpoints.MapControllerRoute(
+                    name: "weatherForecast111",
+                    pattern: "{controlkkkkler}",
+                    defaults: new { action = "Get" }
+                );
+                endpoints.MapGet("/echo",
+                    context => context.Response.WriteAsync("echo"));
+                // endpoints.MapControllers().RequireCors("MyLocalhostPolicy");
             });
         }
     }

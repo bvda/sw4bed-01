@@ -69,6 +69,7 @@ namespace attributes
 
       app.UseEndpoints(endpoints =>
       {
+        endpoints.MapGet();
         endpoints.MapControllers();
       });
     }
