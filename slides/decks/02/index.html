@@ -45,10 +45,25 @@
 					<section>
 						<h2>Docker architecture</h2>
 						<ul>
-							<li>Docker deamon</li>
-							<li>Docker client</li>
-							<li>Docker registries</li>
-							<li>Docker Objects
+							<li>Docker deamon
+								<ul>
+									<li>listens for Docker API requests</li>
+									<li>Manages Docker objects</li>
+								</ul>
+							</li>
+							<li>Docker client
+								<ul>
+									<li>The primary way users interact with Docker</li>
+								</ul>
+							</li>
+							<li>Docker registries
+								<ul>
+									<li>Stores Docker images</li>
+									<li>Docker Hub is a public registry (used by default). You can run a private registry</li>
+									<li><code>docker pull/run</code> fetches required images, and <code>docker push</code> publishes images to registries</li>
+								</ul>
+							</li>
+							<li>Docker objects
 								<ul>
 									<li>Images</li>
 									<li>Containers</li>
