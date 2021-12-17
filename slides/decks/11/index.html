@@ -46,6 +46,31 @@
 				</ul>
 			</section>
 			<section>
+				<h2>Encrypting traffic using HTTPS</h2>
+				<ul>
+					<li>Two certificate</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Public key cryptography</h2>
+				<ul>
+					<li>Consists of two parts:
+						<ul>
+							<li>A public key, that anyone can see</li>
+							<li>A private key, that only the server can see</li>
+						</ul>
+					</li>
+					<li>Data encrypted with the public key can only be decrypted with the private key</li>
+					<li>TLS handshake
+						<ul>
+							<li>Client/server key exchange and verification</li>
+							<li>Master secret</li>
+							<li>Data transmission</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
 				<h2>Same-origin policy</h2>
 				<ul>
 					<li>Two URLs have the same origin if they have identical schemes, hosts, and ports</li>
@@ -57,10 +82,10 @@
 					</li>
 					<li>These URLs have different origins than the previous two URLs
 						<ul>
-							<li><code>https://example.net</code>: Different domain</li>
-							<li><code>https://www.example.com/foo.html</code>: Different subdomain</li>
-							<li><code>http://example.com/foo.html</code>: Different scheme</li>
-							<li><code>https://example.com:9000/foo.html</code>: Different port</li>
+							<li><code>https://example.net</code>—Different domain</li>
+							<li><code>https://www.example.com/foo.html</code>—Different subdomain</li>
+							<li><code>http://example.com/foo.html</code>—Different scheme</li>
+							<li><code>https://example.com:9000/foo.html</code>—Different port</li>
 						</ul>
 					</li>
 					<li>Defined in <a href="https://datatracker.ietf.org/doc/html/rfc6454">RFC 6454</a></li>
@@ -114,6 +139,38 @@
 						<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/cors">Enable Cross-Origin Requests (CORS) in ASP.NET Core | Microsoft Docs</a></li>
 					</ul>
 				</aside>
+			</section>
+			<section>
+				<h2>Middleware</h2>
+				<pre><code class="cs" data-line-numbers="|4-5,15|6-13|17-18,24|20-22|21|" data-trim data-noescape><script type="text/template">
+					public class Startup
+					{
+						...
+						public void ConfigureServices(IServiceCollection services)
+						{
+							services.AddCors(options => {
+								options.AddDefaultPolicy(builder => {
+									builder.WithOrigins(
+										"http://localhost:4200",
+										"http://localhost:3000"
+									).AllowAnyHeader().AllowAnyMethod();
+								});
+							});
+							...
+						}
+						...
+						public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+						{
+							...
+							app.UseRouting();
+							app.UseCors();
+							app.UseAuthorization();
+							...
+						}
+					}
+				</script>
+				</code></pre>
+				<small>examples/lesson11-improving-application-security/cors/middleware/Startup.cs</small>
 			</section>
 		</div>
 	</div>
