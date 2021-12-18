@@ -88,40 +88,65 @@
 						</aside>
 					</section>
 				</section>
+				<section id="creating-images">
+					<section>
+						<h1>Creating images</h1>
+					</section>
+					<section>
+						<h2>Dockerfile</h2>
+						<pre><code class="docker" data-line-numbers data-trim data-noescape><script type="text/template">
+							# https://hub.docker.com/_/microsoft-dotnet
+							FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+							WORKDIR /source
+							
+							# copy csproj and restore as distinct layers
+							COPY *.sln .
+							COPY whales/*.csproj ./whales/
+							RUN dotnet restore
+							
+							# copy everything else and build app
+							COPY whales/. ./whales/s
+							WORKDIR /source/whales
+							RUN dotnet publish -c release -o /app
+							
+							# final stage/image
+							FROM mcr.microsoft.com/dotnet/aspnet:5.0
+							WORKDIR /app
+							COPY --from=build /app ./
+							ENTRYPOINT ["dotnet", "whales.dll"]
+						</script>
+						</code></pre>
+						<small>examples/lesson-02-docker/hello-docker/Dockerfile</small>
+					</section>
+					<section>
+						<h2>Docker build</h2>
+						<ul>
+							<li>The <code>docker build</code> command builds an image from a Dockerfile and a context
+								<ul>
+									<li>A build's context is a set of files located in a <code>PATH</code> or <code>URL</code></li>
+									<li>When the <code>URL</code> points to a Git repository, that acts as the context </li>
+								</ul>
+							</li>
+							<li>Options
+								<ul>
+									<li><code>--pull</code>—Always attempt to pull a newer version of the image</li>
+									<li><code>--file, -f</code>—Name of the Dockerfile (Default is 'PATH/Dockerfile')</li>
+									<li><code>--tag , -t</code>—Name and optionally a tag in the 'name:tag' format</li>
+								</ul>
+							</li>
+							<li>Use a <code>.dockerignore</code> file to exclude files from being sent to the Docker daemon</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/build/">docker build | Docker Documentation</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
 				<section id="build-and-deploy-containers">
 					<section>
 						<h1>Build and deploy containers</h1>
-					</section>
-					<section id="creating-images">
-						<section>
-							<h1>Creating images</h1>
-						</section>
-						<section>
-							<h2>Dockerfile</h2>
-							<pre><code class="docker" data-line-numbers data-trim data-noescape><script type="text/template">
-								# https://hub.docker.com/_/microsoft-dotnet
-								FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-								WORKDIR /source
-								
-								# copy csproj and restore as distinct layers
-								COPY *.sln .
-								COPY whales/*.csproj ./whales/
-								RUN dotnet restore
-								
-								# copy everything else and build app
-								COPY whales/. ./whales/
-								WORKDIR /source/whales
-								RUN dotnet publish -c release -o /app
-								
-								# final stage/image
-								FROM mcr.microsoft.com/dotnet/aspnet:5.0
-								WORKDIR /app
-								COPY --from=build /app ./
-								ENTRYPOINT ["dotnet", "whales.dll"]
-							</script>
-							</code></pre>
-							<small>examples/lesson-02-docker/hello-docker/Dockerfile</small>
-						</section>
 					</section>
 				</section>
 				<section id="persisting-data">
