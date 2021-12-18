@@ -92,6 +92,32 @@
 					<section>
 						<h1>Build and deploy containers</h1>
 					</section>
+					<section>
+						<h2>Dockerfile</h2>
+						<pre><code class="docker" data-line-numbers data-trim data-noescape><script type="text/template">
+							# https://hub.docker.com/_/microsoft-dotnet
+							FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+							WORKDIR /source
+							
+							# copy csproj and restore as distinct layers
+							COPY *.sln .
+							COPY whales/*.csproj ./whales/
+							RUN dotnet restore
+							
+							# copy everything else and build app
+							COPY whales/. ./whales/
+							WORKDIR /source/whales
+							RUN dotnet publish -c release -o /app
+							
+							# final stage/image
+							FROM mcr.microsoft.com/dotnet/aspnet:5.0
+							WORKDIR /app
+							COPY --from=build /app ./
+							ENTRYPOINT ["dotnet", "whales.dll"]
+						</script>
+						</code></pre>
+						<small>examples/lesson-02-docker/hello-docker/Dockerfile</small>
+					</section>
 				</section>
 				<section id="creating-images">
 					<section>
