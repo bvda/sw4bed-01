@@ -39,8 +39,16 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li></li>
+							<li>Docker is an open platform for developing, shipping and running applications</li>
+							<li>Docker separates applications from infrastructure</li>
+							<li>Docker let you manage your infrastructure in the same way you manage your applications</li>
 						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>Docker overview | Docker Documentation</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Docker architecture</h2>
@@ -63,12 +71,6 @@
 									<li><code>docker pull/run</code> fetches required images, and <code>docker push</code> publishes images to registries</li>
 								</ul>
 							</li>
-							<li>Docker objects
-								<ul>
-									<li>Images</li>
-									<li>Containers</li>
-								</ul>
-							</li>
 						</ul>
 						<aside class="notes">
 							<h4>References</h4>
@@ -86,6 +88,33 @@
 								<li><a href="https://docs.docker.com/get-started/overview/#docker-architecture">Docker overview | Docker Documentation</a></li>
 							</ul>
 						</aside>
+					</section>
+					<section>
+						<h2>Docker images</h2>
+						<ul>
+							<li>Images are read-only templates with instructions for creating containers
+								<ul>
+									<li>Images are typically based on other images, with some customization</li>
+								</ul>
+							</li>
+							<li>To build an image, you create a Dockerfile
+								<ul>
+									<li>A simple syntax defines the steps needed to produce and image and run it</li>
+									<li>Each instruction create a layer in the image</li>
+								</ul>
+							</li>
+							<li>Layers are what makes Docker so lightweight, small, and fast when compared with other virtualization technologies
+								<ul>
+									<li>When rebuilding an image, only those layers which have changed are rebuilt</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Docker containers</h2>
+						<ul>
+							<li></li>
+						</ul>
 					</section>
 				</section>
 				<section id="creating-images">
