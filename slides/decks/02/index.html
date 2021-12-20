@@ -22,7 +22,7 @@
 					<h3>Lesson 02</h3>
 					<h4>SW4BED-01</h4>
 				</section>
-				<section>
+				<section id="agenda">
 					<h2>Agenda</h2>
 					<ul>
 						<li>What is Docker?</li>
@@ -53,7 +53,7 @@
 					<section>
 						<h2>Docker architecture</h2>
 						<ul>
-							<li>Docker deamon
+							<li>Docker daemon
 								<ul>
 									<li>listens for Docker API requests</li>
 									<li>Manages Docker objects</li>
@@ -113,13 +113,31 @@
 					<section>
 						<h2>Docker containers</h2>
 						<ul>
-							<li></li>
+							<li>A container is a runnable instance of an image</li>
+							<li>A container is relatively well isolated from other containers and its host machine</li>
+							<li>A container is defined by its image as well as any configuration options you provide to it when you create or start it
+								<ul>
+								<li>When a container is removed, any changes to its state that are not stored in persistent storage disappear</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 				</section>
 				<section id="creating-images">
 					<section>
 						<h1>Creating images</h1>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>Dockerfiles</li>
+							<li>Building images
+								<ul>
+									<li>Using <code>docker build</code></li>
+									<li>Multi-stage builds</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 					<section>
 						<h2>Dockerfile</h2>
@@ -187,6 +205,16 @@
 					<section>
 						<h1>Multi-container applications</h1>
 					</section>
+				</section>
+				<section>
+					<h2>Wrap-up</h2>
+					<ul>
+						<li>What is Docker?</li>
+						<li>Build and deploy containers</li>
+						<li>Creating images</li>
+						<li>Persisting data</li>
+						<li>Multi-container applications</li>
+					</ul>
 				</section>
 			</div>
 		</div>
