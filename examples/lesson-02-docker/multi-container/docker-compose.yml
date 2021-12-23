@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  api:
+    image: whales-web
+    build:
+      context: ./whales
+      dockerfile: Dockerfile
+    ports:
+      - "9080:80"
+    depends_on: 
+      - migrations
+      - db
+  db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
+      ACCEPT_EULA: "Y"
+    ports:
+    - "14331:1433"
+    depends_on: 
+      - migrations
+  migrations:
+    build: 
+      context: ./whales
+      dockerfile: Migrations.Dockerfile

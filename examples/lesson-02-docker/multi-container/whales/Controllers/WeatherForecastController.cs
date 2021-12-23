@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace whales.Controllers
@@ -17,23 +18,41 @@ namespace whales.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly WeatherForecastDbContext _context;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<ActionResult<IEnumerable<WeatherForecast>>> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return await _context.WeatherForecasts.ToListAsync();
+        }
+
+                [HttpGet("{id}")]
+        public async Task<ActionResult<WeatherForecast>> GetWeatherForecast(long id)
+        {
+            var todoItem = await _context.WeatherForecasts.FindAsync(id);
+
+            if (todoItem == null)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                return NotFound();
+            }
+
+            return todoItem;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<WeatherForecast>> PostWeatherForecast(WeatherForecast weatherForecast) 
+        {
+            _context.WeatherForecasts.Add(weatherForecast);
+            await _context.SaveChangesAsync();
+
+            //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+            return CreatedAtAction(nameof(GetWeatherForecast), new { id = weatherForecast.Id }, weatherForecast);
         }
     }
 }

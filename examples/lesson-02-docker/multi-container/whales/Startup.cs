@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +27,12 @@ namespace whales
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+                var connection = @"Server=db;Database=master;User=sa;Password=suchSecureVeryWordSoPassW0w!;";
+
+            // This line uses 'UseSqlServer' in the 'options' parameter
+            // with the connection string defined above.
+            services.AddDbContext<WeatherForecastDbContext>(
+            options => options.UseSqlServer(connection));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
