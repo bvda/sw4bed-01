@@ -13,6 +13,8 @@ services:
       - db
   db:
     image: mcr.microsoft.com/mssql/server
+    volumes:
+      - ./tmp/multi-container:/var/opt/mssql/data
     environment:
       SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
       ACCEPT_EULA: "Y"

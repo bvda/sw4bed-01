@@ -199,6 +199,25 @@
 				<section id="persisting-data">
 					<section>
 						<h1>Persisting data</h1>
+						<ul>
+							<li>Data does not persist when a container no longer exists</li>
+							<li>Docker has two options for containers to store files in the host machine
+								<ul>
+									<li>Volumes</li>
+									<li>Bind mounts</li>
+									<li><code>tmpfs</code> (Linux) or <code>named pipes</code> (Windows)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.docker.com/storage/">Manage data in Docker | Docker Documentation</a></li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section id="multi-container-applications">
