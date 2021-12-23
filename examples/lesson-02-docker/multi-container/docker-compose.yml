@@ -13,16 +13,20 @@ services:
       - db
   db:
     image: mcr.microsoft.com/mssql/server
+    user: root
     volumes:
-      - ./tmp/multi-container:/var/opt/mssql/data
+      - multi-container:/var/opt/mssql/data
     environment:
       SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
       ACCEPT_EULA: "Y"
     ports:
     - "14331:1433"
-    depends_on: 
+    depends_on:
       - migrations
   migrations:
     build: 
       context: ./whales
       dockerfile: Migrations.Dockerfile
+volumes:
+  multi-container:
+    name: multi-container
