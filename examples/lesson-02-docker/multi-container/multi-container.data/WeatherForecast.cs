@@ -1,6 +1,6 @@
 using System;
 
-namespace whales
+namespace multi_container.data
 {
     public class WeatherForecast
     {

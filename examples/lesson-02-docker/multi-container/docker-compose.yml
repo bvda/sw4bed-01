@@ -4,12 +4,12 @@ services:
   api:
     image: whales-web
     build:
-      context: ./whales
+      # context: .
       dockerfile: Dockerfile
     ports:
       - "9080:80"
     depends_on: 
-      - migrations
+      # - migrations
       - db
   db:
     image: mcr.microsoft.com/mssql/server
@@ -21,12 +21,12 @@ services:
       ACCEPT_EULA: "Y"
     ports:
     - "14331:1433"
-    depends_on:
-      - migrations
-  migrations:
-    build: 
-      context: ./whales
-      dockerfile: Migrations.Dockerfile
+    # depends_on:
+    #   - migrations
+  # migrations:
+  #   build: 
+  #     context: ./whales
+  #     dockerfile: Migrations.Dockerfile
 volumes:
   multi-container:
     name: multi-container

@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace whales 
+namespace multi_container.data 
 {
   public class WeatherForecastDbContext : DbContext {
     public WeatherForecastDbContext (DbContextOptions<WeatherForecastDbContext> options)
