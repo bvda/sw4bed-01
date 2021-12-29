@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 namespace multi_container.data 
 {
   public class WeatherForecastDbContext : DbContext {
+
+    public WeatherForecastDbContext() : base() { }
     public WeatherForecastDbContext (DbContextOptions<WeatherForecastDbContext> options)
                 : base(options)
             {

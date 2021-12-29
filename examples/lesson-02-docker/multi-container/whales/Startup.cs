@@ -33,7 +33,10 @@ namespace whales
             // This line uses 'UseSqlServer' in the 'options' parameter
             // with the connection string defined above.
             services.AddDbContext<WeatherForecastDbContext>(
-            options => options.UseSqlServer(connection));
+            options => options.UseSqlServer(
+                connection,
+                x => x.MigrationsAssembly("multi-container.migrations")
+            ));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
