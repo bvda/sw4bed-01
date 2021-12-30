@@ -11,8 +11,8 @@ namespace multi_container.data
 
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
-        public string Summary { get; set; }
+        public string Summary { get; set; } = string.Empty;
 
-        public string NewSummary { get; set; }
+        public string NewSummary { get; set; } = string.Empty;
     }
 }
