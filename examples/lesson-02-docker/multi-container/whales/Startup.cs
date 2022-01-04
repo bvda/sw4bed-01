@@ -28,13 +28,13 @@ namespace whales
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-                var connection = @"Server=db;Database=master;User=sa;Password=suchSecureVeryWordSoPassW0w!;";
+            // var connection = @"Server=db;Database=master;User=sa;Password=suchSecureVeryWordSoPassW0w!;";
 
             // This line uses 'UseSqlServer' in the 'options' parameter
             // with the connection string defined above.
             services.AddDbContext<WeatherForecastDbContext>(
             options => options.UseSqlServer(
-                connection,
+                Configuration["ConnectionString"],
                 x => x.MigrationsAssembly("multi-container.migrations")
             ));
 
