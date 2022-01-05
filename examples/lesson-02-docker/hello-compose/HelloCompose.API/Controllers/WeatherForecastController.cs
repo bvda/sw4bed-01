@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using HelloCompose.Data;
 
 namespace HelloCompose.API.Controllers;
@@ -7,27 +8,41 @@ namespace HelloCompose.API.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly WeatherForecastDbContext _context;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<WeatherForecast>>> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        return await _context.WeatherForecasts.ToListAsync();
+    }
+
+    
+    [HttpGet("{id}")]
+    public async Task<ActionResult<WeatherForecast>> GetWeatherForecast(long id)
+    {
+        var todoItem = await _context.WeatherForecasts.FindAsync(id);
+
+        if (todoItem == null)
         {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+            return NotFound();
+        }
+
+        return todoItem;
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<WeatherForecast>> PostWeatherForecast(WeatherForecast weatherForecast) 
+    {
+        _context.WeatherForecasts.Add(weatherForecast);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetWeatherForecast), new { id = weatherForecast.Id }, weatherForecast);
     }
 }

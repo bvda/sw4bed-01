@@ -20,4 +20,4 @@ services:
     - "14331:1433"
 volumes:
   hello-compose:
-    name: hello-compose
+    name: hello-compose-db
