@@ -10,10 +10,5 @@ namespace HelloCompose.Data
     }
 
     public DbSet<WeatherForecast> WeatherForecasts => Set<WeatherForecast>();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-      modelBuilder.Entity<WeatherForecast>().ToTable("WeatherForecast");
-    }
   }
 }

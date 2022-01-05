@@ -5,5 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\HelloCompose.Data\HelloCompose.Data.csproj" />
+  </ItemGroup>
 
 </Project>
