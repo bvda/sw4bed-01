@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "iM+ZOw4PgHps0OoDhHahSGd3Ho6Q2Rp3SySPC9w53bw=",
+  "Source": "HelloCompose.API",
+  "BasePath": "_content/HelloCompose.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
