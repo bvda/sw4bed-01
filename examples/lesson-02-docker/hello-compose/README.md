@@ -19,9 +19,10 @@ Run to `docker compose up` start the solution.
 
 This will create to containers `hello-compose-api-1` and `hello-compose-db-1`. When starting the container for the first time, it will also create volume `hello-compose-db` where data are persisted between starts.
 
+Run `dotnet ef database update --startup-project HelloCompose.API` to create the database in `hello-compose-db-1`. Make sure the the connection string are configured before running this command (see `examples/lesson-02-docker/hello-compose/HelloCompose.API/<appsettings|appsettings.Development>.json`)
+
 ## Migrations
 ### Run migrations
-Run `dotnet ef database update --startup-project HelloCompose.API` to create the database in `hello-compose-db-1`.
 
 Add new migration with `dotnet ef migrations add <NAME> -p HelloCompose.Migrations -s HelloCompose.API`. 
 - `-p|--project <PROJECT>` – relative path of the target project. Default value is current directory
