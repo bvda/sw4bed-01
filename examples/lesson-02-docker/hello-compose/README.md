@@ -10,7 +10,6 @@ This solution is based on the following offical Docker images published by Micro
 - [ASP.NET Core Runtime by Microsoft | Docker Hub](https://hub.docker.com/_/microsoft-dotnet-aspnet)
 - [Microsoft SQL Server by Microsoft | Docker Hub](https://hub.docker.com/_/microsoft-mssql-server)
 
-
 The solution follows the guidelines found in [Using a Separate Migrations Project - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/projects?tabs=dotnet-core-cli). It contains the followiing projects:
 - `HelloCompose.API` – Application code
 - `HelloCompose.Data` – Models and database contexts
@@ -24,14 +23,16 @@ The following software is required to be installed:
 - [Docker Desktop](https://www.docker.com/get-started)
 
 ### Build the solution
-Run `docker compose build .` to build the solution.
+Run `docker compose build` to build the solution.
 
 ### Run the solution
 Run to `docker compose up` start the solution.
 
 This will create to containers `hello-compose-api-1` and `hello-compose-db-1`. When starting the container for the first time, it will also create volume `hello-compose-db` where data are persisted between starts.
 
-Run `dotnet ef database update --startup-project HelloCompose.API` to create the database in `hello-compose-db-1`. Make sure the the connection string are configured before running this command (see `examples/lesson-02-docker/hello-compose/HelloCompose.API/<appsettings|appsettings.Development>.json`)
+Run `dotnet ef database update --startup-project HelloCompose.API` to create the database in `hello-compose-db-1`. 
+
+Make sure the the connection string are configured before running this command (see `examples/lesson-02-docker/hello-compose/HelloCompose.API/<appsettings|appsettings.Development>.json`)
 
 ## Migrations
 ### Run migrations
