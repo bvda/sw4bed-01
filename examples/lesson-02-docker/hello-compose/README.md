@@ -17,6 +17,12 @@ The solution follows the guidelines found in [Using a Separate Migrations Projec
 - `HelloCompose.Migrations` – Migration code
 
 ## Getting started
+### Prerequisites
+The following software is required to be installed:
+- [.NET 6.0](https://dotnet.microsoft.com/en-us/download)
+- [Entirty Framework Core](https://docs.microsoft.com/en-us/ef/core/get-started/overview/install)
+- [Docker Desktop](https://www.docker.com/get-started)
+
 ### Build the solution
 Run `docker compose build .` to build the solution.
 
