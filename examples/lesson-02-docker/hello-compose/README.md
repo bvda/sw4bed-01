@@ -41,4 +41,4 @@ Add new migration with `dotnet ef migrations add <NAME> -p HelloCompose.Migratio
 - `-p|--project <PROJECT>` – relative path of the target project. Default value is current directory
 - `-s|--startup-project <PROJECT>` – relative path of the startup-project. Default value is current directory
 
-See [Migrations Overview - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) for more information.
+See [Migrations Overview - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) for more information
