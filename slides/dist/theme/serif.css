@@ -35,6 +35,13 @@ code {
   padding: 5px 10px;
 }
 
+mark {
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: khaki;
+}
+
 .reveal a {
   line-height: 1.3em;
 }
