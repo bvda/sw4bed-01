@@ -53,18 +53,18 @@
 					<section>
 						<h2>Docker architecture</h2>
 						<ul>
-							<li>Docker daemon
+							<li>Docker <mark>daemon</mark>
 								<ul>
 									<li>listens for Docker API requests</li>
 									<li>Manages Docker objects</li>
 								</ul>
 							</li>
-							<li>Docker client
+							<li>Docker <mark>client</mark>
 								<ul>
 									<li>The primary way users interact with Docker</li>
 								</ul>
 							</li>
-							<li>Docker registries
+							<li>Docker <mark>registries</mark>
 								<ul>
 									<li>Stores Docker images</li>
 									<li>Docker Hub is a public registry (used by default). You can run a private registry</li>
@@ -92,18 +92,18 @@
 					<section>
 						<h2>Docker images</h2>
 						<ul>
-							<li>Images are read-only templates with instructions for creating containers
+							<li>Images are <mark>read-only</mark> templates with instructions for creating containers
 								<ul>
 									<li>Images are typically based on other images, with some customization</li>
 								</ul>
 							</li>
-							<li>To build an image, you create a Dockerfile
+							<li>To build an image, you create a <mark>Dockerfile</mark>
 								<ul>
 									<li>A simple syntax defines the steps needed to produce and image and run it</li>
 									<li>Each instruction create a layer in the image</li>
 								</ul>
 							</li>
-							<li>Layers are what makes Docker so lightweight, small, and fast when compared with other virtualization technologies
+							<li><mark>Layers</mark> are what makes Docker so lightweight, small, and fast when compared with other virtualization technologies
 								<ul>
 									<li>When rebuilding an image, only those layers which have changed are rebuilt</li>
 								</ul>
@@ -113,9 +113,9 @@
 					<section>
 						<h2>Docker containers</h2>
 						<ul>
-							<li>A container is a runnable instance of an image</li>
-							<li>A container is relatively well isolated from other containers and its host machine</li>
-							<li>A container is defined by its image as well as any configuration options you provide to it when you create or start it
+							<li>A container is a <mark>runnable instance</mark> of an image</li>
+							<li>A container is relatively well <mark>isolated</mark> from other containers and its host machine</li>
+							<li>A container is defined by its image as well as any <mark>configuration</mark> you provide to it when you create or start it
 								<ul>
 								<li>When a container is removed, any changes to its state that are not stored in persistent storage disappear</li>
 								</ul>
