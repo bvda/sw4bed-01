@@ -55,7 +55,7 @@
 						<ul>
 							<li>Docker <mark>daemon</mark>
 								<ul>
-									<li>listens for Docker API requests</li>
+									<li>Listens for Docker API requests</li>
 									<li>Manages Docker objects</li>
 								</ul>
 							</li>
@@ -207,9 +207,9 @@
 					<section>
 						<h2>Publishing images</h2>
 						<ul>
-							<li>Use `docker push` to upload and publish images in registries
+							<li>Use <code>docker push</code> to upload and publish images in registries
 								<ul> 
-									<li>Docker Hub is set as default</li>
+									<li>Default registry: <a href="https://hub.docker.com/">Docker Hub</a></li>
 								</ul>
 							</li>
 							<li>Be sure to tag the image as <code>&lt;USERNAME&gt;/&lt;IMAGE_TAG&gt;</code></li>
@@ -225,6 +225,51 @@
 				<section id="build-and-deploy-containers">
 					<section>
 						<h1>Build and deploy containers</h1>
+					</section>
+					<section>
+						<h2>Containers</h2>
+						<ul>
+							<li>A container a runnable <mark>instance</mark> of an <mark>image</mark></li>
+							<li>Containers are ephemeral
+								<ul>
+									<li>They can be stopped, destroyed, rebuilt and replaced with minimum set up and configuration</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2><code>docker run</code></h2>
+						<ul>
+							<li><code>docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</code></li>
+							<li>Options
+								<ul>
+									<li><code>--detach, -d</code>—Run container in background and print container ID</li>
+									<li><code>--rm</code>—Automatically remove the container when it exits</li>
+									<li><code>--tty, -t</code>—Allocate a pseudo-TTY</li>
+									<li><code>--interactive, -i</code>—Keep STDIN open even if not attached</li>
+									<li><code>--volume, -v</code>—Bind mount a volume</li>
+									<li><code>--name</code>—Assign a name to the container</li>
+									<li><code>--publish, -p</code>—Publish a container's port(s) to the host</li>
+								</ul>
+							</li>
+							<li><code>docker run --rm -p 5000:80 my_app</code>
+								<ul>
+									<li>Run image named <code>my_app</code> and expose port 80 in the container on 5000 on the host, and remove the container when it stops</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>Reference</h4>
+							<ul>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/run/">docker run | Docker Documentation</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Other docker</h2>
+						<ul>
+							<li>https://docs.docker.com/engine/reference/commandline/port/</li>
+						</ul>
 					</section>
 				</section>
 				<section id="persisting-data">
