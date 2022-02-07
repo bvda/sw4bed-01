@@ -22,7 +22,12 @@ If you are running a Home edition of Windows 10/11, check out the blog post @ ht
 
 ## Exercise 01-2
 ### Containerizing a ASP.NET Core application
+Go ahead and study the guide @ https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images
+
+Write down an answer to the following questions:
+- Is it possible to have multiple Dockerfiles in one project?
+- What are the benefits of using a multi-stage build strategy when building .NET images?
 
 ## Exercise 01-3
-### Multi-container applications
+### Multi-container applications with Docker Compose
   
