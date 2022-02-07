@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "9080:80"
+    depends_on: 
+      - db
+  db:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+    - "27017:27017"

@@ -372,16 +372,55 @@
 							<li>Compose is a tool for <mark>defining</mark> and <mark>running</mark> <mark>multi-container</mark> applications</li>
 						</ul>
 					</section>
+					<section>	
+						<pre><code class="docker" data-line-numbers data-trim data-noescape><script type="text/template">
+							version: '3.4'
+
+							services:
+								api:
+									build:
+										dockerfile: Dockerfile
+									ports:
+										- "9080:80"
+									depends_on: 
+										- db
+								db:
+									image: mcr.microsoft.com/mssql/server
+									user: root
+									volumes:
+										- hello-compose:/var/opt/mssql/data
+									environment:
+										SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
+										ACCEPT_EULA: "Y"
+									ports:
+									- "14331:1433"
+							volumes:
+								hello-compose:
+									name: hello-compose-db
+							</script>
+						</code></pre>
+						<small>examples/lesson-02-docker/hello-docker/Dockerfile</small>
+					</section>
 				</section>
 				<section>
-					<h2>Wrap-up</h2>
-					<ul>
-						<li>What is Docker?</li>
-						<li>Build and deploy containers</li>
-						<li>Creating images</li>
-						<li>Persisting data</li>
-						<li>Multi-container applications</li>
-					</ul>
+					<section>
+						<h2>Wrap-up</h2>
+						<ul>
+							<li>What is Docker?</li>
+							<li>Build and deploy containers</li>
+							<li>Creating images</li>
+							<li>Persisting data</li>
+							<li>Multi-container applications</li>
+						</ul>
+					</section>
+					<section data-background-image="../../assets/dumpster.gif">
+						<h1>Remember</h1>
+						<h4>A container is never better</h4>
+						<h4>Than the </h4>
+						<h2>Software</h2>
+						<h4>it</h4>
+						<h2>contains</h2>
+					</section>
 				</section>
 			</div>
 		</div>

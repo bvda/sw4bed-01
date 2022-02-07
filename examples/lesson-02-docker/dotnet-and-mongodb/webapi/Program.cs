@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IMongoRepository>(new WeatherRepository("mongodb://localhost:27017"));
+builder.Services.AddSingleton<IMongoRepository>(new WeatherRepository("mongodb://db:27017"));
 
 var app = builder.Build();
 
