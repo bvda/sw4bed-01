@@ -151,8 +151,8 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Dockerfile</h2>
-						<pre><code class="docker" data-line-numbers data-trim data-noescape><script type="text/template">
+						<h2>Dockerfiles</h2>
+						<pre><code class="dockerfile" data-line-numbers="|2|3|6|7|8|11|12|13|2,16|16|17|18|19|" data-trim data-noescape><script type="text/template">
 							# https://hub.docker.com/_/microsoft-dotnet
 							FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 							WORKDIR /source
@@ -176,6 +176,28 @@
 						</code></pre>
 						<small>examples/lesson-02-docker/hello-docker/Dockerfile</small>
 					</section>
+					<section>
+						<h2>.NET Core docker images</h2>
+						<ul>
+							<li>Multi-stage build
+								<ul>
+									<li><mark>Build</mark> application in container optimized for <mark>development</mark>, debugging, and testing</li>
+									<li><mark>Run</mark> application in optimized from <mark>production</mark></li>
+								</ul>
+							</li>
+							<li>Restore in distinct layer to use caching features
+								<ul>
+									<li>If the project file(s) have not changed, use <mark>cached</mark> layers</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images">Docker images for ASP.NET Core | Microsoft Docs</a></li>
+								<li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">Best practices for writing Dockerfiles | Docker Documentation</a></li>
+							</ul>
+						</section>
 					<section>
 						<h2>Docker build</h2>
 						<ul>
@@ -201,7 +223,7 @@
 							</ul>
 						</aside>
 					</section>
-					<section>
+					<!-- <section>
 						<h2>Multi-state builds</h2>
 						<ul>
 							<li>Challenging to keep image size small</li>
@@ -213,7 +235,7 @@
 								<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">Use multi-stage builds | Docker Documentation</a></li>
 							</ul>
 						</aside>
-					</section>
+					</section> -->
 					<section>
 						<h2>Publishing images</h2>
 						<ul>
@@ -370,10 +392,19 @@
 						<h2>Docker Compose</h2>
 						<ul>
 							<li>Compose is a tool for <mark>defining</mark> and <mark>running</mark> <mark>multi-container</mark> applications</li>
+							<li>Compose files are defined using YAML</li>
+							<li>The three step process:
+								<ul>
+									<li>Define application environment with a Dockerfile</li>
+									<li>Define the services that make up the application in docker-compose.yml</li>
+									<li>Run <code>docker compose up</code> to start the entire application</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
-					<section>	
-						<pre><code class="docker" data-line-numbers data-trim data-noescape><script type="text/template">
+					<section>
+						<h2>Compose file</h2>	
+						<pre><code class="yaml" data-line-numbers="|1|3|4,11|5-6|7-8|9-10|11|12|13|14-15|16-18|19-20|21-23|" data-trim data-noescape><script type="text/template">
 							version: '3.4'
 
 							services:
@@ -381,7 +412,7 @@
 									build:
 										dockerfile: Dockerfile
 									ports:
-										- "9080:80"
+										- "5000:80"
 									depends_on: 
 										- db
 								db:
@@ -393,13 +424,13 @@
 										SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
 										ACCEPT_EULA: "Y"
 									ports:
-									- "14331:1433"
+									- "1433:1433"
 							volumes:
 								hello-compose:
 									name: hello-compose-db
 							</script>
 						</code></pre>
-						<small>examples/lesson-02-docker/hello-docker/Dockerfile</small>
+						<small>examples/lesson-02-docker/hello-compose/docker-compose.yaml</small>
 					</section>
 				</section>
 				<section>
@@ -418,8 +449,8 @@
 						<h4>A container is never better</h4>
 						<h4>Than the </h4>
 						<h2>Software</h2>
-						<h4>it</h4>
-						<h2>contains</h2>
+						<h4>it is</h4>
+						<h2>containing</h2>
 					</section>
 				</section>
 			</div>

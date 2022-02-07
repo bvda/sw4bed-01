@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: Dockerfile
     ports:
-      - "9080:80"
+      - "5000:80"
     depends_on: 
       - db
   db:
@@ -17,7 +17,7 @@ services:
       SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
       ACCEPT_EULA: "Y"
     ports:
-    - "14331:1433"
+    - "1433:1433"
 volumes:
   hello-compose:
     name: hello-compose-db

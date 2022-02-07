@@ -5,12 +5,13 @@ services:
     build:
       dockerfile: Dockerfile
     ports:
-      - "9080:80"
+      - "5000:80"
     depends_on: 
       - db
   db:
     image: mongo
     volumes:
-      - ./data:/data/db
+      - ./data/db:/data/db
+      - ./data/configdb:/data/configdb
     ports:
     - "27017:27017"
