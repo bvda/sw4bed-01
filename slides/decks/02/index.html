@@ -72,7 +72,7 @@
 								</ul>
 							</li>
 						</ul>
-						<aside class="notes">
+						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.docker.com/get-started/overview/">Docker overview | Docker Documentation</a></li>
@@ -82,7 +82,7 @@
 					<section>
 						<h2>Docker architecture</h2>
 						<img src="../../assets/docker-architecture.svg" alt="docker-architecture" width="50%" />
-						<aside class="notes">
+						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.docker.com/get-started/overview/#docker-architecture">Docker overview | Docker Documentation</a></li>
@@ -113,11 +113,11 @@
 					<section>
 						<h2>Docker containers</h2>
 						<ul>
-							<li>A container is a <mark>runnable instance</mark> of an image</li>
+							<li>A container is a runnable <mark>instance</mark> of an image</li>
 							<li>A container is relatively well <mark>isolated</mark> from other containers and its host machine</li>
 							<li>A container is defined by its image as well as any <mark>configuration</mark> you provide to it when you create or start it
 								<ul>
-								<li>When a container is removed, any changes to its state that are not stored in persistent storage disappear</li>
+									<li>When a container is removed, any changes to its state that are not stored in persistent storage disappear</li>
 								</ul>
 							</li>	
 						</ul>
@@ -289,14 +289,13 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Data does not persist when a container no longer exists</li>
-							<li>Docker has two options for containers to store files in the host machine
+							<li>All data is written to the container's file system by default
 								<ul>
-									<li>Volumes</li>
-									<li>Bind mounts</li>
-									<li><code>tmpfs</code> (Linux) or <code>named pipes</code> (Windows)</li>
+									<li>Data does not persist when a container no longer exists</li>
 								</ul>
 							</li>
+							<li>Docker has two options for containers to store files on the host machine filesystem: <mark>Volumes</mark> and <mark>Bind mounts</mark></li>
+							<li>Docker also supports containers storing files in-memory on the host machine with <mark><code style="background: transparent; color: black; padding: 0;">tmpfs</code> mounts</mark></li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -305,10 +304,73 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Storage options</h2>
+						<ul>
+							<li>Volumes
+								<ul>
+									<li>Stored in a part of the host filesystem <mark>managed</mark> by Docker</li>
+									<li>Should <mark>only</mark> be modified by Docker processes</li>
+								</ul>
+							</li>
+							<li>Bind mounts 
+								<ul>
+									<li>Stored <mark>anywhere</mark> on the host filesystem</li>
+									<li>May be modified by <mark>any</mark> process (Docker and/or Non-Docker)</li>
+								</ul>
+							</li>
+							<li>In-memory file systems
+								<ul>
+									<li>Stored in the host system's <mark>memory</mark></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Volumes</h2>
+						<ul>
+							<li>Persist data on host filesystem managed by Docker</li>
+							<li>Use cases
+								<ul>
+									<li>Sharing data across multiple containers</li>
+									<li>Back-up, restore and migrate data between Docker Hosts</li>
+								</ul>
+							</li>
+							<li>Use <code>docker volume</code> to create and manage volumes</li>
+							<li>Use the <code>-v|--volume</code> flag to specify volume mount</li>
+							<li>Can be managed directly with Docker CLI</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/volume_create/"></a>docker volume create | Docker Documentation</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Bind mounts</h2>
+						<ul>
+							<li>Mounts directory/file on host machine in a container</li>
+							<li>Use cases
+								<ul>
+									<li>Sharing configuration files from the host machine to containers</li>
+									<li>Sharing source code or build artifacts between ad development environment on the Docker Host and a container</li>
+								</ul>
+							</li>
+							<li>Use the <code>-v|--volume</code> flag to specify mount points</li>
+							<li>Cannot be managed with Docker CLI</li>
+						</ul>
+					</section>
 				</section>
 				<section id="multi-container-applications">
 					<section>
 						<h1>Multi-container applications</h1>
+					</section>
+					<section>
+						<h2>Docker Compose</h2>
+						<ul>
+							<li>Compose is a tool for <mark>defining</mark> and <mark>running</mark> <mark>multi-container</mark> applications</li>
+						</ul>
 					</section>
 				</section>
 				<section>
