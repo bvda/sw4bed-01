@@ -35,3 +35,5 @@ We have now created our first image and instantiated a container based on that i
 Create a `docker-compose.yaml` in the project root directory and add the following configuration:
 - A service called `aspnetapp`
 - Configure port 80 in the container to be exposed on 5000 on the host machine
+
+Then go ahead and build the stack with `docker compose build`<sup>(<a href="https://docs.docker.com/engine/reference/commandline/compose_build/">docs</a>)</sup> and boot it up with `docker compose up`<sup>(<a href="https://docs.docker.com/engine/reference/commandline/compose_up/">docs</a>)</sup>

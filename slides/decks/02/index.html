@@ -181,6 +181,7 @@
 						<ul>
 							<li>Multi-stage build
 								<ul>
+									<li>Challenging to keep image size small</li>
 									<li><mark>Build</mark> application in container optimized for <mark>development</mark>, debugging, and testing</li>
 									<li><mark>Run</mark> application in optimized from <mark>production</mark></li>
 								</ul>
@@ -196,6 +197,7 @@
 							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images">Docker images for ASP.NET Core | Microsoft Docs</a></li>
 								<li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">Best practices for writing Dockerfiles | Docker Documentation</a></li>
+								<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">Use multi-stage builds | Docker Documentation</a></li>
 							</ul>
 						</section>
 					<section>
@@ -223,19 +225,6 @@
 							</ul>
 						</aside>
 					</section>
-					<!-- <section>
-						<h2>Multi-state builds</h2>
-						<ul>
-							<li>Challenging to keep image size small</li>
-							<li></li>
-						</ul>
-						<aside class="notes" aria-label="notes">
-							<h4>References</h4>
-							<ul>
-								<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">Use multi-stage builds | Docker Documentation</a></li>
-							</ul>
-						</aside>
-					</section> -->
 					<section>
 						<h2>Publishing images</h2>
 						<ul>
@@ -300,7 +289,12 @@
 					<section>
 						<h2>Other docker</h2>
 						<ul>
-							<li>https://docs.docker.com/engine/reference/commandline/port/</li>
+							<li>https://docs.docker.com/engine/reference/commandline/port/ list port information</li>
+							<li>https://docs.docker.com/engine/reference/commandline/container_prune/ remove unused containers</li>
+							<li>https://docs.docker.com/engine/reference/commandline/ps/ list containers</li>
+							<li>https://docs.docker.com/engine/reference/commandline/rmi/ remove image</li>
+							<li>https://docs.docker.com/engine/reference/commandline/rm/ remove container</li>
+							<li>https://docs.docker.com/engine/reference/commandline/images/ list images</li>
 						</ul>
 					</section>
 				</section>
