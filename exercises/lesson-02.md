@@ -30,4 +30,8 @@ Write down an answer to the following questions:
 
 ## Exercise 01-3
 ### Multi-container applications with Docker Compose
-  
+We have now created our first image and instantiated a container based on that image. The next step is to create a Compose file, so our peers can spin up our application in a breeze.
+
+Create a `docker-compose.yaml` in the project root directory and add the following configuration:
+- A service called `aspnetapp`
+- Configure port 80 in the container to be exposed on 5000 on the host machine
