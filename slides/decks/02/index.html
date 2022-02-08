@@ -39,9 +39,9 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Docker is an open platform for developing, shipping and running applications</li>
+							<li>Docker is an open <mark>platform</mark> for developing, shipping and running applications</li>
 							<li>Docker <mark>separates</mark> applications from <mark>infrastructure</mark></li>
-							<li>Docker let you manage your <mark>infrastructure</mark> in the same way you manage your applications</li>
+							<li>Docker let you <mark>manage</mark> your infrastructure in the same way you manage your applications</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -99,7 +99,7 @@
 							</li>
 							<li>To build an image, you create a <mark>Dockerfile</mark>
 								<ul>
-									<li>A simple syntax defines the steps needed to produce and image and run it</li>
+									<li>A simple syntax defines the steps needed to produce an image and run it</li>
 									<li>Each instruction create a layer in the image</li>
 								</ul>
 							</li>
@@ -125,6 +125,7 @@
 					<section>
 						<h2>Docker deployment</h2>
 						<img src="../../assets/docker-deployment.png" alt="docker-deployment" />
+						<small>Containers and VMs Together - Docker Blog</small>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
@@ -179,9 +180,9 @@
 					<section>
 						<h2>.NET Core docker images</h2>
 						<ul>
+							<li>Challenging to keep image size small</li>
 							<li>Multi-stage build
 								<ul>
-									<li>Challenging to keep image size small</li>
 									<li><mark>Build</mark> application in container optimized for <mark>development</mark>, debugging, and testing</li>
 									<li><mark>Run</mark> application in optimized from <mark>production</mark></li>
 								</ul>
@@ -245,7 +246,7 @@
 				</section>
 				<section id="build-and-deploy-containers">
 					<section>
-						<h1>Build and deploy containers</h1>
+						<h1>Create and run containers</h1>
 					</section>
 					<section>
 						<h2>Containers</h2>
@@ -287,15 +288,28 @@
 						</aside>
 					</section>
 					<section>
-						<h2>Other docker</h2>
+						<h2>Other useful <code>docker</code> commands</h2>
 						<ul>
-							<li>https://docs.docker.com/engine/reference/commandline/port/ list port information</li>
-							<li>https://docs.docker.com/engine/reference/commandline/container_prune/ remove unused containers</li>
-							<li>https://docs.docker.com/engine/reference/commandline/ps/ list containers</li>
-							<li>https://docs.docker.com/engine/reference/commandline/rmi/ remove image</li>
-							<li>https://docs.docker.com/engine/reference/commandline/rm/ remove container</li>
-							<li>https://docs.docker.com/engine/reference/commandline/images/ list images</li>
+							<li><code>docker port</code>—List port mappings or a specific mapping for the container</li>
+							<li><code>docker container prune</code>—Remove all stopped containers</li>
+							<li><code>docker ps</code>—List containers</li>
+							<li><code>docker rmi</code>—Remove one or more images</li>
+							<li><code>docker rm</code>—Remove one or more containers</li>
+							<li><code>docker images</code>List images</li>
 						</ul>
+						<ul>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/port/"></a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/container_prune/"></a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/ps/"></a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/rmi/"></a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/rm/"></a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/images/"></a></li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section id="persisting-data">
@@ -444,6 +458,17 @@
 							</li>
 						</ul>
 					</section>
+				</section>
+				<section>
+					<h2>Orchestration</h2>
+					<ul>
+						<li>Not in the scope for SW4BED-01
+							<ul>
+								<li>The department offers Distributed Systems in Practice (SWDISP-01)</li>
+							</ul>
+						</li>
+						<li>Scaling, monitoring and configuration of applications in clusters and/or clouds</li>
+					</ul>
 				</section>
 				<section>
 					<section>

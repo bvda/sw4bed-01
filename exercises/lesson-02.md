@@ -37,3 +37,5 @@ Create a `docker-compose.yaml` in the project root directory and add the followi
 - Configure port 80 in the container to be exposed on 5000 on the host machine
 
 Then go ahead and build the stack with `docker compose build`<sup>(<a href="https://docs.docker.com/engine/reference/commandline/compose_build/">docs</a>)</sup> and boot it up with `docker compose up`<sup>(<a href="https://docs.docker.com/engine/reference/commandline/compose_up/">docs</a>)</sup>
+
+After verifying that everything is up and running, add a volume that maps to `/tmp` and a bind mount that maps to a folder on your host machine.  
