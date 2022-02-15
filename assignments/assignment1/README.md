@@ -13,12 +13,11 @@ The customer needs help writing the Dockerfiles needed to create Docker images f
 ### 1.3 Push images to Docker Hub
 Publish your images to Docker Hub[^1]
 
-1. Push the image built in `1.1.1` to Docker Hub
-2. Push the image built in `1.1.2` to Docker Hub
+1. Push the image built in `1.1.1` to Docker Hub[^1]
+2. Push the image built in `1.1.2` to Docker Hub[^1]
 
 ## Useful commands
 - Build and tag a docker image with `docker build -t <IMAGE_TAG> -f <PATH_DOCKERFILE> <CONTEXT>`
 
-## Resources
-- https://docs.docker.com/engine/reference/commandline/build/
-- [^1]: [Docker Hub Quickstart | Docker Documentation](https://docs.docker.com/docker-hub/)
+[^1]: [Docker Hub Quickstart | Docker Documentation](https://docs.docker.com/docker-hub/)
+[^2]: [Docker images for ASP.NET Core | Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-6.0)
