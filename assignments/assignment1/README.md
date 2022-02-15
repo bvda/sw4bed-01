@@ -10,7 +10,7 @@ Create Dockerfiles to build images for the two solutions.
 1. Write a Dockerfile[^2] named `Dockerfile.API` that creates an image for `bakery-api.sln`
 2. Write a Dockerfile named `Dockerfile.WEB` that creates and image for `bakery-web.sln`
 
-_Hint: Place the Dockerfiles in the directory as the solution files_
+_Hint: Place the Dockerfiles in the same directory as the solution files_
 
 ## `1.2` Docker Compose
 1. Write a Docker Compose file that uses the two images with the following configuration:
