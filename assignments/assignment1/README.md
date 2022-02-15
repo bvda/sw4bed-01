@@ -4,7 +4,7 @@ The local bakery (the customer) wants to have a presence on the web. They have p
 
 The customer needs help writing the Dockerfiles needed to create Docker images for the two solutions: `bakery-api.sln` and `bakery-web.sln` and a Docker Compose file that can help them distribute the application internally.
 
-### `1.1` Dockerfiles
+## `1.1` Dockerfiles
 Create Dockerfiles to build images for the two solutions.
 
 1. Write a Dockerfile[^2] named `Dockerfile.API` that creates an image for `bakery-api.sln`
@@ -12,7 +12,7 @@ Create Dockerfiles to build images for the two solutions.
 
 _Hint: Place the Dockerfiles in the directory as the solution files_
 
-### `1.2` Docker Compose
+## `1.2` Docker Compose
 1. Write a Docker Compose file that uses the two images with the following configuration:
     
     - Two services: A service named `api` for `bakery-api` and a service named `web` for `bakery-web`
@@ -20,11 +20,11 @@ _Hint: Place the Dockerfiles in the directory as the solution files_
     - Publish `bakery-web` on port `5000` on the host
     - `bakery-web` has an environment variable[^3] named `API_URL` that should contain an URL to the base address of the API service[^4]
 
-### `1.3` Push images to Docker Hub
+## `1.3` Push images to Docker Hub
 Publish your images to Docker Hub[^1]. 
 
-1. Push the image built in `1.1.1` to Docker Hub
-2. Push the image built in `1.1.2` to Docker Hub
+1. Push the image built with `Dockerfile.API` in `1.1` to Docker Hub
+2. Push the image built with `Dockerfile.WEB` in `1.1` to Docker Hub
 3. If needed, update the images used in `docker-compose.yaml` in `1.2` so they match your published images.
 
 ## Submission
