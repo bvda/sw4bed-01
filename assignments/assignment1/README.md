@@ -1,24 +1,24 @@
 # .NET containerization with Docker
-## Assignment 1
+## `1` Desscription
 The local bakery (the customer) wants to have a presence on the web. They have provided the SW4BED Developer Team (you) with a code base for which they need help to deploy to their cloud infrastructure.
 
 The customer needs help writing the Dockerfiles needed to create Docker images for the two solutions: `bakery-api.sln` and `bakery-web.sln` and a Docker Compose file that can help them distribute the application internally.
 
-### 1.1 Dockerfiles
+### `1.1` Dockerfiles
 
 
 1. Write a Dockerfile[^2] named `Dockerfile.API` that creates an image for `bakery-api.sln`
 2. Write a Dockerfile named `Dockerfile.WEB` that creates and image for `bakery-web.sln` 
 
-### 1.2 Docker Compose
+### `1.2` Docker Compose
 1. Write a Docker Compose file that uses the two images with the following configuration:
     
     - Two services: A service named `api` for `bakery-api` and a service named `web` for `bakery-web`
     - Publish `bakery-api` on port `6000` on the host
     - Publish `bakery-web` on port `5000` on the host
-    - `bakery-web` has an environment variable[^4] named `API_URL` that should contain an URL to the base address of the API service[^4]
+    - `bakery-web` has an environment variable[^3] named `API_URL` that should contain an URL to the base address of the API service[^4]
 
-### 1.3 Push images to Docker Hub
+### `1.3` Push images to Docker Hub
 Publish your images to Docker Hub[^1]. 
 
 1. Push the image built in `1.1.1` to Docker Hub
