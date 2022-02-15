@@ -6,6 +6,7 @@
   - `dotnet new page -n Pastries`
   - `dotnet new page -n Bread`
 3. Add a `.gitignore` with `dotnet new gitignore` (make sure the current directory is where the solution file is located)
+4. Add a `Dockerfile` for each project that uses multistage build to produce an images
 
 ### useful commands
 - Run application with `bakery-web` as startup project: `dotnet run --project bakery-web`
