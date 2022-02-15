@@ -12,10 +12,11 @@ The customer needs help writing the Dockerfiles needed to create Docker images f
 
 ### 1.2 Docker Compose
 1. Write a Docker Compose file that uses the two images with the following configuration:
-  - Two services: A service named `api` for `bakery-api` and a service named `web` for `bakery-web`
-  - Publish `bakery-api` on port `6000` on the host
-  - Publish `bakery-web` on port `5000` on the host
-  - `bakery-web` has an environment variable[^4] named `API_URL` that should contain an URL to the base address of the API service[^5]
+    
+    - Two services: A service named `api` for `bakery-api` and a service named `web` for `bakery-web`
+    - Publish `bakery-api` on port `6000` on the host
+    - Publish `bakery-web` on port `5000` on the host
+    - `bakery-web` has an environment variable[^4] named `API_URL` that should contain an URL to the base address of the API service[^4]
 
 ### 1.3 Push images to Docker Hub
 Publish your images to Docker Hub[^1]. 
