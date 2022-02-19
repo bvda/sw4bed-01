@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BlockchainExplorer.Pages
+namespace BlockchainExplorer.Pages.Transactions
 {
-    public class WalletsModel : PageModel
+    public class IndexModel : PageModel
     {
         public void OnGet()
         {

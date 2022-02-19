@@ -1,0 +1,8 @@
+﻿@page "/Wallets/{wallet:minlength(26):maxlength(35)}"
+@model BlockchainExplorer.Pages.Wallets.DetailsModel
+@{
+  ViewData["Title"] = "Wallets 💰 – " + Model.Wallet;
+}
+<h1>Wallet</h1>
+<h3><code>@Model.Wallet</code></h3>
+<p>Uses custom route</p>

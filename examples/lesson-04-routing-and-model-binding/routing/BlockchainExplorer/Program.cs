@@ -1,6 +1,9 @@
+using BlockchainExplorer.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<TransactionService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
