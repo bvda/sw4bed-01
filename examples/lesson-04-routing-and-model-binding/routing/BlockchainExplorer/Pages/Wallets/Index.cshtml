@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler=Get}"
 @model BlockchainExplorer.Pages.Wallets.IndexModel
 @{
   ViewData["Title"] = "Wallets 💰";
@@ -6,6 +6,6 @@
 <h1>@ViewData["Title"] (@Model.Transactions.Count)</h1>
 <ul>
   @foreach(var t in Model.Transactions) {
-  <li>@t</li>
+  <li><a href="/Wallets/Details?wallet=@t">@t</a></li>
 }
 </ul>
