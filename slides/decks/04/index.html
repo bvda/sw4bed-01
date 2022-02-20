@@ -31,8 +31,8 @@
 				</section>
 				<section>
 					<section>
-						<h2>What is routing</h2>
-						<blockquote>Routing is the process of <mark>mapping</mark> an incoming <mark>request</mark>request to a <mark>methods</mark> that will handle</blockquote>
+						<h2>What is routing?</h2>
+						<h3><mark>mapping</mark> incoming <mark>requests</mark> to <mark>actions</mark></h3>
 					</section>
 					<section>
 						<h2>Routing in ASP.NET Core</h2>
@@ -40,7 +40,7 @@
 							<li>Routing styles
 								<ul>
 									<li>Convention-based routing</li>
-									<li>Attribute routes</li>
+									<li>Attribute routes</li>	
 									<li>Convention-based generation of attribute routes</li>
 								</ul>
 							</li>
@@ -91,9 +91,36 @@
 					</section>
 					<section>
 						<h2>Convention-based routing</h2>
+						<ul>
+							<li>Defined globally for the application</li>
+							<li>Endpoints must adhere strictly to defined conventions</li>
+							<li>Makes it hard to customize URLs for a subset of controllers and actions</li>
+						</ul>
 					</section>	
 					<section>
 						<h2>Attribute routing</h2>
+						<ul>
+							<li>Tie a given URL to a specific endpoint</li>
+							<li>More verbose–requires attributes for every action in the application</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Razor page routing</h2>
+						<ul>
+							<li>Uses Convention-based generation of attribute routes</li>
+							<li>The best of both worlds:
+								<ul>
+									<li>Predictability and terseness from convention-based routing</li>
+									<li>Flexibility for easy URL customization from attribute routing</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), p. 131</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section>
@@ -114,7 +141,7 @@
 							<li>Constraints to route parameters</li>
 							<li>Matching arbitrary URLs</li>
 						</ul>
-						<aside>
+						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio-code#custom-routes">Introduction to Razor Pages in ASP.NET Core | Microsoft Docs</a></li>
