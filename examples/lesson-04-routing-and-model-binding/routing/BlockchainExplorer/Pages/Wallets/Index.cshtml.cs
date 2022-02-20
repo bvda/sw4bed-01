@@ -17,7 +17,7 @@ namespace BlockchainExplorer.Pages.Wallets
         }
         
         public IActionResult OnGetDetails(string wallet) {
-            return RedirectToPage("/Wallets/Details", new { wallet });
+            return RedirectToPage("/Wallets/Details", new { Wallet = wallet });
         }
     }
 }
