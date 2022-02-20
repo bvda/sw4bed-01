@@ -11,43 +11,17 @@ namespace BlockchainExplorer.Pages.Transactions
     [BindProperty]
     public TransactionsIndexBindingModel bindingModel { get; set; }
     public IList<Transaction> Transactions { get; set; }
+    private TransactionService _service;
 
-    public IndexModel(TransactionService transactions)
+    public IndexModel(TransactionService service)
     {
-      Transactions = transactions.Transactions;
+      _service = service;
+      Transactions = _service.Transactions;
     }
 
     public void OnGet(TransactionsIndexBindingModel model)
     {
-      Transactions = OrderList(model, Filter(model));
-    }
-
-    private IList<Transaction> Filter(TransactionsIndexBindingModel model) {
-      Transactions = Transactions.Select(t => t).ToList();
-      if (model.From != 0 && model.To != 0)
-      {
-        Transactions = Transactions.Where(t => t.Timestamp >= model.From && t.Timestamp <= model.To).ToList();
-      }
-      else
-      {
-        if (model.From != 0)
-        {
-          Transactions = Transactions.Where(t => t.Timestamp >= model.From).ToList();
-        }
-        if (model.To != 0)
-        {
-          Transactions = Transactions.Where(t => t.Timestamp <= model.To).ToList();
-        }
-      }
-      return Transactions.ToList();
-    }
-
-    private IList<Transaction> OrderList(TransactionsIndexBindingModel model, IList<Transaction> list) {
-      if(model.Ascending) {
-          return list.OrderBy(t => t.Timestamp).ToList();
-      } else {
-          return list.OrderByDescending(t => t.Timestamp).ToList();
-      }        
+      Transactions = _service.OrderBy(model.Ascending).Filter(model.From, model.To).Transactions;
     }
   }
 
