@@ -65,30 +65,9 @@
 							<li>Use case: <code>AuthorizationMiddleware</code>—control endpoint execution based on permissions</li>
 						</ul>
 					</section>
-					<section>
-						<h2>Routing in ASP.NET Core</h2>
-						<pre><code class="text" data-line-numbers="|1,13-16|2,5,8|2-4|5-7|8-12|" data-trim data-noescape><script type="text/template">
-							+-Pages 
-							|	 |  +-Shared
-							|	 |  |  |-_Layout.cshtml
-							|	 |  |  |-_Layout.cshtml.css	
-							|	 |	 +-Transactions
-							|	 |  |  |-Index.cs
-							|	 |  |  |-Index.html.cs
-							|	 |	 +–Wallets
-							|	 |     |-Details.cs
-							|	 |     |-Details.html.cs
-							|	 |     |-Index.cs
-							|	 |     |-Index.html.cs
-							|	 |-Index.cshtml
-							|	 |-Index.cshtml.cs
-							|	 |-Error.cshtml
-							|	 |-Error.cshtml.cs
-						</script></code></pre>
-					</section>
-					<section>
+					<!-- <section>
 						<h2>Endpoint routing</h2>
-					</section>
+					</section> -->
 					<section>
 						<h2>Convention-based routing</h2>
 						<ul>
@@ -96,6 +75,12 @@
 							<li>Endpoints must adhere strictly to defined conventions</li>
 							<li>Makes it hard to customize URLs for a subset of controllers and actions</li>
 						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
 					</section>	
 					<section>
 						<h2>Attribute routing</h2>
@@ -131,8 +116,42 @@
 						<h2>Overview</h2>
 						<ul>
 							<li>Convention-based generation of attribute routes</li>
-							<li>Defining with route templates</li>
+							<li>Generates route templates for each page
+								<ul>
+									<li>A single route template based on file path </li>
+									<li>Path of page relative to the Razor Pages root directory (<code>/Pages</code>)</li>
+								</ul>
+							</li>
+							<li>Routing is not case sensitive</li>
 						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 132-134</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Directory structure</h2>
+						<pre><code class="text" data-line-numbers="|1,13-16|2,5,8|2-4|5-7|8-12|" data-trim data-noescape><script type="text/template">
+							+-Pages 
+							|	 |  +-Shared
+							|	 |  |  |-_Layout.cshtml
+							|	 |  |  |-_Layout.cshtml.css	
+							|	 |	 +-Transactions
+							|	 |  |  |-Index.cs
+							|	 |  |  |-Index.html.cs
+							|	 |	 +–Wallets
+							|	 |     |-Details.cs
+							|	 |     |-Details.html.cs
+							|	 |     |-Index.cs
+							|	 |     |-Index.html.cs
+							|	 |-Index.cshtml
+							|	 |-Index.cshtml.cs
+							|	 |-Error.cshtml
+							|	 |-Error.cshtml.cs
+						</script></code></pre>
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer</small>
 					</section>
 					<section>
 						<h2>Route template syntax</h2>
@@ -151,7 +170,6 @@
 					<section>
 						<h4>Route template syntax</h4>
 						<h2>Optionals and default values</h2>
-						</ul>
 					</section>
 					<section>
 						<h4>Route template syntax</h4>
