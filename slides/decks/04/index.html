@@ -212,7 +212,12 @@
 									<li>Use to ensure the route values are <mark>convertible</mark> to appropiate types</li>
 								</ul>
 							</li>
-							<li>Constaints is <mark>NOT</mark> a substitue for proper validation</li>
+							<li>Constaints is <mark>NOT</mark> a substitue for proper validation
+								<ul>
+									<li>Constaints will produce a <code>404</code> response</li>
+									<li>Invalid input should result in a <code>400</code> response</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -270,14 +275,90 @@
 				</section>
 				<section>
 					<section>
-						<h2>Page handlers</h2>
+						<h2>Selecting page handlers</h2>
 					</section>
 					<section>
-						<h2>Selecting page handler to invoke</h2>
+						<h2>Selecting the page handler to invoke</h2>
+						<ul>
+							<li>A Razor Page can have multiple handlers
+								<ul>
+									<li>But only one runs in response to a given requests</li>
+								</ul>
+							</li>
+							<li>Provide <code>handler</code> when invoking endpoint:
+								<ul>
+									<li>Provided as query string—<code>Search?handler=Custom</code></li>
+									<li>Provided as route parameter—<code>Search/Custom</code></li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 					<section>
 						<h2>Conventions</h2>
-						<code>On{verb}[handler][suffix]</code>
+						<p style="font-family: monospace;">On<span style="color:tomato;">{verb}</span><span style="color: cornflowerblue">[handler]</span><span style="color: goldenrod">[suffix]</span></p>
+						<ul>
+							<li>Template
+								<ul>
+									<li><span style="color: tomato; font-family: monospace;">verb</span>—the HTTP verb (<code>GET</code>, <code>POST</code>, <code>DELETE</code>, etc.)</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">handler</span>—Optional handler name</li>
+									<li><span style="color: goldenrod; font-family: monospace;">suffix</span>—Optional async suffix</li>
+								</ul>
+							</li>
+							<li><code>EndpointMiddleware</code> will execute a <mark>implicit</mark> empty page handler if handler is not matched</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 149-150</li>	
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Invoking custom page handler</h2>
+						<pre><code class="cshtml" data-line-numbers="|1|" data-trim data-noescape><script type="text/template">
+							@page "{handler=Get}"
+							@model BlockchainExplorer.Pages.Wallets.IndexModel
+							@{
+								ViewData["Title"] = "Wallets 💰";
+							}
+							<h1>@ViewData["Title"] (@Model.Wallets.Count)</h1>
+							<ul>
+								@foreach(var t in Model.Wallets) {
+									<li><a href="/Wallets/Details?wallet=@t">@t</a></li>
+								} 
+							</ul>
+						</script></code></pre>
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Wallets/Index.cshtml</small>	
+					</section>
+					<section>
+						<h2>Invoking custom page handler</h2>
+						<pre><code class="cs" data-line-numbers="|19-21|" data-trim data-noescape><script type="text/template">
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.AspNetCore.Mvc.RazorPages;
+							
+							using BlockchainExplorer.Services;
+							
+							namespace BlockchainExplorer.Pages.Wallets
+							{
+									public class IndexModel : PageModel
+									{
+											public IList<String> Wallets;
+							
+											public IndexModel(TransactionService transactions) {
+													Wallets = new TransactionService().Wallets.Select(m => m.Sender).Distinct().ToList();
+											}
+											public void OnGet()
+											{
+											}
+											
+											public IActionResult OnGetDetails(string wallet) {
+													return RedirectToPage("/Wallets/Details", new { Wallet = wallet });
+											}
+									}
+							}
+							
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Wallets/Index.cshtml.cs</small>
 					</section>
 				</section>
 				<section>
@@ -287,7 +368,7 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Models in Razor pages (and MVC)
+							<li>Models in Razorpages (and MVC)
 								<ul>
 									<li>Binding model</li>
 									<li>Application model</li>
@@ -325,6 +406,9 @@
 							</ul>
 						</aside>
 					</section>
+				</section>
+				<section>
+					<h2>Wrap-up</h2>
 				</section>
 			</div>
 		</div>
