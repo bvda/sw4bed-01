@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using BlockchainExplorer.Models;
 using BlockchainExplorer.Services;
+using BlockchainExplorer.Validation;
 
 namespace BlockchainExplorer.Pages.Transactions
 {
@@ -31,7 +32,6 @@ namespace BlockchainExplorer.Pages.Transactions
 
     public IActionResult OnPost() {
       if(!ModelState.IsValid) {
-        Console.WriteLine("Invalid model");
         return Page();
       }
       return RedirectToPage("Index", new { To = TimeFilter.To, From = TimeFilter.From, Ascending = BindingModel.Ascending });
@@ -47,8 +47,10 @@ namespace BlockchainExplorer.Pages.Transactions
 
   public class TimeFilter {
     [Required]
+    [BitcoinGenesisRange]
     public int To { get; set; }
-    [Required]
+    
+    [BitcoinGenesisRange]
     public int From { get; set; }
 
   }
