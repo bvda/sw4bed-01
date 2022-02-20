@@ -65,9 +65,6 @@
 							<li>Use case: <code>AuthorizationMiddleware</code>—control endpoint execution based on permissions</li>
 						</ul>
 					</section>
-					<!-- <section>
-						<h2>Endpoint routing</h2>
-					</section> -->
 					<section>
 						<h2>Convention-based routing</h2>
 						<ul>
@@ -155,10 +152,21 @@
 					</section>
 					<section>
 						<h2>Route template syntax</h2>
+						<p style="font-family: monospace;"><span style="color: tomato">product</span>/<span style="color: cornflowerblue">{category}</span>/<span style="color: cornflowerblue">{name}</span></p>
 						<ul>
-							<li>Optionals and default values</li>
-							<li>Constraints to route parameters</li>
-							<li>Matching arbitrary URLs</li>
+							<li>Route template is comprised of <mark>segments</mark>
+								<ul>
+									<li><span style="color: tomato; font-family: monospace;">product</span>–A literal value must be exactly matched</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">category</span>–A route parameter will match to anything</li>
+								</ul>
+							</li>
+							<li>Other features:
+								<ul>
+									<li>Optionals and default values</li>
+									<li>Constraints to route parameters</li>
+									<li>Matching arbitrary URLs</li>
+								</ul>
+							</li> 
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -170,16 +178,90 @@
 					<section>
 						<h4>Route template syntax</h4>
 						<h2>Optionals and default values</h2>
-					</section>
-					<section>
-						<h4>Route template syntax</h4>
-						<h2>Constraints to route parameters</h2>
+						<p style="font-family: monospace;"><span style="color: tomato">product</span>/<span style="color: cornflowerblue">{category}</span>/<span style="color: khaki">{name=all}</span>/<span style="color: goldenrod">{id?}</span></p>
+						<ul>
+							<li>Template
+								<ul>
+									<li><span style="color: tomato; font-family: monospace;">product</span>–Literal segment</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">category</span>–Required parameter</li>
+									<li><span style="color: khaki; font-family: monospace;">name</span>–Optional route parameter with default value</li>
+									<li><span style="color: goldenrod; font-family: monospace;">id</span>–Optional route parameter</li>
+								</ul>
+							</li>
+							<li>Default values gives shorter URLs</li>
+							<li>You can only have optional parameter at the end of a route template</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-6.0">Routing in ASP.NET Core | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 138-139</li>
 							</ul>
 						</aside>
+					</section>
+					<section>
+						<h4>Route template syntax</h4>
+						<h2>Constraints for route parameters</h2>
+						<ul>
+							<li>The routing template syntax might be a too broad
+								<ul>
+									<li>If route parameter is <code>string</code> where <code>int</code> is expected, the application will throw an exception</li>
+								</ul>
+							</li>
+							<li>Restricts template matching
+								<ul>
+									<li>Use to ensure the route values are <mark>convertible</mark> to appropiate types</li>
+								</ul>
+							</li>
+							<li>Constaints is <mark>NOT</mark> a substitue for proper validation</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 139-142</li>	
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-6.0#route-constraints">Routing in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Razor template file</h2>
+						<pre><code class="cshtml" data-line-numbers="|1|" data-trim data-noescape><script type="text/template">
+							@page "/Wallets/{wallet:minlength(26):maxlength(35)}"
+							@model BlockchainExplorer.Pages.Wallets.DetailsModel
+							@{
+								ViewData["Title"] = "Wallets 💰 – " + Model.Wallet;
+							}
+							<h1>Wallet</h1>
+							<h3><code>@Model.Wallet</code></h3>
+							<h4 class="mt-4">Sent ➡️</h4>
+							<ul class="list-group">
+								@foreach (var t in Model.Transactions.Select(t => t).ToList().Where(t => t.Sender.Equals(Model.Wallet)).ToList())
+								{
+									<li class="list-group-item d-flex justify-content-between align-items-start">
+										<div class="ms-2 me-auto">
+											<div class="fw-bold">@DateTimeOffset.FromUnixTimeSeconds(@t.Timestamp).DateTime.Date.ToLongDateString()</div>
+											<div class="fs-6 text-muted">@t.Timestamp</div>
+											<code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code> to <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
+										</div>
+										<span class="badge bg-primary rounded-pill align-self-center">@t.Amount</span>
+									</li>
+								}
+							</ul>
+							<h4 class="mt-4">Received ⬅️</h4>
+							<ul class="list-group">
+							@foreach (var t in Model.Transactions.Select(t => t).ToList().Where(t => t.Recipient.Equals(Model.Wallet)).ToList())
+							{
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+										<div class="fw-bold">@DateTimeOffset.FromUnixTimeSeconds(@t.Timestamp).DateTime.Date.ToLongDateString()</div>
+										<div class="fs-6 text-muted">@t.Timestamp</div>
+										<code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code> to <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
+									</div>
+									<span class="badge bg-primary rounded-pill align-self-center">@t.Amount</span>
+								</li>
+							}
+							</ul>					
+						</script></code></pre>
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Wallets/Details.cshtml</small>
 					</section>
 					<section>
 						<h4>Route template syntax</h4>
