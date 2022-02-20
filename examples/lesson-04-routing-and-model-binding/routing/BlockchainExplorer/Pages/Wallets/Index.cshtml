@@ -3,9 +3,9 @@
 @{
   ViewData["Title"] = "Wallets 💰";
 }
-<h1>@ViewData["Title"] (@Model.Transactions.Count)</h1>
+<h1>@ViewData["Title"] (@Model.Wallets.Count)</h1>
 <ul>
-  @foreach(var t in Model.Transactions) {
-  <li><a href="/Wallets/Details?wallet=@t">@t</a></li>
-}
+  @foreach(var t in Model.Wallets) {
+    <li><a href="/Wallets/Details?wallet=@t">@t</a></li>
+  } 
 </ul>

@@ -32,6 +32,10 @@
 				<section>
 					<section>
 						<h2>What is routing</h2>
+						<blockquote>Routing is the process of <mark>mapping</mark> an incoming <mark>request</mark>request to a <mark>methods</mark> that will handle</blockquote>
+					</section>
+					<section>
+						<h2>Routing in ASP.NET Core</h2>
 						<ul>
 							<li>Routing styles
 								<ul>
@@ -40,6 +44,25 @@
 									<li>Convention-based generation of attribute routes</li>
 								</ul>
 							</li>
+							<li>The process of mapping an incoming HTTP request to a specific handler
+								<ul>
+									<li><mark>Razor pages</mark>–the handler is a handler method</li>
+									<li><mark>MVC</mark>–the handler is an action method in a controller</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Routing middleware</h2>
+						<ul>
+							<li><code>RoutingMiddleware</code> <mark>selects</mark> the endpoint</li>
+							<li><code>EndpointMiddleware</code> <mark>executes</mark> the endpoint</li>
+							<li>The advantages of having two separate pieces of middleware:
+								<ul>
+									<li>All middleware between <code>RoutingMiddleware</code> and <code>EndpointMiddleware</code> can see what is going to be executed</li>
+								</ul>
+							</li>
+							<li>Use case: <code>AuthorizationMiddleware</code>—control endpoint execution based on permissions</li>
 						</ul>
 					</section>
 					<section>
@@ -137,9 +160,14 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Binding model</li>
-							<li>Application model</li>
-							<li>Page model</li>
+							<li>Models in Razor pages (and MVC)
+								<ul>
+									<li>Binding model</li>
+									<li>Application model</li>
+									<li>Page model</li>
+								</ul>
+							</li>
+							<li>Binding models are <mark>inputs</mark> to Razor pages</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>
@@ -147,6 +175,27 @@
 									<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp.159-160</li>
 								</ul>
 							</h4>
+						</aside>
+					</section>
+					<section>
+						<h2>Binding model</h2>
+						<ul>
+							<li>Retrieves data from various sources
+								<ul>
+									<li>Route data</li>
+									<li>Form fields</li>
+									<li>Query stringd</li>
+								</ul>
+								<li>Provides data to Razor pages and controller in method parameters and public properties</li>
+								<li>Converts string data to .NET types</li>
+							</li>
+							<li></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
 						</aside>
 					</section>
 				</section>

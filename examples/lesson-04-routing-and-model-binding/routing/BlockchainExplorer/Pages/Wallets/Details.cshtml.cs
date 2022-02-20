@@ -8,9 +8,9 @@ namespace BlockchainExplorer.Pages.Wallets
 {
     public class DetailsModel : PageModel
     {
-        public IList<Transaction> Transactions = new List<Transaction>();
+        [BindProperty]
         public string Wallet { get; set; }
-
+        public IList<Transaction> Transactions = new List<Transaction>();
 
         public DetailsModel(TransactionService service) {
             Transactions = service.Transactions;
