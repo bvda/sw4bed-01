@@ -4,6 +4,15 @@
   ViewData["Title"] = "Transactions 💸";
 }
 <h1>@ViewData["Title"] (@Model.Transactions.Count)</h1>
+<form method="post">
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
+    <input type="text" class="form-control" aria-label="Sizing example input" asp-for="TimeFilter.From" aria-describedby="inputGroup-sizing-sm">
+    <span class="input-group-text" id="inputGroup-sizing-sm">To</span>
+    <input type="text" class="form-control" aria-label="Sizing example input" asp-for="TimeFilter.To" aria-describedby="inputGroup-sizing-sm">
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+  </div>
+</form>
 <ul class="list-group">
   @foreach (var t in Model.Transactions)
   {

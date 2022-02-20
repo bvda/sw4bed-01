@@ -7,7 +7,7 @@ namespace BlockchainExplorer.Pages.Wallets
 {
     public class IndexModel : PageModel
     {
-        public IList<String> Wallets;
+        public IList<string> Wallets;
 
         public IndexModel(TransactionService transactions) {
             Wallets = new TransactionService().Wallets.Select(m => m.Sender).Distinct().ToList();
