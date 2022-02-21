@@ -138,7 +138,7 @@
 							|	 |	 +-Transactions
 							|	 |  |  |-Index.cs
 							|	 |  |  |-Index.html.cs
-							|	 |	 +–Wallets
+							|	 |	 +—Wallets
 							|	 |     |-Details.cs
 							|	 |     |-Details.html.cs
 							|	 |     |-Index.cs
@@ -342,7 +342,7 @@
 							{
 									public class IndexModel : PageModel
 									{
-											public IList<String> Wallets;
+											public IList<string> Wallets;
 							
 											public IndexModel(TransactionService transactions) {
 													Wallets = new TransactionService().Wallets.Select(m => m.Sender).Distinct().ToList();
@@ -426,7 +426,7 @@
 								</ul>
 							</li>
 						</ul>
-						<aside class="">
+						<aside class="note" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li></li>
