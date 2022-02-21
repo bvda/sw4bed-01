@@ -327,7 +327,7 @@
 					</section>
 					<section>
 						<h2>Invoking custom page handler</h2>
-						<pre><code class="cshtml" data-line-numbers="|1|" data-trim data-noescape><script type="text/template">
+						<pre><code class="cshtml" data-line-numbers="|1|9|" data-trim data-noescape><script type="text/template">
 							@page "{handler=Get}"
 							@model BlockchainExplorer.Pages.Wallets.IndexModel
 							@{
@@ -344,7 +344,7 @@
 					</section>
 					<section>
 						<h2>Invoking custom page handler</h2>
-						<pre><code class="cs" data-line-numbers="|19-21|" data-trim data-noescape><script type="text/template">
+						<pre><code class="cs" data-line-numbers="19-21|15-17" data-trim data-noescape><script type="text/template">
 							using Microsoft.AspNetCore.Mvc;
 							using Microsoft.AspNetCore.Mvc.RazorPages;
 							
@@ -404,10 +404,16 @@
 								<ul>
 									<li>Form fields</li>
 									<li>Route data</li>
-									<li>Query stringd</li>
+									<li>Query string parameters</li>
 								</ul>
-								<li>Provides data to Razor pages and controller in method parameters and public properties</li>
+								<li>Provides data for Razor pages and MVC Controllers</li>
 								<li>Converts string data to .NET types</li>
+								<li>Annotate properties with <code>[BindProperty]</code>
+									<ul>
+										<li>Create a separate binding class to hold multiple bindable values</li>
+										<li>Binding classes should be a nested class</li>
+									</ul>
+								</li>
 							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
@@ -417,6 +423,74 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Model binding</h2>
+						<pre><code class="cs" data-line-numbers="|14-15,17-18|46-51,53-61|" data-trim data-noescape><script type="text/template">
+							using System.ComponentModel.DataAnnotations;
+
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.AspNetCore.Mvc.RazorPages;
+							
+							using BlockchainExplorer.Models;
+							using BlockchainExplorer.Services;
+							using BlockchainExplorer.Validation;
+							
+							namespace BlockchainExplorer.Pages.Transactions
+							{
+								public class IndexModel : PageModel 
+								{
+									[BindProperty(SupportsGet = true)]
+									public TransactionsIndexBindingModel BindingModel { get; set; }
+							
+									[BindProperty]
+									public TimeFilter TimeFilter { get; set; }
+									
+									public IList<Transaction> Transactions { get; set; }
+									private TransactionService _service;
+							
+									public IndexModel(TransactionService service)
+									{
+										_service = service;
+										Transactions = _service.Transactions;
+									}
+							
+									public void OnGet()
+									{
+										TimeFilter = new TimeFilter {
+											To = BindingModel.To,
+											From = BindingModel.From,
+										};
+										Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
+									}
+							
+									public IActionResult OnPost() {
+										if(!ModelState.IsValid) {
+											return Page();
+										}
+										return RedirectToPage("Index", new { To = TimeFilter.To, From = TimeFilter.From, Ascending = BindingModel.Ascending });
+									}
+								}
+							
+								public class TransactionsIndexBindingModel
+								{
+									public int To { get; set; }
+									public int From { get; set; }
+									public bool Ascending { get; set; }
+								}
+							
+								public class TimeFilter {
+									[Required]
+									[BitcoinGenesisRange]
+									public int To { get; set; }
+									
+									[BitcoinGenesisRange]
+									public int From { get; set; }
+							
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
+						</section>
 				</section>
 				<section>
 					<section>
@@ -488,10 +562,10 @@
 						</aside>
 					</section>
 					<section>
-
-						<pre><code class="cs" data-line-numbers="|17-18|52-61|56,59|37-42|38-40|41|" data-trim data-noescape><script type="text/template">
+						<h2>The PRG pattern</h2>
+						<pre><code class="cs" data-line-numbers="|17-18|53-61|56,59|38-44|39-41|42|" data-trim data-noescape><script type="text/template">
 							using System.ComponentModel.DataAnnotations;
-		
+
 							using Microsoft.AspNetCore.Mvc;
 							using Microsoft.AspNetCore.Mvc.RazorPages;
 							
@@ -503,11 +577,12 @@
 							{
 								public class IndexModel : PageModel 
 								{
-									[BindProperty]
+									[BindProperty(SupportsGet = true)]
 									public TransactionsIndexBindingModel BindingModel { get; set; }
 							
 									[BindProperty]
 									public TimeFilter TimeFilter { get; set; }
+									
 									public IList<Transaction> Transactions { get; set; }
 									private TransactionService _service;
 							
@@ -517,13 +592,13 @@
 										Transactions = _service.Transactions;
 									}
 							
-									public void OnGet(TransactionsIndexBindingModel model)
+									public void OnGet()
 									{
 										TimeFilter = new TimeFilter {
-											To = model.To,
-											From = model.From,
+											To = BindingModel.To,
+											From = BindingModel.From,
 										};
-										Transactions = _service.OrderBy(model.Ascending).Filter(model.From, model.To).Transactions;
+										Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
 									}
 							
 									public IActionResult OnPost() {
@@ -542,7 +617,6 @@
 								}
 							
 								public class TimeFilter {
-
 									[Required]
 									[BitcoinGenesisRange]
 									public int To { get; set; }
@@ -551,10 +625,10 @@
 									public int From { get; set; }
 							
 								}
-							}		
+							}
 						</script></code></pre>	
 						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
-						</section>
+					</section>
 				</section>
 				<section>
 					<h2>Wrap-up</h2>

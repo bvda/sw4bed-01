@@ -11,11 +11,12 @@ namespace BlockchainExplorer.Pages.Transactions
 {
   public class IndexModel : PageModel 
   {
-    [BindProperty]
+    [BindProperty(SupportsGet = true)]
     public TransactionsIndexBindingModel BindingModel { get; set; }
 
     [BindProperty]
     public TimeFilter TimeFilter { get; set; }
+    
     public IList<Transaction> Transactions { get; set; }
     private TransactionService _service;
 
@@ -25,13 +26,13 @@ namespace BlockchainExplorer.Pages.Transactions
       Transactions = _service.Transactions;
     }
 
-    public void OnGet(TransactionsIndexBindingModel model)
+    public void OnGet()
     {
       TimeFilter = new TimeFilter {
-        To = model.To,
-        From = model.From,
+        To = BindingModel.To,
+        From = BindingModel.From,
       };
-      Transactions = _service.OrderBy(model.Ascending).Filter(model.From, model.To).Transactions;
+      Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
     }
 
     public IActionResult OnPost() {
