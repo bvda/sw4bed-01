@@ -18,28 +18,29 @@
 		<div class="reveal">
 			<div class="slides">
 				<section id="introduction">
-					<h1>Mapping URLs to Razor Pages using routing</h1>
-					<h3>Lesson 04</h3>
-					<h4>SW4BED-01</h4>
-				</section>
-				<section>
-					<h2>Agenda</h2>
-					<ul>
-						<li>What is routing?</li>
-						<li>Routing in ASP.NET Core
-							<ul>
-								<li>Attribute and convension-based routing</li>
-								<li>Route template syntax</li>
-							</ul>
-						</li>
-						<li>Model binding
-							<ul>
-								<li>The three different models</li>
-								<li>Validation</li>
-							</ul>
-						</li>
-						<li>Wrap-up</li>
-					</ul>
+					<section>
+						<h1>Routing & Model Binding</h1>
+						<h3>Lesson 04</h3>
+						<h4>SW4BED-01</h4>
+					</section>
+					<section>
+						<h2>Agenda</h2>
+						<ul>
+							<li>What is routing?</li>
+							<li>Routing in ASP.NET Core
+								<ul>
+									<li>Attribute and convension-based routing</li>
+									<li>Route template syntax</li>
+								</ul>
+							</li>
+							<li>Model binding
+								<ul>
+									<li>The three different models</li>
+									<li>Validation</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -176,7 +177,6 @@
 								<ul>
 									<li>Optionals and default values</li>
 									<li>Constraints to route parameters</li>
-									<li>Matching arbitrary URLs</li>
 								</ul>
 							</li> 
 						</ul>
@@ -279,10 +279,6 @@
 							</ul>					
 						</script></code></pre>
 						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Wallets/Details.cshtml</small>
-					</section>
-					<section>
-						<h4>Route template syntax</h4>
-						<h2>Matching arbitrary URLs</h2>
 					</section>
 				</section>
 				<section>
@@ -629,9 +625,71 @@
 						</script></code></pre>	
 						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
 					</section>
+					<section>
+						<h2>Custom validation</h2>
+						<ul>
+							<li>Sometimes the built-in validators are not enough</li>
+							<li>Two options:
+								<ul>
+									<li>Create custom attributes</li>
+									<li>Implement <code>IValidatableObject</code></li>
+								</ul>
+							</li>
+							<li>Creating an custom attribute
+								<ul>
+									<li>Extends <code>ValidationAttribute</code></li>
+									<li>Override <code>IsValid</code> method</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0#alternatives-to-built-in-attributes">Model validation in ASP.NET Core MVC | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Custom validation</h2>
+						<pre><code class="cs" data-line-numbers="|5|11-15|13|14|" data-trim data-noescape><script type="text/template">
+							using System.ComponentModel.DataAnnotations;
+
+							namespace BlockchainExplorer.Validation 
+							{
+								public class BitcoinGenesisRangeAttribute : ValidationAttribute 
+								{
+									public BitcoinGenesisRangeAttribute()
+									{ 
+									} 
+						
+									public override bool IsValid(object value) 
+									{
+										var dt = (int)value;
+										return dt >= 1231006505 && dt <= DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+									}
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Validation/BitcoinGenesisValidator.cs</small>
+					</section>
 				</section>
 				<section>
 					<h2>Wrap-up</h2>
+					<ul>
+						<li>What is routing?</li>
+						<li>Routing in ASP.NET Core
+							<ul>
+								<li>Attribute and convension-based routing</li>
+								<li>Route template syntax</li>
+							</ul>
+						</li>
+						<li>Model binding
+							<ul>
+								<li>The three different models</li>
+								<li>Validation</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 			</div>
 		</div>
