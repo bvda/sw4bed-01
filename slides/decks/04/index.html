@@ -18,18 +18,696 @@
 		<div class="reveal">
 			<div class="slides">
 				<section id="introduction">
-					<h1>Mapping URLs to Razor Pages using routing</h1>
-					<h3>Lesson 04</h3>
-					<h4>SW4BED-01</h4>
+					<section>
+						<h1>Routing & Model Binding</h1>
+						<h3>Lesson 04</h3>
+						<h4>SW4BED-01</h4>
+					</section>
+					<section>
+						<h2>Agenda</h2>
+						<ul>
+							<li>What is routing?</li>
+							<li>Routing in ASP.NET Core
+								<ul>
+									<li>Attribute and convension-based routing</li>
+									<li>Route template syntax</li>
+								</ul>
+							</li>
+							<li>Model binding
+								<ul>
+									<li>The three different models</li>
+									<li>Validation</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
 				</section>
 				<section>
-					<h2>Introduction</h2>
-					<ul>
-						<li>Routing styles
+					<section>
+						<h2>What is routing?</h2>
+						<h3><mark>mapping</mark> incoming <mark>requests</mark> to <mark>actions</mark></h3>
+					</section>
+					<section>
+						<h2>Routing in ASP.NET Core</h2>
+						<ul>
+							<li>Routing styles
+								<ul>
+									<li>Convention-based routing</li>
+									<li>Attribute routes</li>	
+									<li>Convention-based generation of attribute routes</li>
+								</ul>
+							</li>
+							<li>The process of mapping an incoming HTTP request to a specific handler
+								<ul>
+									<li><mark>Razor pages</mark>–the handler is a handler method</li>
+									<li><mark>MVC</mark>–the handler is an action method in a controller</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Routing middleware</h2>
+						<ul>
+							<li><code>RoutingMiddleware</code> <mark>selects</mark> the endpoint</li>
+							<li><code>EndpointMiddleware</code> <mark>executes</mark> the endpoint</li>
+							<li>The advantages of having two separate pieces of middleware:
+								<ul>
+									<li>All middleware between <code>RoutingMiddleware</code> and <code>EndpointMiddleware</code> can see what is going to be executed</li>
+								</ul>
+							</li>
+							<li>Use case: <code>AuthorizationMiddleware</code>—control endpoint execution based on permissions</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Convention-based routing</h2>
+						<ul>
+							<li>Defined globally for the application</li>
+							<li>Endpoints must adhere strictly to defined conventions</li>
+							<li>Makes it hard to customize URLs for a subset of controllers and actions</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
 							<ul>
-								<li>Convention-based routing</li>
-								<li>Attribute routes</li>
-								<li>Convention-based generation of attribute routes</li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>	
+					<section>
+						<h2>Attribute routing</h2>
+						<ul>
+							<li>Tie a given URL to a specific endpoint</li>
+							<li>More verbose–requires attributes for every action in the application</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Razor page routing</h2>
+						<ul>
+							<li>Uses Convention-based generation of attribute routes</li>
+							<li>The best of both worlds:
+								<ul>
+									<li>Predictability and terseness from convention-based routing</li>
+									<li>Flexibility for easy URL customization from attribute routing</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), p. 131</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Routing to Razor pages</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>Convention-based generation of attribute routes</li>
+							<li>Generates route templates for each page
+								<ul>
+									<li>A single route template based on file path </li>
+									<li>Path of page relative to the Razor Pages root directory (<code>/Pages</code>)</li>
+								</ul>
+							</li>
+							<li>Routing is not case sensitive</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 132-134</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Directory structure</h2>
+						<pre><code class="text" data-line-numbers="|1,13-16|2,5,8|2-4|5-7|8-12|" data-trim data-noescape><script type="text/template">
+							+-Pages 
+							|	 |  +-Shared
+							|	 |  |  |-_Layout.cshtml
+							|	 |  |  |-_Layout.cshtml.css	
+							|	 |	 +-Transactions
+							|	 |  |  |-Index.cs
+							|	 |  |  |-Index.html.cs
+							|	 |	 +—Wallets
+							|	 |     |-Details.cs
+							|	 |     |-Details.html.cs
+							|	 |     |-Index.cs
+							|	 |     |-Index.html.cs
+							|	 |-Index.cshtml
+							|	 |-Index.cshtml.cs
+							|	 |-Error.cshtml
+							|	 |-Error.cshtml.cs
+						</script></code></pre>
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer</small>
+					</section>
+					<section>
+						<h2>Route template syntax</h2>
+						<p style="font-family: monospace;"><span style="color: tomato">product</span>/<span style="color: cornflowerblue">{category}</span>/<span style="color: cornflowerblue">{name}</span></p>
+						<ul>
+							<li>Route template is comprised of <mark>segments</mark>
+								<ul>
+									<li><span style="color: tomato; font-family: monospace;">product</span>–A literal value must be exactly matched</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">category</span>–A route parameter will match to anything</li>
+								</ul>
+							</li>
+							<li>Other features:
+								<ul>
+									<li>Optionals and default values</li>
+									<li>Constraints to route parameters</li>
+								</ul>
+							</li> 
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio-code#custom-routes">Introduction to Razor Pages in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>Route template syntax</h4>
+						<h2>Optionals and default values</h2>
+						<p style="font-family: monospace;"><span style="color: tomato">product</span>/<span style="color: cornflowerblue">{category}</span>/<span style="color: khaki">{name=all}</span>/<span style="color: goldenrod">{id?}</span></p>
+						<ul>
+							<li>Template
+								<ul>
+									<li><span style="color: tomato; font-family: monospace;">product</span>–Literal segment</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">category</span>–Required parameter</li>
+									<li><span style="color: khaki; font-family: monospace;">name</span>–Optional route parameter with default value</li>
+									<li><span style="color: goldenrod; font-family: monospace;">id</span>–Optional route parameter</li>
+								</ul>
+							</li>
+							<li>Default values gives shorter URLs</li>
+							<li>You can only have optional parameter at the end of a route template</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 138-139</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>Route template syntax</h4>
+						<h2>Constraints for route parameters</h2>
+						<ul>
+							<li>The routing template syntax might be a too broad
+								<ul>
+									<li>If route parameter is <code>string</code> where <code>int</code> is expected, the application will throw an exception</li>
+								</ul>
+							</li>
+							<li>Restricts template matching
+								<ul>
+									<li>Use to ensure the route values are <mark>convertible</mark> to appropiate types</li>
+								</ul>
+							</li>
+							<li>Constaints is <mark>NOT</mark> a substitue for proper validation
+								<ul>
+									<li>Constaints will produce a <code>404</code> response</li>
+									<li>Invalid input should result in a <code>400</code> response</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 139-142</li>	
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-6.0#route-constraints">Routing in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Razor template file</h2>
+						<pre><code class="cshtml" data-line-numbers="|1|" data-trim data-noescape><script type="text/template">
+							@page "/Wallets/{wallet:minlength(26):maxlength(35)}"
+							@model BlockchainExplorer.Pages.Wallets.DetailsModel
+							@{
+								ViewData["Title"] = "Wallets 💰 – " + Model.Wallet;
+							}
+							<h1>Wallet</h1>
+							<h3><code>@Model.Wallet</code></h3>
+							<h4 class="mt-4">Sent ➡️</h4>
+							<ul class="list-group">
+								@foreach (var t in Model.Transactions.Select(t => t).ToList().Where(t => t.Sender.Equals(Model.Wallet)).ToList())
+								{
+									<li class="list-group-item d-flex justify-content-between align-items-start">
+										<div class="ms-2 me-auto">
+											<div class="fw-bold">@DateTimeOffset.FromUnixTimeSeconds(@t.Timestamp).DateTime.Date.ToLongDateString()</div>
+											<div class="fs-6 text-muted">@t.Timestamp</div>
+											<code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code> to <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
+										</div>
+										<span class="badge bg-primary rounded-pill align-self-center">@t.Amount</span>
+									</li>
+								}
+							</ul>
+							<h4 class="mt-4">Received ⬅️</h4>
+							<ul class="list-group">
+							@foreach (var t in Model.Transactions.Select(t => t).ToList().Where(t => t.Recipient.Equals(Model.Wallet)).ToList())
+							{
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+										<div class="fw-bold">@DateTimeOffset.FromUnixTimeSeconds(@t.Timestamp).DateTime.Date.ToLongDateString()</div>
+										<div class="fs-6 text-muted">@t.Timestamp</div>
+										<code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code> to <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
+									</div>
+									<span class="badge bg-primary rounded-pill align-self-center">@t.Amount</span>
+								</li>
+							}
+							</ul>					
+						</script></code></pre>
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Wallets/Details.cshtml</small>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Selecting page handlers</h2>
+					</section>
+					<section>
+						<h2>Selecting the page handler to invoke</h2>
+						<ul>
+							<li>A Razor Page can have multiple handlers
+								<ul>
+									<li>But only one runs in response to a given requests</li>
+								</ul>
+							</li>
+							<li>Provide <code>handler</code> when invoking endpoint:
+								<ul>
+									<li>Provided as query string—<code>Search?handler=Custom</code></li>
+									<li>Provided as route parameter—<code>Search/Custom</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Conventions</h2>
+						<p style="font-family: monospace;">On<span style="color:tomato;">{verb}</span><span style="color: cornflowerblue">[handler]</span><span style="color: goldenrod">[suffix]</span></p>
+						<ul>
+							<li>Template
+								<ul>
+									<li><span style="color: tomato; font-family: monospace;">verb</span>—the HTTP verb (<code>GET</code>, <code>POST</code>, <code>DELETE</code>, etc.)</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">handler</span>—Optional handler name</li>
+									<li><span style="color: goldenrod; font-family: monospace;">suffix</span>—Optional async suffix</li>
+								</ul>
+							</li>
+							<li><code>EndpointMiddleware</code> will execute a <mark>implicit</mark> empty page handler if handler is not matched</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 149-150</li>	
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Invoking custom page handler</h2>
+						<pre><code class="cshtml" data-line-numbers="|1|9|" data-trim data-noescape><script type="text/template">
+							@page "{handler=Get}"
+							@model BlockchainExplorer.Pages.Wallets.IndexModel
+							@{
+								ViewData["Title"] = "Wallets 💰";
+							}
+							<h1>@ViewData["Title"] (@Model.Wallets.Count)</h1>
+							<ul>
+								@foreach(var t in Model.Wallets) {
+									<li><a href="/Wallets/Details?wallet=@t">@t</a></li>
+								} 
+							</ul>
+						</script></code></pre>
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Wallets/Index.cshtml</small>	
+					</section>
+					<section>
+						<h2>Invoking custom page handler</h2>
+						<pre><code class="cs" data-line-numbers="19-21|15-17" data-trim data-noescape><script type="text/template">
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.AspNetCore.Mvc.RazorPages;
+							
+							using BlockchainExplorer.Services;
+							
+							namespace BlockchainExplorer.Pages.Wallets
+							{
+									public class IndexModel : PageModel
+									{
+											public IList<string> Wallets;
+							
+											public IndexModel(TransactionService transactions) {
+													Wallets = new TransactionService().Wallets.Select(m => m.Sender).Distinct().ToList();
+											}
+											public void OnGet()
+											{
+											}
+											
+											public IActionResult OnGetDetails(string wallet) {
+													return RedirectToPage("/Wallets/Details", new { Wallet = wallet });
+											}
+									}
+							}
+							
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Wallets/Index.cshtml.cs</small>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>The Binding Model</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>Models in Razorpages (and MVC)
+								<ul>
+									<li>Binding model</li>
+									<li>Application model</li>
+									<li>Page model</li>
+								</ul>
+							</li>
+							<li>Binding models are <mark>inputs</mark> to Razor pages</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>
+								<ul>
+									<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp.159-160</li>
+								</ul>
+							</h4>
+						</aside>
+					</section>
+					<section>
+						<h2>Binding model</h2>
+						<ul>
+							<li>Retrieves data from various sources
+								<ul>
+									<li>Form fields</li>
+									<li>Route data</li>
+									<li>Query string parameters</li>
+								</ul>
+								<li>Provides data for Razor pages and MVC Controllers</li>
+								<li>Converts string data to .NET types</li>
+								<li>Annotate properties with <code>[BindProperty]</code>
+									<ul>
+										<li>Create a separate binding class to hold multiple bindable values</li>
+										<li>Binding classes should be a nested class</li>
+									</ul>
+								</li>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Model binding</h2>
+						<pre><code class="cs" data-line-numbers="|14-15,17-18|46-51,53-61|" data-trim data-noescape><script type="text/template">
+							using System.ComponentModel.DataAnnotations;
+
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.AspNetCore.Mvc.RazorPages;
+							
+							using BlockchainExplorer.Models;
+							using BlockchainExplorer.Services;
+							using BlockchainExplorer.Validation;
+							
+							namespace BlockchainExplorer.Pages.Transactions
+							{
+								public class IndexModel : PageModel 
+								{
+									[BindProperty(SupportsGet = true)]
+									public TransactionsIndexBindingModel BindingModel { get; set; }
+							
+									[BindProperty]
+									public TimeFilter TimeFilter { get; set; }
+									
+									public IList<Transaction> Transactions { get; set; }
+									private TransactionService _service;
+							
+									public IndexModel(TransactionService service)
+									{
+										_service = service;
+										Transactions = _service.Transactions;
+									}
+							
+									public void OnGet()
+									{
+										TimeFilter = new TimeFilter {
+											To = BindingModel.To,
+											From = BindingModel.From,
+										};
+										Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
+									}
+							
+									public IActionResult OnPost() {
+										if(!ModelState.IsValid) {
+											return Page();
+										}
+										return RedirectToPage("Index", new { To = TimeFilter.To, From = TimeFilter.From, Ascending = BindingModel.Ascending });
+									}
+								}
+							
+								public class TransactionsIndexBindingModel
+								{
+									public int To { get; set; }
+									public int From { get; set; }
+									public bool Ascending { get; set; }
+								}
+							
+								public class TimeFilter {
+									[Required]
+									[BitcoinGenesisRange]
+									public int To { get; set; }
+									
+									[BitcoinGenesisRange]
+									public int From { get; set; }
+							
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
+					</section>
+					<section>
+						<h2><code>[From*]</code> attributes</h2>
+						<ul>
+							<li>If the default source is not correct, use these to secify source
+								<ul>
+									<li><code>[FromQuery]</code>—Gets values from the query string</li>
+									<li><code>[FromRoute]</code>—Gets values from route data</li>
+									<li><code>[FromHeader]</code>—Gets values from posted form fields</li>
+									<li><code>[FromBody]</code>—Gets values from the request body</li>
+									<li><code>[FromForm]</code>—Gets values from HTTP headers</li>
+								</ul>
+							</li>
+							<li>Added to the individal properties, rather than to the model class</li>
+						</ul>
+						<aside class="notes" aria-label="">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0#sources">Model Binding in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Validation</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>Improve overall data quality
+								<ul>
+									<li>Accuracy-are users providing a usable value?</li>
+									<li>Completeness-are they providing all values needed?</li>
+								</ul>
+							</li>
+							<li>Display useful messages to users
+								<ul>
+									<li>Guide the user to input valid data</li>
+								</ul>
+							</li>
+							<li><mark>Always</mark> validate data provided by <mark>clients</mark> before using it</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0">Model validation in ASP.NET Core MVC | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Validation with Razor Pages</h2>
+						<img src="../../assets/model-validation.svg" width="30%" alt="model-validation" />
+					</section>
+					<section>
+						<h2><code>DataAnnotation</code></h2>
+						<ul>
+							<li>Specify rules for properties in a binding model
+								<ul>
+									<li>They provide <mark>metadata</mark> for the model</li>
+								</ul>
+							</li>
+							<li>Set on properties as annotations
+								<ul>
+									<li><code>[EmailAddress]</code>—validates that a property has a valid email address format</li>
+									<li><code>[Range(min, max)]</code>–validates that a property has a value between <code>min</code> and <code>max</code> </li>
+									<li><code>[Required]</code>—validates that a property in not <code>null</code></li>
+								</ul>
+							</li>
+							<li>Does not validate business rules</li>
+							<li>Also used with Entity Framework Core</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0">Model validation in ASP.NET Core MVC | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 176-178</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>The PRG pattern</h2>
+						<ul>
+							<li>The <code>POST</code>–<code>REDIRECT</code>–<code>GET</code> pattern prevents clients from submitting the same form multiple times</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 178-182</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>The PRG pattern</h2>
+						<pre><code class="cs" data-line-numbers="|17-18|53-61|56,59|38-44|39-41|42|" data-trim data-noescape><script type="text/template">
+							using System.ComponentModel.DataAnnotations;
+
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.AspNetCore.Mvc.RazorPages;
+							
+							using BlockchainExplorer.Models;
+							using BlockchainExplorer.Services;
+							using BlockchainExplorer.Validation;
+							
+							namespace BlockchainExplorer.Pages.Transactions
+							{
+								public class IndexModel : PageModel 
+								{
+									[BindProperty(SupportsGet = true)]
+									public TransactionsIndexBindingModel BindingModel { get; set; }
+							
+									[BindProperty]
+									public TimeFilter TimeFilter { get; set; }
+									
+									public IList<Transaction> Transactions { get; set; }
+									private TransactionService _service;
+							
+									public IndexModel(TransactionService service)
+									{
+										_service = service;
+										Transactions = _service.Transactions;
+									}
+							
+									public void OnGet()
+									{
+										TimeFilter = new TimeFilter {
+											To = BindingModel.To,
+											From = BindingModel.From,
+										};
+										Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
+									}
+							
+									public IActionResult OnPost() {
+										if(!ModelState.IsValid) {
+											return Page();
+										}
+										return RedirectToPage("Index", new { To = TimeFilter.To, From = TimeFilter.From, Ascending = BindingModel.Ascending });
+									}
+								}
+							
+								public class TransactionsIndexBindingModel
+								{
+									public int To { get; set; }
+									public int From { get; set; }
+									public bool Ascending { get; set; }
+								}
+							
+								public class TimeFilter {
+									[Required]
+									[BitcoinGenesisRange]
+									public int To { get; set; }
+									
+									[BitcoinGenesisRange]
+									public int From { get; set; }
+							
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
+					</section>
+					<section>
+						<h2>Custom validation</h2>
+						<ul>
+							<li>Sometimes the built-in validators are not enough</li>
+							<li>Two options:
+								<ul>
+									<li>Create custom attributes</li>
+									<li>Implement <code>IValidatableObject</code></li>
+								</ul>
+							</li>
+							<li>Creating an custom attribute
+								<ul>
+									<li>Extends <code>ValidationAttribute</code></li>
+									<li>Override <code>IsValid</code> method</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0#alternatives-to-built-in-attributes">Model validation in ASP.NET Core MVC | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Custom validation</h2>
+						<pre><code class="cs" data-line-numbers="|5|11-15|13|14|" data-trim data-noescape><script type="text/template">
+							using System.ComponentModel.DataAnnotations;
+
+							namespace BlockchainExplorer.Validation 
+							{
+								public class BitcoinGenesisRangeAttribute : ValidationAttribute 
+								{
+									public BitcoinGenesisRangeAttribute()
+									{ 
+									} 
+						
+									public override bool IsValid(object value) 
+									{
+										var dt = (int)value;
+										return dt >= 1231006505 && dt <= DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+									}
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Validation/BitcoinGenesisValidator.cs</small>
+					</section>
+				</section>
+				<section>
+					<h2>Wrap-up</h2>
+					<ul>
+						<li>What is routing?</li>
+						<li>Routing in ASP.NET Core
+							<ul>
+								<li>Attribute and convension-based routing</li>
+								<li>Route template syntax</li>
+							</ul>
+						</li>
+						<li>Model binding
+							<ul>
+								<li>The three different models</li>
+								<li>Validation</li>
 							</ul>
 						</li>
 					</ul>
