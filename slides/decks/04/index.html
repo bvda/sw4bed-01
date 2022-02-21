@@ -486,7 +486,28 @@
 							}
 						</script></code></pre>	
 						<small>examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
-						</section>
+					</section>
+					<section>
+						<h2><code>[From*]</code> attributes</h2>
+						<ul>
+							<li>If the default source is not correct, use these to secify source
+								<ul>
+									<li><code>[FromQuery]</code>—Gets values from the query string</li>
+									<li><code>[FromRoute]</code>—Gets values from route data</li>
+									<li><code>[FromHeader]</code>—Gets values from posted form fields</li>
+									<li><code>[FromBody]</code>—Gets values from the request body</li>
+									<li><code>[FromForm]</code>—Gets values from HTTP headers</li>
+								</ul>
+							</li>
+							<li>Added to the individal properties, rather than to the model class</li>
+						</ul>
+						<aside class="notes" aria-label="">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0#sources">Model Binding in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
 				</section>
 				<section>
 					<section>
