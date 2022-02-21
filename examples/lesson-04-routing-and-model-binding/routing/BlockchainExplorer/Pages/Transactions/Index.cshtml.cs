@@ -27,6 +27,10 @@ namespace BlockchainExplorer.Pages.Transactions
 
     public void OnGet(TransactionsIndexBindingModel model)
     {
+      TimeFilter = new TimeFilter {
+        To = model.To,
+        From = model.From,
+      };
       Transactions = _service.OrderBy(model.Ascending).Filter(model.From, model.To).Transactions;
     }
 

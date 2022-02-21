@@ -15,7 +15,8 @@ namespace BlockchainExplorer.Services {
         PropertyNameCaseInsensitive = true,
       });
       _transactions = transactions;
-      Wallets = Transactions;
+      Transactions = _transactions;
+      Wallets = _transactions;
     }
 
     public TransactionService OrderBy(bool ascending) {

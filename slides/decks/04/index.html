@@ -475,6 +475,86 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>The PRG pattern</h2>
+						<ul>
+							<li>The <code>POST</code>–<code>REDIRECT</code>–<code>GET</code> pattern prevents clients from submitting the same form multiple times</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 178-182</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+
+						<pre><code class="cs" data-line-numbers="|17-18|52-61|56,59|37-42|38-40|41|" data-trim data-noescape><script type="text/template">
+							using System.ComponentModel.DataAnnotations;
+		
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.AspNetCore.Mvc.RazorPages;
+							
+							using BlockchainExplorer.Models;
+							using BlockchainExplorer.Services;
+							using BlockchainExplorer.Validation;
+							
+							namespace BlockchainExplorer.Pages.Transactions
+							{
+								public class IndexModel : PageModel 
+								{
+									[BindProperty]
+									public TransactionsIndexBindingModel BindingModel { get; set; }
+							
+									[BindProperty]
+									public TimeFilter TimeFilter { get; set; }
+									public IList<Transaction> Transactions { get; set; }
+									private TransactionService _service;
+							
+									public IndexModel(TransactionService service)
+									{
+										_service = service;
+										Transactions = _service.Transactions;
+									}
+							
+									public void OnGet(TransactionsIndexBindingModel model)
+									{
+										TimeFilter = new TimeFilter {
+											To = model.To,
+											From = model.From,
+										};
+										Transactions = _service.OrderBy(model.Ascending).Filter(model.From, model.To).Transactions;
+									}
+							
+									public IActionResult OnPost() {
+										if(!ModelState.IsValid) {
+											return Page();
+										}
+										return RedirectToPage("Index", new { To = TimeFilter.To, From = TimeFilter.From, Ascending = BindingModel.Ascending });
+									}
+								}
+							
+								public class TransactionsIndexBindingModel
+								{
+									public int To { get; set; }
+									public int From { get; set; }
+									public bool Ascending { get; set; }
+								}
+							
+								public class TimeFilter {
+
+									[Required]
+									[BitcoinGenesisRange]
+									public int To { get; set; }
+									
+									[BitcoinGenesisRange]
+									public int From { get; set; }
+							
+								}
+							}		
+						</script></code></pre>	
+						<small>examples/lesson-04-routing-and-model-binding/routing/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs</small>
+						</section>
 				</section>
 				<section>
 					<h2>Wrap-up</h2>
