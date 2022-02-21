@@ -26,7 +26,19 @@
 					<h2>Agenda</h2>
 					<ul>
 						<li>What is routing?</li>
-						<li>Routing to Razor pages</li>
+						<li>Routing in ASP.NET Core
+							<ul>
+								<li>Attribute and convension-based routing</li>
+								<li>Route template syntax</li>
+							</ul>
+						</li>
+						<li>Model binding
+							<ul>
+								<li>The three different models</li>
+								<li>Validation</li>
+							</ul>
+						</li>
+						<li>Wrap-up</li>
 					</ul>
 				</section>
 				<section>
@@ -390,14 +402,13 @@
 						<ul>
 							<li>Retrieves data from various sources
 								<ul>
-									<li>Route data</li>
 									<li>Form fields</li>
+									<li>Route data</li>
 									<li>Query stringd</li>
 								</ul>
 								<li>Provides data to Razor pages and controller in method parameters and public properties</li>
 								<li>Converts string data to .NET types</li>
 							</li>
-							<li></li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -425,21 +436,42 @@
 									<li>Guide the user to input valid data</li>
 								</ul>
 							</li>
+							<li><mark>Always</mark> validate data provided by <mark>clients</mark> before using it</li>
 						</ul>
-						<aside class="note" aria-label="notes">
+						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li></li>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0">Model validation in ASP.NET Core MVC | Microsoft Docs</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section>
-						<h2>DataAnnotation</h2>
+						<h2>Validation with Razor Pages</h2>
+						<img src="../../assets/model-validation.svg" width="30%" alt="model-validation" />
+					</section>
+					<section>
+						<h2><code>DataAnnotation</code></h2>
+						<ul>
+							<li>Specify rules for properties in a binding model
+								<ul>
+									<li>They provide <mark>metadata</mark> for the model</li>
+								</ul>
+							</li>
+							<li>Set on properties as annotations
+								<ul>
+									<li><code>[EmailAddress]</code>—validates that a property has a valid email address format</li>
+									<li><code>[Range(min, max)]</code>–validates that a property has a value between <code>min</code> and <code>max</code> </li>
+									<li><code>[Required]</code>—validates that a property in not <code>null</code></li>
+								</ul>
+							</li>
+							<li>Does not validate business rules</li>
+							<li>Also used with Entity Framework Core</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0">Model validation in ASP.NET Core MVC | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 176-178</li>
 							</ul>
 						</aside>
 					</section>
