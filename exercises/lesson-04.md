@@ -37,6 +37,6 @@ Check out https://getbootstrap.com/docs/5.1/forms/input-group/ and style your fo
 [^2]: https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0#built-in-attributes
 [^3]: https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0#complex-types
 [^4]: https://getbootstrap.com/
-[^5]: https://github.com/bvda/sw4bed-01/blob/main/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml
+[^5]: https://github.com/bvda/sw4bed-01/blob/f85ff5f935fe47be02caa9a5f940bdb9fa7a8dc2/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml#L24
 [^6]: https://github.com/bvda/sw4bed-01/blob/8f3fea24c936ecd817186fb31727b301b2be3596/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs#L38-L44
 [^7]: https://github.com/bvda/sw4bed-01/blob/8f3fea24c936ecd817186fb31727b301b2be3596/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs#L53-L61
