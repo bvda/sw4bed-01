@@ -18,7 +18,7 @@ Next up, we are going to add a form, binding model, and a handler
   - `Phone`
 - Add a complex binding model[^3] as a child class and use that for model binding
 - Setup a page handler for `POST` requests on the `Index` page[^6]
-  - When the form is posted, it should be added to a list (just create a property in `PageModel`)
+  - When the form is posted, it should be added to a list (just create a service[^9] and inject it in `Program.cs`[^8])
 
 ## Exercise 04-3
 Set up server-side validation[^2][^7] for the fields that fulfills the following requirements:
@@ -40,3 +40,5 @@ Check out https://getbootstrap.com/docs/5.1/forms/input-group/ and style your fo
 [^5]: https://github.com/bvda/sw4bed-01/blob/f85ff5f935fe47be02caa9a5f940bdb9fa7a8dc2/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml#L24
 [^6]: https://github.com/bvda/sw4bed-01/blob/8f3fea24c936ecd817186fb31727b301b2be3596/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs#L38-L44
 [^7]: https://github.com/bvda/sw4bed-01/blob/8f3fea24c936ecd817186fb31727b301b2be3596/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Pages/Transactions/Index.cshtml.cs#L53-L61
+[^8]: https://github.com/bvda/sw4bed-01/blob/8f3fea24c936ecd817186fb31727b301b2be3596/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Services/TransactionService.cs#L10
+[^9]: https://github.com/bvda/sw4bed-01/blob/8f3fea24c936ecd817186fb31727b301b2be3596/examples/lesson-04-routing-and-model-binding/routing-and-model-binding/BlockchainExplorer/Program.cs#L6
