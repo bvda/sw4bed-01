@@ -1,0 +1,52 @@
+﻿@page
+@model BED_W4_Exercise.Pages.Contact.IndexModel
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Contacts</h1>
+</div>
+
+<h2>Add a new contact!</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" asp-for="Input.Email">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="Name" asp-for="Input.Name">
+    </div>
+    <div class="mb-3">
+        <label for="PhoneNumber" class="form-label">Phone</label>
+        <input type="tel" class="form-control" id="PhoneNumber" asp-for="Input.PhoneNumber">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<table class="table table-hover" aria-describedby="contactsTable">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (int i = 0; i<Model.Service.Contacts.Count; i++)
+    {
+        <tr>
+            <th scope="row">@(i+1)</th>
+            <td>@Model.Service.Contacts[i].Name</td>
+            <td>@Model.Service.Contacts[i].Email</td>
+            <td>@Model.Service.Contacts[i].PhoneNumber</td>
+            <td><a href="Contact/Details?index=@(i)">Details</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
