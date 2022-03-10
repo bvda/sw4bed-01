@@ -1,4 +1,10 @@
+using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+using WebAPIConfiguration.Data;
+using WebAPIConfiguration.Model;
 
 namespace WebAPIConfiguration.Controllers;
 
@@ -12,21 +18,17 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly NetLogContext _context;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, NetLogContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet(Name = "GetNetLogs")]
+    public async Task<ActionResult<IList<NetLog>>> GetNetLogs()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        return await _context.NetLogs.ToListAsync();
     }
 }

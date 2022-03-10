@@ -1,6 +1,17 @@
 {
   "version": "0.2.0",
   "configurations": [
+  {
+    "name": ".NET Core Launch (WebAPIConfiguration)",
+    "type": "coreclr",
+    "request": "launch",
+    "preLaunchTask": "build",
+    "program": "${workspaceFolder}/examples/lesson-07-configuration/WebAPIConfiguration/bin/Debug/net6.0/WebAPIConfiguration.dll",
+    "args": [],
+    "cwd": "${workspaceFolder}",
+    "stopAtEntry": false,
+    "console": "integratedTerminal"
+  },
     {
       "name": ".NET Core Launch (console)",
       "type": "coreclr",
