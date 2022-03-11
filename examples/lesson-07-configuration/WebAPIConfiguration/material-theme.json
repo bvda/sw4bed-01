@@ -1,0 +1,20 @@
+{
+  "Colors": {
+    "Primary": "This is test",
+    "PrimaryContainer": "",
+    "Secondary": "",
+    "SecondaryContainer": "",
+    "Tertiary": "",
+    "TertiaryContainer": ""
+  },
+  "Fonts": {
+    "Display": {
+      "Url": "",
+      "Size": 24
+    },
+    "Body": {
+      "Url": "",
+      "Size": 12
+    }
+  }  
+}
