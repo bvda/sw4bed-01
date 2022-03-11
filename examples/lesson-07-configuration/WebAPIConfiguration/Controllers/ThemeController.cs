@@ -16,11 +16,12 @@ public class ThemeController : Controller
     _logger = logger;
   }
 
-  public String GetTheme()
+  [HttpGet]
+  public IActionResult GetTheme()
   {
     var appShellOptions = new AppShellOptions();
     _configuration.Bind(appShellOptions);
 
-    return $"{appShellOptions.Colors.Primary}";
+    return Json(appShellOptions);
   }
 }
