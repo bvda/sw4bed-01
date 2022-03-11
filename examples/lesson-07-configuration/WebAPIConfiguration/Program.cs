@@ -7,6 +7,14 @@ using WebAPIConfiguration.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
+  config.Sources.Clear();
+
+  var env = hostingContext.HostingEnvironment;
+  config.AddIniFile("MyConfig.ini", optional: true, reloadOnChange: true)
+        .AddIniFile($"MyConfig.{env.EnvironmentName}", optional: true, reloadOnChange: true);
+});
+
 // Add services to the container.
 if (builder.Environment.IsDevelopment())
 {

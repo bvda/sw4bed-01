@@ -20,15 +20,20 @@ public class WeatherForecastController : ControllerBase
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly NetLogContext _context;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, NetLogContext context)
+    private readonly IConfiguration _configuration;
+
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, NetLogContext context, IConfiguration configuration)
     {
         _logger = logger;
+        _configuration = configuration;
         _context = context;
     }
 
     [HttpGet(Name = "GetNetLogs")]
     public async Task<ActionResult<IList<NetLog>>> GetNetLogs()
     {
+        Console.WriteLine(_configuration["OverrideThisValue"]);
+        Console.WriteLine(_configuration["Ests:Fest"]);
         return await _context.NetLogs.ToListAsync();
     }
 }

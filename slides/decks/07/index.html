@@ -77,6 +77,14 @@
 					</section>
 					<section>
 						<h2>Overriding settings</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Options pattern</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
 						<ul>
 							<li>Provide strongly type access to groups of related settings
 								<ul>
@@ -88,20 +96,6 @@
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li></li>
-							</ul>
-						</aside>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Options pattern</h2>
-					</section>
-					<section>
-						<h2>Overview</h2>
-						<aside class="notes" aria-label="notes">
-							<h4>References</h4>
-							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options">Options pattern in ASP.NET Core | Microsoft Docs</a></li>
 							</ul>
 						</aside>
@@ -110,6 +104,12 @@
 				<section>
 					<section>
 						<h2>Environments</h2>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Configure service and middleware</h2>
@@ -141,8 +141,6 @@
 							
 							var app = builder.Build();
 							
-							
-							
 							// Configure the HTTP request pipeline.
 							if (app.Environment.IsDevelopment())
 							{
@@ -153,11 +151,8 @@
 							}
 							
 							app.UseHttpsRedirection();
-							
 							app.UseAuthorization();
-							
 							app.MapControllers();
-							
 							app.Run();
 							
 							void seedData() {
