@@ -12,7 +12,7 @@ using WebAPIConfiguration.Data;
 namespace WebAPIConfiguration.Migrations
 {
     [DbContext(typeof(NetLogContext))]
-    [Migration("20220310124321_InitialCreate")]
+    [Migration("20220310202000_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,17 +51,6 @@ namespace WebAPIConfiguration.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("NetLogs");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = new Guid("ba0b2e46-f8ee-4c49-84ef-59877b6480c4"),
-                            Date = new DateTime(2021, 8, 17, 15, 14, 56, 0, DateTimeKind.Local),
-                            Destination = "239.136.66.100",
-                            Port = 55874,
-                            Source = "0.196.36.4",
-                            UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.107 Safari/535.1"
-                        });
                 });
 #pragma warning restore 612, 618
         }

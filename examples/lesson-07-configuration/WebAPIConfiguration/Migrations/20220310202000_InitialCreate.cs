@@ -24,11 +24,6 @@ namespace WebAPIConfiguration.Migrations
                 {
                     table.PrimaryKey("PK_NetLogs", x => x.ID);
                 });
-
-            migrationBuilder.InsertData(
-                table: "NetLogs",
-                columns: new[] { "ID", "Date", "Destination", "Port", "Source", "UserAgent" },
-                values: new object[] { new Guid("ba0b2e46-f8ee-4c49-84ef-59877b6480c4"), new DateTime(2021, 8, 17, 15, 14, 56, 0, DateTimeKind.Local), "239.136.66.100", 55874, "0.196.36.4", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.107 Safari/535.1" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

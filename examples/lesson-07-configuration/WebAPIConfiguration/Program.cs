@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 using Microsoft.EntityFrameworkCore;
 
 using WebAPIConfiguration.Data;
@@ -26,13 +28,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-seedData();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();
   app.UseSwaggerUI();
+  
+  seedData();
 }
 
 app.UseHttpsRedirection();
@@ -45,16 +49,14 @@ app.Run();
 
 void seedData() {
   using(var scope = app.Services.CreateScope()) {
-  var context = scope.ServiceProvider.GetRequiredService<NetLogContext>();
-    context.Database.EnsureCreated();
-    context.NetLogs.Add(new NetLog { 
-        ID = new Guid("ba0b2e46-f8ee-4c49-84ef-59877b6480c4"), 
-        Source = "0.196.36.4",
-        Destination = "239.136.66.100",
-        UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.107 Safari/535.1", 
-        Port = 55874,
-        Date = DateTime.Parse("2021-08-17T13:14:56Z")
+    using FileStream fs = File.OpenRead("MOCK_DATA.json");
+    var logs = JsonSerializer.Deserialize<NetLog[]>(fs, new JsonSerializerOptions {
+      PropertyNameCaseInsensitive = true,
     });
-    context.SaveChanges();
+
+    var context = scope.ServiceProvider.GetRequiredService<NetLogContext>();
+      context.Database.EnsureCreated();
+      context.AddRange(logs);
+      context.SaveChanges();
   }
 }

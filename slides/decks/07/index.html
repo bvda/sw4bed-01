@@ -25,6 +25,11 @@
 					</section>
 					<section>
 						<h2>Agenda</h2>
+						<ul>
+							<li>Application configuration</li>
+							<li>Options pattern</li>
+							<li>Environments</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
@@ -72,7 +77,20 @@
 					</section>
 					<section>
 						<h2>Overriding settings</h2>
-						
+						<ul>
+							<li>Provide strongly type access to groups of related settings
+								<ul>
+									<li>Isolatation by scenario(s) adhere to Interface Segregation Principle (ISP) and separation of concerns</li>
+								</ul>
+							</li>
+							<li>Validation of configuration data</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li></li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section>
@@ -88,12 +106,84 @@
 							</ul>
 						</aside>
 					</section>
+				</section>
+				<section>
 					<section>
-						<h2>Resources</h2>
-						<ul>
-							<li><a href="https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding">Data Seeding - EF Core | Microsoft Docs</a></li>
-						</ul>
+						<h2>Environments</h2>
 					</section>
+					<section>
+						<h2>Configure service and middleware</h2>
+						<pre><code class="csharp" data-line-numbers="|11-12,15-17,20|13-14|18-19|34-40|" data-trim data-noescape><script type="text/template">
+							using System.Text.Json;
+							using Microsoft.EntityFrameworkCore;
+							using WebAPIConfiguration.Data;
+							using WebAPIConfiguration.Model;
+							
+							var builder = WebApplication.CreateBuilder(args);
+							
+							// Add services to the container.
+							if (builder.Environment.IsDevelopment())
+							{
+								builder.Services.AddDbContext<NetLogContext>(options =>
+									options.UseInMemoryDatabase("NetLogDev"));
+							}
+							else
+							{
+								builder.Services.AddDbContext<NetLogContext>(options =>
+									options.UseSqlServer(builder.Configuration.GetConnectionString("NetLog")));
+							}
+							
+							builder.Services.AddControllers();
+							
+							// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+							builder.Services.AddEndpointsApiExplorer();
+							builder.Services.AddSwaggerGen();
+							
+							var app = builder.Build();
+							
+							
+							
+							// Configure the HTTP request pipeline.
+							if (app.Environment.IsDevelopment())
+							{
+								app.UseSwagger();
+								app.UseSwaggerUI();
+								
+								seedData();
+							}
+							
+							app.UseHttpsRedirection();
+							
+							app.UseAuthorization();
+							
+							app.MapControllers();
+							
+							app.Run();
+							
+							void seedData() {
+								using(var scope = app.Services.CreateScope()) {
+									using FileStream fs = File.OpenRead("MOCK_DATA.json");
+									var logs = JsonSerializer.Deserialize<NetLog[]>(fs, new JsonSerializerOptions {
+										PropertyNameCaseInsensitive = true,
+									});
+							
+									var context = scope.ServiceProvider.GetRequiredService<NetLogContext>();
+										context.Database.EnsureCreated();
+										context.AddRange(logs);
+										context.SaveChanges();
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-07-configuration/WebAPIConfiguration/Program.cs</small>
+					</section>
+				</section>
+				<section>
+					<h2>Resources</h2>
+					<ul>
+						<li><a href="https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding">Data Seeding - EF Core | Microsoft Docs</a></li>
+						<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">Configuration in ASP.NET Core | Microsoft Docs</a></li>
+						<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0">Options pattern in ASP.NET Core | Microsoft Docs</a></li>
+					</ul>
 				</section>
 			</div>
 		</div>
