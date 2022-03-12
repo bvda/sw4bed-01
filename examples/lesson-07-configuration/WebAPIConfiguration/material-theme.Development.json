@@ -1,0 +1,20 @@
+{
+  "Colors": {
+    "Primary": "#2196f3",
+    "PrimaryLight": "#6ec6ff",
+    "PrimaryDark": "#0069c0",
+    "Secondary": "#ff9800",
+    "SecondaryLight": "#ffc947",
+    "SecondaryDark": "#c66900"
+  },
+  "Fonts": {
+    "Display": {
+      "Url": "",
+      "Size": 24
+    },
+    "Body": {
+      "Url": "",
+      "Size": 12
+    }
+  }  
+}
