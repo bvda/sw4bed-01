@@ -76,6 +76,22 @@
 						</ul>
 					</section>
 					<section>
+						<h2>Loading configurations</h2>
+						<ul>
+							<li>Loaded from a variety of sources</li>
+							<li>Applied in the following order:
+								<ul>
+									<li>Add host configuration</li>
+									<li><code>appsettings.json</code></li>
+									<li><code>appsettings.{ENVIRONMENT}.json</code></li>
+									<li>App secrets (when running in the <code>Development</code> environment</li>
+									<li>Environment variables</li>
+									<li>Command-line arguments</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
 						<h2>Overriding settings</h2>
 					</section>
 				</section>
