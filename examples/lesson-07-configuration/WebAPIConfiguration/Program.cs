@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Data.SqlClient;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ using WebAPIConfiguration.Data;
 using WebAPIConfiguration.Model;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
   config.Sources.Clear();
@@ -24,8 +26,10 @@ if (builder.Environment.IsDevelopment())
 }
 else
 {
+  var connStrBuilder = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("NetLog"));
+  connStrBuilder.Password = builder.Configuration["dbPassword"];
   builder.Services.AddDbContext<NetLogContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NetLog")));
+    options.UseSqlServer(connStrBuilder.ConnectionString));
 }
 
 builder.Services.AddControllers();
