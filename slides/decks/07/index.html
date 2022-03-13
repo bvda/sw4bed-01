@@ -48,6 +48,7 @@
 							<li>Tweak various settings at deploy time
 								<ul>
 									<li>No need for re-compilation</li>
+									<li>A <mark>setting</mark> is a value that changes the <mark>behavior</mark> of an application</li>
 								</ul>
 							</li>
 							<li>Sources
@@ -69,8 +70,8 @@
 						<ul>
 							<li>ASP.NET Core uses configuration providers
 								<ul>
-									<li>Loads key-value pairs</li>
-									<li>An application can have any number of configration providers</li>
+									<li>Loads key-value pairs (<code>{"key":"value"}</code></li>
+									<li>An application can have any number of configuration providers</li>
 								</ul>
 							</li>
 						</ul>
@@ -93,6 +94,53 @@
 					</section>
 					<section>
 						<h2>Overriding settings</h2>
+						<ul>
+							<li>Load settings from multiple sources to create "layers" i a configuration</li>
+						</ul>
+					</section>
+					<section>
+						<h2>App secrets</h2>
+						<ul>
+							<li>The Secret Manager tools stores sensitive data during development
+								<ul>
+									<li>App secrets are stored in a separate location from the project tree</li>
+									<li>Not checked into source control</li>
+									<li>Does not encrypt the stored secrets and should not be treated as a trusted store</li>
+								</ul>
+							</li>
+							<li>Secrets are created as name-value pairs</li>
+							<li>Use Azure Key Vault in production</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 342-346</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>How to use Secret Manager</h2>
+						<ul>
+							<li><code>dotnet user-secrets init</code></li>
+							<li>Set a secret
+								<ul>
+									<li><code>dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"</code></li>
+								</ul>
+							</li>
+							<li>Access a secret</li>
+							<li>Map secrets to a POCO</li>
+						</ul>
+					</section>
+					<section>
+						<h2>String replacement with secrets</h2>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 342-346</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section>
@@ -102,7 +150,8 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Provide strongly type access to groups of related settings
+							<li>The preferred way to read hierarchical configuration data</li>
+							<li>Provide <mark>strongly</mark> type access to groups of related settings
 								<ul>
 									<li>Isolatation by scenario(s) adhere to Interface Segregation Principle (ISP) and separation of concerns</li>
 								</ul>
