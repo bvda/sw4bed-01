@@ -120,52 +120,6 @@
 							</ul>
 						</aside>
 					</section>
-					<section>
-						<h2>App secrets</h2>
-						<ul>
-							<li>The Secret Manager tools stores sensitive data during <mark>development</mark>
-								<ul>
-									<li>App secrets are stored in a separate location from the project tree</li>
-									<li>Not checked into source control</li>
-									<li>Does not encrypt the stored secrets and should not be treated as a trusted store</li>
-								</ul>
-							</li>
-							<li>Secrets are created as name-value pairs</li>
-							<li>Use Azure Key Vault in production</li>
-						</ul>
-						<aside class="notes" aria-label="notes">
-							<h4>References</h4>
-							<ul>
-								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
-								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 342-346</li>
-							</ul>
-						</aside>
-					</section>
-					<section>
-						<h2>How to use Secret Manager</h2>
-						<ul>
-							<li><code>dotnet user-secrets init</code></li>
-							<li>Set a secret
-								<ul>
-									<li><code>dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"</code></li>
-								</ul>
-							</li>
-							<li>Access a secret</li>
-							<li>Map secrets to a POCO</li>
-						</ul>
-					</section>
-					<section>
-						<h2>String replacement with secrets</h2>
-						<ul>
-							<li>Add `dotnet add package system.data.sqlclient`</li>
-						</ul>
-						<aside class="notes" aria-label="notes">
-							<h4>References</h4>
-							<ul>
-								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
-							</ul>
-						</aside>
-					</section>
 				</section>
 				<section>
 					<section>
@@ -357,6 +311,73 @@
 						<small>examples/lesson-07-configuration/WebAPIConfiguration/Program.cs</small>
 					</section>
 				</section>
+				<section>
+					<section>
+						<h2>Storing sensitive data</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>Never store passwords or other sensitive data in source code</li>
+							<li>Production secrets should not be used for development</li>
+							<li>Secrets should not be deployed with the application
+								<ul>
+									<li>They should be accessed through the environment</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>App secrets</h2>
+						<ul>
+							<li>The Secret Manager tools stores sensitive data during <mark>development</mark>
+								<ul>
+									<li>App secrets are stored in a separate location from the project tree</li>
+									<li>Not checked into source control</li>
+									<li>Does not encrypt the stored secrets and should not be treated as a trusted store</li>
+								</ul>
+							</li>
+							<li>Secrets are created as name-value pairs</li>
+							<li>Use Azure Key Vault in <mark>production</mark></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 342-346</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>How to use Secret Manager</h2>
+						<ul>
+							<li><code>dotnet user-secrets init</code></li>
+							<li>Set a secret
+								<ul>
+									<li><code>dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"</code></li>
+								</ul>
+							</li>
+							<li>Accessing user Secrets
+								<ul>
+									<li>Can be mapped as any other settings</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>String replacement with secrets</h2>
+						<ul>
+							<li>Add `dotnet add package system.data.sqlclient`</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+
 				<section>
 					<h2>Wrap-up</h2>
 					<ul>
