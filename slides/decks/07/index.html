@@ -95,8 +95,20 @@
 					<section>
 						<h2>Overriding settings</h2>
 						<ul>
-							<li>Load settings from multiple sources to create "layers" i a configuration</li>
+							<li>Load settings from multiple sources to create "layers" i a configuration
+								<ul>
+									<li>The order in which configuration providers are added is significant</li>
+								</ul>
+							</li>
+							<li>Produces a single cohesive configuration object</li>
 						</ul>
+						<img src="../../assets/layered-configuration.jpg" width="60%" alt="layered-configuration" />
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 340-342</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>App secrets</h2>
@@ -141,7 +153,6 @@
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets">Safe storage of app secrets in development in ASP.NET Core | Microsoft Docs</a></li>
-								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 342-346</li>
 							</ul>
 						</aside>
 					</section>
@@ -160,6 +171,8 @@
 								</ul>
 							</li>
 							<li>Validation of configuration data</li>
+							<li>Should be used instead of <code>IConfiguration</code></li>
+							<li>Used troughout the ASP.NET Core</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -194,12 +207,26 @@
 					<section>
 						<h2>Binding Option classes</h2>
 						<ul>
-							<li></li>
+							<li>POCO classes need to
+								<ul>
+									<li>Be non-abstract</li>
+									<li>Have a default constructor</li>
+								</ul>
+							</li>
+							<li>Properties need to adhere to the following rules to bind automatically
+								<ul>
+									<li>Declared with the <code>public</code> access modifier</li>
+									<li>Have a <code>get</code> accessor (<code>set</code>-only properties will not be bound)</li>
+									<li>Have a <code>set</code>  accessor (or non-<code>null</code> value for complex types)</li>
+									<li>Is not an indexer</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 349-350</li>
+								<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/indexers/">Indexers - C# Programming Guide | Microsoft Docs</a></li>
 							</ul>
 						</aside>
 					</section>
