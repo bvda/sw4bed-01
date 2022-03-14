@@ -30,7 +30,6 @@ public class NetLogController : ControllerBase {
     return log;
   }
 
-
   [HttpGet(Name = "GetNetLogs")]
   public async Task<ActionResult<IList<NetLog>>> GetNetLogs()
   {

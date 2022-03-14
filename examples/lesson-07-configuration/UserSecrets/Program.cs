@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UserSecrets.Data;
+using UserSecrets.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<NetLogContext>(options =>
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:NetLog"]));
+var appSecrets = builder.Configuration.GetSection("ConnectionStrings").Get<AppSecretOptions>();
+Console.WriteLine(appSecrets.NetLog);
+
+if(appSecrets.NetLog is not null) {
+    builder.Services.AddDbContext<NetLogContext>(options =>
+        options.UseSqlServer(appSecrets.NetLog));
+}
 
 var app = builder.Build();
 

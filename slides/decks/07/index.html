@@ -325,6 +325,12 @@
 									<li>They should be accessed through the environment</li>
 								</ul>
 							</li>
+							<li>Examples of sensitive data:
+								<ul>
+									<li>Connection strings</li>
+									<li>API keys</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 					<section>
@@ -357,17 +363,11 @@
 									<li><code>dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"</code></li>
 								</ul>
 							</li>
-							<li>Accessing user Secrets
+							<li>Accessing User Secrets
 								<ul>
-									<li>Can be mapped as any other settings</li>
+									<li>Can be mapped to option classes as any other settings</li>
 								</ul>
 							</li>
-						</ul>
-					</section>
-					<section>
-						<h2>String replacement with secrets</h2>
-						<ul>
-							<li>Add `dotnet add package system.data.sqlclient`</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -376,8 +376,10 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						
+					</section>
 				</section>
-
 				<section>
 					<h2>Wrap-up</h2>
 					<ul>
