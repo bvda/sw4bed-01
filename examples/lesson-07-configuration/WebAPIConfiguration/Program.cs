@@ -2,9 +2,9 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using WebAPIConfiguration.Data;
 using WebAPIConfiguration.Model;
+using WebAPIConfiguration.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
   var env = hostingContext.HostingEnvironment;
@@ -21,10 +21,11 @@ if (builder.Environment.IsDevelopment())
 }
 else
 {
-  Console.WriteLine(builder.Configuration.GetConnectionString("NetLogs"));
   builder.Services.AddDbContext<NetLogContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("NetLogs")));
 }
+
+builder.Services.Configure<AppShellOptions>(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -35,14 +36,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();
   app.UseSwaggerUI();
-  
   seedData();
 }
 
@@ -55,15 +53,17 @@ app.MapControllers();
 app.Run();
 
 void seedData() {
-  using(var scope = app.Services.CreateScope()) {
-    using FileStream fs = File.OpenRead("MOCK_DATA.json");
-    var logs = JsonSerializer.Deserialize<NetLog[]>(fs, new JsonSerializerOptions {
+  using (var fs = File.OpenRead("MOCK_DATA.json")) {
+    var logs = JsonSerializer.Deserialize<List<NetLog>>(fs, new JsonSerializerOptions {
       PropertyNameCaseInsensitive = true,
     });
-
-    var context = scope.ServiceProvider.GetRequiredService<NetLogContext>();
-      context.Database.EnsureCreated();
-      context.AddRange(logs);
-      context.SaveChanges();
-  }
+    if(logs is not null) {
+      using(var scope = app.Services.CreateScope()) {
+        var context = scope.ServiceProvider.GetRequiredService<NetLogContext>();
+        context.Database.EnsureCreated();
+        context.AddRange(logs);
+        context.SaveChanges();
+      }
+    }
+  };
 }

@@ -10,16 +10,17 @@ namespace WebAPIConfiguration.Controllers;
 public class ThemeController : Controller 
 {
   private readonly ILogger<ThemeController> _logger;
-  private readonly IOptions<AppShellOptions> _configuration;
+  private readonly AppShellOptions _options;
 
   public ThemeController(ILogger<ThemeController> logger, IOptions<AppShellOptions> configuration) {
-    _configuration = configuration;
+
+    _options = configuration.Value;
     _logger = logger;
   }
 
   [HttpGet]
   public IActionResult GetTheme()
   {
-    return Json(_configuration);
+    return Json(_options);
   }
 }
