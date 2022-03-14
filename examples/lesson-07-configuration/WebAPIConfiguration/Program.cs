@@ -10,7 +10,8 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
   var env = hostingContext.HostingEnvironment;
   config.AddIniFile("MyConfig.ini", optional: true, reloadOnChange: true)
         .AddIniFile($"MyConfig.{env.EnvironmentName}.ini", optional: true, reloadOnChange: true)
-        .AddJsonFile("material-theme.json");
+        .AddJsonFile("material-theme.json", optional: false, reloadOnChange: true)
+        .AddJsonFile($"material-theme.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
 });
 
 // Add services to the container.
@@ -26,6 +27,12 @@ else
 }
 
 builder.Services.Configure<AppShellOptions>(builder.Configuration);
+
+builder.Services.AddCors(options => {
+  options.AddPolicy("Theme", builder => {
+    builder.AllowAnyOrigin();
+  });
+});
 
 builder.Services.AddControllers();
 
@@ -45,6 +52,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

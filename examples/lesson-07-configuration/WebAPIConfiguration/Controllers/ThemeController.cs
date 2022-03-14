@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -12,12 +13,13 @@ public class ThemeController : Controller
   private readonly ILogger<ThemeController> _logger;
   private readonly AppShellOptions _options;
 
-  public ThemeController(ILogger<ThemeController> logger, IOptions<AppShellOptions> configuration) {
+  public ThemeController(ILogger<ThemeController> logger, IOptionsSnapshot<AppShellOptions> configuration) {
 
     _options = configuration.Value;
     _logger = logger;
   }
 
+  [EnableCors("Theme")]
   [HttpGet]
   public IActionResult GetTheme()
   {
