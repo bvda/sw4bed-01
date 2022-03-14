@@ -3,7 +3,7 @@ namespace WebAPIConfiguration.Options;
 public class AppShellOptions {
   public const string AppShell = "AppShell";
 
-  public ColorsOption Colors { get; set; }
+  public ColorsOption? Colors { get; set; }
 
   public class ColorsOption {
     public string Primary { get; set; } = String.Empty;

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 using WebAPIConfiguration.Options;
 
@@ -9,9 +10,9 @@ namespace WebAPIConfiguration.Controllers;
 public class ThemeController : Controller 
 {
   private readonly ILogger<ThemeController> _logger;
-  private readonly IConfiguration _configuration;
+  private readonly IOptions<AppShellOptions> _configuration;
 
-  public ThemeController(ILogger<ThemeController> logger, IConfiguration configuration) {
+  public ThemeController(ILogger<ThemeController> logger, IOptions<AppShellOptions> configuration) {
     _configuration = configuration;
     _logger = logger;
   }
@@ -19,9 +20,6 @@ public class ThemeController : Controller
   [HttpGet]
   public IActionResult GetTheme()
   {
-    var appShellOptions = new AppShellOptions();
-    _configuration.Bind(appShellOptions);
-
-    return Json(appShellOptions);
+    return Json(_configuration);
   }
 }

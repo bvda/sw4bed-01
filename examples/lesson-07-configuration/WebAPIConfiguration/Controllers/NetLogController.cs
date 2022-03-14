@@ -8,19 +8,14 @@ namespace WebAPIConfiguration.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class NetLogController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<NetLogController> _logger;
     private readonly NetLogContext _context;
 
     private readonly IConfiguration _configuration;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, NetLogContext context, IConfiguration configuration)
+    public NetLogController(ILogger<NetLogController> logger, NetLogContext context, IConfiguration configuration)
     {
         _logger = logger;
         _configuration = configuration;
