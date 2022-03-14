@@ -47,7 +47,7 @@
 						<ul>
 							<li>Tweak various settings at deploy time
 								<ul>
-									<li>No need for re-compilation</li>
+									<li>No need for re-compilation or restarts</li>
 									<li>A <mark>setting</mark> is a value that changes the <mark>behavior</mark> of an application</li>
 								</ul>
 							</li>
@@ -74,18 +74,28 @@
 									<li>An application can have any number of configuration providers</li>
 								</ul>
 							</li>
+							<li>Available providers:
+								<ul>
+									<li>Azure Key Vault</li>
+									<li>Azure App</li>
+									<li>Environment Variables</li>
+									<li>Command-line</li>
+									<li>File</li>
+									<li>User secrets</li>
+									<li>Custom</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 					<section>
 						<h2>Loading configurations</h2>
 						<ul>
-							<li>Loaded from a variety of sources</li>
-							<li>Applied in the following order:
+							<li>Applied in the following order (default configuration):
 								<ul>
 									<li>Add host configuration</li>
 									<li><code>appsettings.json</code></li>
 									<li><code>appsettings.{ENVIRONMENT}.json</code></li>
-									<li>App secrets (when running in the <code>Development</code> environment</li>
+									<li>App secrets (when running in the <code>Development</code> environment)</li>
 									<li>Environment variables</li>
 									<li>Command-line arguments</li>
 								</ul>
@@ -234,10 +244,55 @@
 				<section>
 					<section>
 						<h2>Environments</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>ASP.NET Core configures application behavior based on environments</li>
+							<li>Three environments defined per default:
+								<ul>
+									<li><mark>Development</mark> Used for development on local machines</li>
+									<li><mark>Staging</mark> A nearly exact replica of the production environment</li>
+									<li><mark>Production</mark> The environment exposed to end-users</li>
+								</ul>
+							</li>
+							<li>Defined in enviroment variable <code>ASPNETCORE_ENVIRONMENT</code> 
+								<ul>
+									<li>If not set, it will default to <code>Production</code></li>
+								</ul>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li></li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments">Use multiple environments in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Common use cases</h2>
+						<ul>
+							<li>Customization of middleware pipeline
+								<ul>
+									<li>Exception pages</li>
+									<li>Enable <code>Strict-Transport-Security</code> headers (HSTS)</li>
+								</ul>
+							</li>
+							<li>Loading environment-specific configuration files
+								<ul>
+									<li>Logging configuration</li>
+								</ul>
+							</li>
+							<li>Add or remove configuration providers
+								<ul>
+									<li>User Secret Manager for development. Azure Key Vault for production, etc.</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">Strict-Transport-Security - HTTP | MDN</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -303,11 +358,23 @@
 					</section>
 				</section>
 				<section>
-					<h2>Resources</h2>
+					<h2>Wrap-up</h2>
 					<ul>
-						<li><a href="https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding">Data Seeding - EF Core | Microsoft Docs</a></li>
-						<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">Configuration in ASP.NET Core | Microsoft Docs</a></li>
-						<li><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0">Options pattern in ASP.NET Core | Microsoft Docs</a></li>
+						<li>Application configuration
+							<ul>
+								<li>Extract configuration from implementation</li>
+							</ul>
+						</li>
+						<li>Options pattern
+							<ul>
+								<li>Use strongly-typed configuration objects and dependency injectiong</li>
+							</ul>
+						</li>
+						<li>Environments
+							<ul>
+								<li>Change configuration based on environment</li>
+							</ul>
+						</li>
 					</ul>
 				</section>
 			</div>
