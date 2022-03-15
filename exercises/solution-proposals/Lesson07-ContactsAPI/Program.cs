@@ -1,24 +1,24 @@
 using Microsoft.EntityFrameworkCore;
-using UserSecrets.Data;
-using UserSecrets.Options;
+using Lesson07_ContactsAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+if (builder.Environment.IsDevelopment())
+{
+  builder.Services.AddDbContext<ContactContext>(options =>
+    options.UseInMemoryDatabase("NetLogDev"));
+}
+else
+{
+  builder.Services.AddDbContext<ContactContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("NetLogs")));
+}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-var appSecrets = builder.Configuration
-    .GetSection("ConnectionStrings")
-    .Get<AppSecretOptions>();
-
-if(appSecrets.NetLog is not null) {
-    builder.Services.AddDbContext<NetLogContext>(options =>
-        options.UseSqlServer(appSecrets.NetLog));
-}
 
 var app = builder.Build();
 
