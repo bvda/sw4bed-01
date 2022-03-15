@@ -122,7 +122,7 @@
 					</section>
 					<section>
 						<h2>Loading and overriding settings</h2>
-						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+						<pre><code class="csharp" data-line-numbers="|1,14|2|3|4-6|7-9|10-12|" data-trim data-noescape><script type="text/template">
 							builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
 								var env = hostingContext.HostingEnvironment;
 								config.AddIniFile("MyConfig.ini", optional: true, reloadOnChange: true)
@@ -214,6 +214,85 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>POCO option class</h2>
+						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+							namespace WebAPIConfiguration.Options;
+
+							public class AppShellOptions {
+								public const string AppShell = "AppShell";
+
+								public ColorsOption? Colors { get; set; }
+
+								public class ColorsOption {
+									public string Primary { get; set; } = String.Empty;
+									public string PrimaryLight { get; set; } = String.Empty;
+									public string PrimaryDark { get; set; } = String.Empty;
+									public string Secondary { get; set; } = String.Empty;
+									public string SecondaryLight { get; set; } = String.Empty;
+									public string SecondaryDark { get; set; } = String.Empty;
+								}
+							}
+						</script></code></pre>	
+						<small>examples/lesson-07-configuration/WebAPIConfiguration/Options/AppShellOptions.cs</small>
+					</section>
+					<section>
+						<h2>The settings file</h2>
+						<pre><code class="json" data-line-numbers data-trim data-noescape><script type="text/template">
+							{
+								"Colors": {
+									"Primary": "#009688",
+									"PrimaryLight": "#52c7b8",
+									"PrimaryDark": "#00675b",
+									"Secondary": "#d81b60",
+									"SecondaryLight": "#ff5c8d",
+									"SecondaryDark": "#a00037"
+								},
+								"Fonts": {
+									"Display": {
+										"Url": "",
+										"Size": 24
+									},
+									"Body": {
+										"Url": "",
+										"Size": 12
+									}
+								}  
+							}
+						</script></code></pre>	
+						<small>examples/lesson-07-configuration/WebAPIConfiguration/material-theme.json</small>
+					</section>
+					<section>
+						<h2>Using settings</h2>
+						<pre><code class="csharp" data-line-numbers="|13|15|16|23|" data-trim data-noescape><script type="text/template">
+							using Microsoft.AspNetCore.Cors;
+							using Microsoft.AspNetCore.Mvc;
+							using Microsoft.Extensions.Options;
+							
+							using WebAPIConfiguration.Options;
+							
+							namespace WebAPIConfiguration.Controllers;
+							
+							[ApiController]
+							[Route("[controller]")]
+							public class ThemeController : Controller 
+							{
+								private readonly AppShellOptions _options;
+							
+								public ThemeController(IOptionsSnapshot<AppShellOptions> configuration) {
+									_options = configuration.Value;
+								}
+							
+								[EnableCors("Theme")]
+								[HttpGet]
+								public IActionResult GetTheme()
+								{
+									return Json(_options);
+								}
+							}
+						</script></code></pre>
+						<small>examples/lesson-07-configuration/WebAPIConfiguration/Program.cs</small>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -272,7 +351,7 @@
 					</section>
 					<section>
 						<h2>Configure service and middleware</h2>
-						<pre><code class="csharp" data-line-numbers="|11-12,15-17,20|13-14|18-19|34-40|" data-trim data-noescape><script type="text/template">
+						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
 							using System.Text.Json;
 							using Microsoft.EntityFrameworkCore;
 							using WebAPIConfiguration.Data;
@@ -398,7 +477,7 @@
 					</section>
 					<section>
 						<h2>Accessing user secrets</h2>
-						<pre><code class="csharp" data-line-numbers="|11-12,15-17,20|13-14|18-19|34-40|" data-trim data-noescape><script type="text/template">
+						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
 							var appSecrets = builder.Configuration
 								.GetSection("ConnectionStrings")
 								.Get<AppSecretOptions>();

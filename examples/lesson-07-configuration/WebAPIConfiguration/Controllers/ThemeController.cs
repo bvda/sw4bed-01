@@ -10,13 +10,10 @@ namespace WebAPIConfiguration.Controllers;
 [Route("[controller]")]
 public class ThemeController : Controller 
 {
-  private readonly ILogger<ThemeController> _logger;
   private readonly AppShellOptions _options;
 
-  public ThemeController(ILogger<ThemeController> logger, IOptionsSnapshot<AppShellOptions> configuration) {
-
+  public ThemeController(IOptionsSnapshot<AppShellOptions> configuration) {
     _options = configuration.Value;
-    _logger = logger;
   }
 
   [EnableCors("Theme")]
