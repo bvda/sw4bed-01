@@ -351,7 +351,7 @@
 					</section>
 					<section>
 						<h2>Configure service and middleware</h2>
-						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+						<pre><code class="csharp" data-line-numbers="|9-10,13-15,18|11-12|16-17|" data-trim data-noescape><script type="text/template">
 							using System.Text.Json;
 							using Microsoft.EntityFrameworkCore;
 							using WebAPIConfiguration.Data;
@@ -456,7 +456,11 @@
 					<section>
 						<h2>How to use Secret Manager</h2>
 						<ul>
-							<li><code>dotnet user-secrets init</code></li>
+							<li>Initialize user secrets (run from project root directory)
+								<ul>
+									<li><code>dotnet user-secrets init</code></li>
+								</ul>
+							</li>
 							<li>Set a secret
 								<ul>
 									<li><code>dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"</code></li>
@@ -465,6 +469,7 @@
 							<li>Accessing User Secrets
 								<ul>
 									<li>Can be mapped to option classes as any other settings</li>
+									<li>Can be accessed as any other environment variable</li>
 								</ul>
 							</li>
 						</ul>
