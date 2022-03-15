@@ -11,8 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var appSecrets = builder.Configuration.GetSection("ConnectionStrings").Get<AppSecretOptions>();
-Console.WriteLine(appSecrets.NetLog);
+var appSecrets = builder.Configuration
+    .GetSection("ConnectionStrings")
+    .Get<AppSecretOptions>();
 
 if(appSecrets.NetLog is not null) {
     builder.Services.AddDbContext<NetLogContext>(options =>

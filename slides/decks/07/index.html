@@ -120,6 +120,26 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Loading and overriding settings</h2>
+						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+							builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
+								var env = hostingContext.HostingEnvironment;
+								config.AddIniFile("MyConfig.ini", optional: true, reloadOnChange: true)
+											.AddIniFile($"MyConfig.{env.EnvironmentName}.ini", 
+												optional: true, 
+												reloadOnChange: true)
+											.AddJsonFile("material-theme.json", 
+												optional: false, 
+												reloadOnChange: true)
+											.AddJsonFile($"material-theme.{env.EnvironmentName}.json", 
+												optional: false, 
+												reloadOnChange: true
+											);
+							});
+						</script></code></pre>	
+						<small>examples/lesson-07-configuration/WebAPIConfiguration/Program.cs</small>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -377,7 +397,18 @@
 						</aside>
 					</section>
 					<section>
-						
+						<h2>Accessing user secrets</h2>
+						<pre><code class="csharp" data-line-numbers="|11-12,15-17,20|13-14|18-19|34-40|" data-trim data-noescape><script type="text/template">
+							var appSecrets = builder.Configuration
+								.GetSection("ConnectionStrings")
+								.Get<AppSecretOptions>();
+
+							if(appSecrets.NetLog is not null) {
+								builder.Services.AddDbContext<NetLogContext>(options =>
+										options.UseSqlServer(appSecrets.NetLog));
+							}
+						</script></code></pre>
+						<small>examples/lesson-07-configuration/UserSecrets/Program.cs</small>
 					</section>
 				</section>
 				<section>
