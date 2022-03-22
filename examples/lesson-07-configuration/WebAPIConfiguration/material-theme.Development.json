@@ -1,9 +1,9 @@
 {
   "Colors": {
-    "Primary": "#2196f3",
+    "Primary": "lime",
     "PrimaryLight": "#6ec6ff",
     "PrimaryDark": "#0069c0",
-    "Secondary": "#ff9800",
+    "Secondary": "tomato",
     "SecondaryLight": "#ffc947",
     "SecondaryDark": "#c66900"
   },

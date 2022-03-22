@@ -11,7 +11,7 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) => {
   config.AddIniFile("MyConfig.ini", optional: true, reloadOnChange: true)
         .AddIniFile($"MyConfig.{env.EnvironmentName}.ini", optional: true, reloadOnChange: true)
         .AddJsonFile("material-theme.json", optional: false, reloadOnChange: true)
-        .AddJsonFile($"material-theme.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
+        .AddJsonFile($"material-theme.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 });
 
 // Add services to the container.
