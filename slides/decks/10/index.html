@@ -41,9 +41,67 @@
 					</section>
 					<section id="hosting-model">
 						<h2>ASP.NET Core hosting model</h2>
+						<ul>
+							<li>A ASP.NET Core app is running in a web server in a console applications
+								<ul>
+									<li>Typically a Krestel instance</li>
+								</ul>
+							</li>
+							<li>Krestel provides the HTTP functionality
+								<ul>
+									<li>Receives requests and return responses</li>
+									<li>Passes any request to the application itself to generate a response</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 					<section id="reverse-proxy">
 						<h2>Reverse proxies</h2>
+						<ul>
+							<li>A reverse proxy is responsible for receiving requests and forwarding them to the appropiate destination</li>
+							<li>Exposed directly to the internet
+								<ul>
+									<li>Underlying services are exposed to the proxy</li>
+								</ul>
+							</li>
+							<li>Some benefits of using a reverse proxy
+								<ul>
+									<li></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Deployments</h2>
+						<ul>
+							<li>Runtime-dependent
+								<ul>
+									<li>Requires .NET to be installed on the host</li>
+								</ul>
+							</li>
+							<li>Self-contained
+								<ul>
+									<li>Bundle .NET Framework and application together</li>
+									<li>Platform-dependent</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/dotnet/core/deploying/">Application publishing - .NET | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Deploying on Linux</h2>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx">Host ASP.NET Core on Linux with Nginx | Microsoft Docs</a></li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache">Host ASP.NET Core on Linux with Apache | Microsoft Docs</a></li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section>
