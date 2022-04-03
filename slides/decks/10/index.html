@@ -221,13 +221,20 @@
 					<section>
 						<h2>Formatting log messages</h2>
 						<ul>
-							<li>Use placeholders and in message strings
+							<li>Use <mark>placeholders</mark> and in message strings
 								<ul>
 									<li><code>LogDebug("Loaded {dbCount} elements from {dbContext}", dbCount, dbContext)</code></li>
+									<li>Use must provide at least the as many parameters to the log message that there placeholders in the message</li>
 									<li>Don't use string interpolation <strike><code>$"Loaded {dbCount} elements from {dbContext}"</code></strike></li>
+									<li>The <mark>order</mark> of the parameters is significant</li>
 								</ul>
 							</li>
-							<li></li>
+							<li>Structured or sematic logging
+								<ul>
+									<li>Attaches additional structures to log messages</li>
+									<li>Makes it easier searchable and filterable</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -242,6 +249,12 @@
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://github.com/serilog/serilog-aspnetcore">serilog/serilog-aspnetcore: Serilog integration for ASP.NET Core</a></li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section>
