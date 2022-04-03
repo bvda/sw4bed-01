@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "sbXQv11r7jkPlnyvyinS/f0KFaMlv5GS6gQxAvjI31ABiFLO/Lz5lRZSJGiuNk3kf/ItWwSd+mAH4SNHlr0/bg==",
+  "success": true,
+  "projectFilePath": "/Users/bvd/Workspace/sw4bed-01/examples/lesson-10-deployment-logging-and-tests/logging/logging.csproj",
+  "expectedPackageFiles": [
+    "/Users/bvd/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/bvd/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/bvd/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/bvd/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/bvd/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/bvd/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
