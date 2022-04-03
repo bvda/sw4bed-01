@@ -188,7 +188,7 @@
 									<li>Defined  by the <code>LogLevel</code> enum</li>
 								</ul>
 							</li>
-							<li>Categories
+							<li>Categories (filtering)
 								<ul>
 									<li>Used for filtering event during inspection</li>
 									<li>Best practise is to use fully quailified class name
@@ -211,12 +211,37 @@
 						<h2>Log levels</h2>
 						<img src="../../assets/log-levels.png" width="60%" alt="log-levels" />
 						<small>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), p. 549</small>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), p. 549</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
-						<h2>Verbosity and filtering</h2>
+						<h2>Formatting log messages</h2>
+						<ul>
+							<li>Use placeholders and in message strings
+								<ul>
+									<li><code>LogDebug("Loaded {dbCount} elements from {dbContext}", dbCount, dbContext)</code></li>
+									<li>Don't use string interpolation <strike><code>$"Loaded {dbCount} elements from {dbContext}"</code></strike></li>
+								</ul>
+							</li>
+							<li></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li></li>
+								<li></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Serilog</h2>
+						<ul>
+							<li></li>
+						</ul>
 					</section>
 				</section>
 				<section>
