@@ -268,6 +268,71 @@
 						<h2>Testing with xUnit</h2>
 					</section>
 					<section>
+						<h2>What is a test (with xUnit)?</h2>
+						<ul>
+							<li>Tests are denoted by the <code>[Fact]</code> attribute</li>
+							<li>The method should be public with no parameters</li>
+							<li>The method should return <code>null</code></li>
+							<li>The method should reside in a public, non-static class</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 719</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Unit testing with xUnit</h2>
+						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+							public class TemperatureConverter {
+								public decimal CelsiusToFahrenheit(decimal celcius) {
+									if(celcius < kelvinToCelsius(0)) {
+										throw new ArgumentOutOfRangeException(nameof(celcius));
+									}
+									return (celcius * 9/5) + 32; 
+								} 
+							
+								public decimal kelvinToCelsius(decimal kelvin) {
+									return kelvin - 273.15m;
+								}
+							}
+						</script></code></pre>
+						<small>examples/lesson-10-deployment-logging-and-tests/Testing/Testing/TemperatureConverter.cs</small>	
+					</section>
+					<section>
+						<h2>Unit testing with xUnit</h2>
+						<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+							using System;
+							using Xunit;
+							
+							namespace Testing.Tests;
+							
+							public class TemperatureConverterUnitTest
+							{
+									[Fact]
+									public void CelsiusToFahrenheit()
+									{
+											var converter = new TemperatureConverter();
+											decimal input = 0;
+											decimal expected = 32m;
+											var actual = converter.CelsiusToFahrenheit(input);
+											Assert.Equal(expected, actual);
+									}
+							
+									[Fact]
+									public void CelsiusToFahrenheitBelowAbsoluteZero() {
+											var converter = new TemperatureConverter();
+											decimal input = -273.16m;
+											var ex = Assert.Throws<ArgumentOutOfRangeException>(
+													() => converter.CelsiusToFahrenheit(input)
+											);
+									}
+							}
+						</script></code></pre>
+						<small>examples/lesson-10-deployment-logging-and-tests/Testing/Testing.Tests/TemperatureConverter.cs</small>	
+					</section>
+					<section>
 						<h2>Unit testing API controllers</h2>
 					</section>
 					<section>
