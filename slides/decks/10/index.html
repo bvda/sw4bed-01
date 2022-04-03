@@ -181,10 +181,11 @@
 					<section>
 						<h2>Logging categories and levels</h2>
 						<ul>
-							<li>Log levels
+							<li>Log levels (verbosity)
 								<ul>
 									<li>Indicates the importance (seriousness) of the event</li>
 									<li>Used for filtering events during inspection</li>
+									<li>Defined  by the <code>LogLevel</code> enum</li>
 								</ul>
 							</li>
 							<li>Categories
@@ -192,7 +193,7 @@
 									<li>Used for filtering event during inspection</li>
 									<li>Best practise is to use fully quailified class name
 										<ul>
-											<li>But can be any arbitrary <code>string</code></li>
+											<li>Inject <code>ILogger&lt;T&gt;</code> in methods should be enough most of the time</li>
 										</ul>
 									</li>
 								</ul>
