@@ -66,10 +66,23 @@
 							</li>
 							<li>Some benefits of using a reverse proxy
 								<ul>
-									<li></li>
+									<li>Security</li>
+									<li>Support for multiple applications</li>
+									<li>Performance (caching)</li>
+								</ul>
+							</li>
+							<li>Some downsides of using a reverse proxy
+								<ul>
+									<li>Increased complexity</li>
 								</ul>
 							</li>
 						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 505-506</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Deployments</h2>
@@ -90,18 +103,69 @@
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/dotnet/core/deploying/">Application publishing - .NET | Microsoft Docs</a></li>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), p. 509</li>
 							</ul>
 						</aside>
 					</section>
 					<section>
-						<h2>Deploying on Linux</h2>
+						<h2>Deploying on Windows/Linux</h2>
+						<ul>
+							<li>Internet Information Services (IIS)
+								<ul>
+									<li>Application pools</li>
+									<li>In-process and out-of-process hosting</li>
+								</ul>
+							</li>
+							<li>Nginx
+								<ul>
+									<li>Add <code>ForwardedHeadersMiddleware</code>–remember to enable it by setting <code>ASPNETCORE_FORWARDEDHEADERS_ENABLED</code> to <code>true</code></li>
+									<li>Use the correct syntax for environment variables</li>
+								</ul>
+							</li>
+							<li>Apache
+								<ul>
+									<li>Same as Nginx</li>
+								</ul>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx">Host ASP.NET Core on Linux with Nginx | Microsoft Docs</a></li>
 								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache">Host ASP.NET Core on Linux with Apache | Microsoft Docs</a></li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer">Configure ASP.NET Core to work with proxy servers and load balancers | Microsoft Docs</a></li>
 							</ul>
 						</aside>
+					</section>
+				</section>
+				<section>
+					<section id="bundling-and-minification">
+						<h2>Bundling and minification</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>The browser must request each file and wait for a response
+								<ul>
+									<li>This can take a lot of time!</li>
+									<li>Have a massive impact on the perceived speed of the application</li>
+								</ul>
+							</li>
+							<li>Bundling minimizes the number of requests</li>
+							<li>Minification minimized the response size</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/client-side/bundling-and-minification">Bundle and minify static assets in ASP.NET Core | Microsoft Docs</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Bundling</h2>
+					</section>
+					<section>
+						<h2>Minification</h2>
 					</section>
 				</section>
 				<section>
