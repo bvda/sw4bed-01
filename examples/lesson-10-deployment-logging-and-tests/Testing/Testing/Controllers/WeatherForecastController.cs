@@ -12,10 +12,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly TemperatureConverter _converter;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, TemperatureConverter converter)
     {
         _logger = logger;
+        _converter = converter;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -29,4 +31,17 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
+    [HttpPost(Name = "PostCelsiusToFahrenheit")]
+    public ActionResult Post(ConvertRequestData value) {
+        try {
+            return Ok(_converter.CelsiusToFahrenheit(value.Value));
+        } catch (ArgumentOutOfRangeException e) {
+            return BadRequest(e.Message);
+        }
+    }
+
+    public class ConvertRequestData {
+        public decimal Value {get; set;}
+    } 
 }
