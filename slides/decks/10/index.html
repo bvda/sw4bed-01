@@ -40,11 +40,20 @@
 				</section>
 				<section>
 					<h2>Overview</h2>
+					<ul>
+						<li><code>dotnet publish</code> builds a project for deployment
+							<ul>
+								<li>Produces assembly files, dependencies and the .NET runtime (optional)</li>
+								<li>Output located in <code>bin/publish</code></li>
+							</ul>
+						</li>
+						<li>Possible to deploy directly to Azure with Visual Studio</li>
+					</ul>
 				</section>
 				<section id="hosting-model">
 					<h2>ASP.NET Core hosting model</h2>
 					<ul>
-						<li>A ASP.NET Core app is running in a web server in a console applications
+						<li>An ASP.NET Core app is running in a web server in a console applications
 							<ul>
 								<li>Typically a Krestel instance</li>
 							</ul>
@@ -53,6 +62,7 @@
 							<ul>
 								<li>Receives requests and return responses</li>
 								<li>Passes any request to the application itself to generate a response</li>
+								<li>The request passes through the middleware pipeline</li>
 							</ul>
 						</li>
 					</ul>
@@ -90,15 +100,22 @@
 				<section>
 					<h2>Deployments</h2>
 					<ul>
-						<li>Runtime-dependent
+						<li>Runtime/framework-dependent
 							<ul>
+								<li>Small deployments</li>
+								<li>Cross-platform</li>
+								<li>Uses the latest patched runtime</li>
 								<li>Requires .NET to be installed on the host</li>
+								<li>.NET may change</li>
 							</ul>
 						</li>
 						<li>Self-contained
 							<ul>
 								<li>Bundle .NET Framework and application together</li>
 								<li>Platform-dependent</li>
+								<li>Full control over .NET version</li>
+								<li>Larger deployments</li>
+								<li>Harder to update the .NET version</li>
 							</ul>
 						</li>
 					</ul>
