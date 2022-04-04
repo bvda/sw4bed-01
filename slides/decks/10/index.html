@@ -456,7 +456,17 @@
 				<section>
 					<h2>Serilog</h2>
 					<ul>
-						<li></li>
+						<li>Serilog is a third-party logger</li>
+						<li>Writes messages to sinks
+							<ul>
+								<li>There are <mark>+100</mark> sinks available on NuGet</li>
+							</ul>
+						</li>
+						<li>Easy to add to existing ASP.NET Core projects
+							<ul>
+								<li>Add the <code>Serilog.AspNetCore</code> and sinks and start logging</li>
+							</ul>
+						</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -473,14 +483,42 @@
 				</section>
 				<section>
 					<h2>Overview</h2>
+					<ul>
+						<li>Testing is generally considered good practice</li>
+						<li>Identify errors and verify changes to the code base</li>
+						<li>Different types of tests
+							<ul>
+								<li>Unit testing—test a component in <mark>isolation</mark></li>
+								<li>Integration testing—test a <mark>collection</mark> of components</li>
+								<li>User interface testing–interacts with <mark>browser</mark> (end-to-end)</li>
+							</ul>
+						</li>
+						<li>Can (should) be automated with Continuous Integration (CI)</li>
+					</ul>
 				</section>
 				<section>
 					<h2>Testing with xUnit</h2>
+					<ul>
+						<li>xUnit is am open-source unit testing tool for .NET
+							<ul>
+								<li>Written by the authors of NUnit</li>
+								<li>Used as testing tool for ASP.NET Core</li>
+							</ul>
+						</li>
+						<li>Use In-memory database to test <code>DbContext</code></li>
+					</ul>
+					<aside class="notes" aria-label="notes">
+						<h4>References</h4>
+						<ul>
+							<li><a href="https://docs.microsoft.com/en-us/ef/core/testing/">Overview of testing applications that use EF Core - EF Core | Microsoft Docs</a></li>
+							<li><a href="https://xunit.net/">Home | xUnit.net</a></li>
+						</ul>
+					</aside>
 				</section>
 				<section>
 					<h2>What is a test (with xUnit)?</h2>
 					<ul>
-						<li>Tests are denoted by the <code>[Fact]</code> attribute</li>
+						<li>Tests are denoted by the <code>[Fact]</code> of <code>[Theory]</code>attribute</li>
 						<li>The method should be public with no parameters</li>
 						<li>The method should return <code>null</code></li>
 						<li>The method should reside in a public, non-static class</li>
