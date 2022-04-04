@@ -338,8 +338,19 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>The process of recording events or actions in an app</li>
-						<li></li>
+						<li>The process of <mark>recording</mark> events or actions in an app</li>
+						<li>Logging is added to applications for the following reasons
+							<ul>
+								<li><mark>Auditing</mark> and <mark>analytics</mark>—when did what happen?</li>
+								<li><mark>Errors</mark>—what went wrong?</li>
+								<li><mark>Non-errors</mark>—follow the breadcrumbs when an error occurs</li>
+							</ul>
+						</li>
+						<li>How much logging is enough?
+							<ul>
+								<li>Typically, there is a <mark>difference</mark> between development and production logging</li>
+							</ul>
+						</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -358,11 +369,18 @@
 								<li><code>ILoggerFactory</code>—The glue that bind loggers and providers together</li>
 							</ul>
 						</li>
+						<li>ASP.NET Core provides a range of built-in loggers
+							<ul>
+								<li>A range of third-party is offered</li>
+								<li>You can build your own customer loggers</li>
+							</ul>
+						</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
 							<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 543-544</li>
+							<a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/custom-logging-provider">Implement a custom logging provider in .NET | Microsoft Docs</a>
 						</ul>
 					</aside>
 				</section>
@@ -371,7 +389,7 @@
 					<ul>
 						<li>Log levels (verbosity)
 							<ul>
-								<li>Indicates the importance (seriousness) of the event</li>
+								<li>Indicates the <mark>importance</mark> (seriousness) of the event</li>
 								<li>Used for filtering events during inspection</li>
 								<li>Defined by the <code>LogLevel</code> enum</li>
 							</ul>
