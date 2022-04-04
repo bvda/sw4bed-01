@@ -209,7 +209,7 @@
 				</section>
 				<section>
 					<h2>Bundling and minification</h2>
-					<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+					<pre><code class="csharp" data-line-numbers="|4-11|13-24|26-30|33-51|54|" data-trim data-noescape><script type="text/template">
 							// examples/lesson-10-deployment-logging-and-tests/bundling-and-minification/wwwroot/js/fibonacci.js
 							// https://medium.com/developers-writing/fibonacci-sequence-algorithm-in-javascript-b253dc7e320e
 
@@ -269,7 +269,7 @@
 				</section>
 				<section>
 					<h2>Minification</h2>
-					<pre><code class="html" data-line-numbers data-trim data-noescape><script type="text/template">
+					<pre><code class="html" data-line-numbers="|7-10|11-14|" data-trim data-noescape><script type="text/template">
 							<!DOCTYPE html>
 							<html lang="en">
 							<head>
@@ -534,33 +534,27 @@
 							</ul>
 						</li>
 						<li>Use In-memory database to test <code>DbContext</code></li>
+						<li>Writing tests for xUnit
+							<ul>
+								<li>Tests are denoted by the <code>[Fact]</code> or <code>[Theory]</code>attribute</li>
+								<li>The method should be public with no parameters</li>
+								<li>The method should return <code>null</code></li>
+								<li>The method should reside in a public, non-static class</li>
+							</ul>
+						</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
 							<li><a href="https://docs.microsoft.com/en-us/ef/core/testing/">Overview of testing applications that use EF Core - EF Core | Microsoft Docs</a></li>
 							<li><a href="https://xunit.net/">Home | xUnit.net</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h2>What is a test (with xUnit)?</h2>
-					<ul>
-						<li>Tests are denoted by the <code>[Fact]</code> of <code>[Theory]</code>attribute</li>
-						<li>The method should be public with no parameters</li>
-						<li>The method should return <code>null</code></li>
-						<li>The method should reside in a public, non-static class</li>
-					</ul>
-					<aside class="notes" aria-label="notes">
-						<h4>References</h4>
-						<ul>
 							<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 719</li>
 						</ul>
 					</aside>
 				</section>
 				<section>
-					<h2>Unit testing with xUnit</h2>
-					<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+					<h2>Unit testing with xUnit (SUT)</h2>
+					<pre><code class="csharp" data-line-numbers="|1,12|2,7|3,5|4|6|2-7|9-11|10|" data-trim data-noescape><script type="text/template">
 							public class TemperatureConverter {
 								public decimal CelsiusToFahrenheit(decimal celcius) {
 									if(celcius < kelvinToCelsius(0)) {
@@ -578,7 +572,7 @@
 				</section>
 				<section>
 					<h2>Unit testing with xUnit</h2>
-					<pre><code class="csharp" data-line-numbers data-trim data-noescape><script type="text/template">
+					<pre><code class="csharp" data-line-numbers="|9-10,16|11-13|14|15|19,25|21|22,24|23|" data-trim data-noescape><script type="text/template">
 							using System;
 							using Xunit;
 							
@@ -616,9 +610,11 @@
 								<li>Databases</li>
 								<li>File systems</li>
 								<li>Networks</li>
+								<li>Request-response pipelines</li>
 							</ul>
 						</li>
-						<li>Supported </li>
+						<li>Limit to the most important scenarios</li>
+						<li>Use the <code>Microsoft.AspNetCore.Mvc.Testing</code> NuGet package</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -628,7 +624,49 @@
 					</aside>
 				</section>
 				<section>
-					<h2>Unit testing custom middleware</h2>
+					<h2>Integration test</h2>
+					<pre><code class="csharp" data-line-numbers="|11-15,24|16-17|19|20|21|22|23|" data-trim data-noescape><script type="text/template">
+						using System.Threading.Tasks;
+						using System.Net.Http.Json;
+						using System.Net;
+						using Microsoft.AspNetCore.Mvc.Testing;
+						using Xunit;
+						
+						namespace Testing.Tests;
+						
+						public class WeatherForecastControllerTests
+						{
+							[Theory]
+							[InlineData(0, 32)]
+							[InlineData(-273.15, -459.67)]
+							public async Task PostWeatherForecastSuccess(decimal input, decimal output)
+							{
+								var application = new WebApplicationFactory<Program>()
+									.WithWebHostBuilder(builder => { });
+						
+								var client = application.CreateClient();
+								var body = JsonContent.Create(new { value = input });
+								var response = await client.PostAsync("/weatherforecast", body);
+								response.EnsureSuccessStatusCode();
+								Assert.Equal(output.ToString(), await response.Content.ReadAsStringAsync());
+							}
+						
+							[Fact]
+							public async Task PostWeatherForecastBadRequest()
+							{
+								var input = -274;
+						
+								var application = new WebApplicationFactory<Program>()
+									.WithWebHostBuilder(builder => { });
+						
+								var client = application.CreateClient();
+								var body = JsonContent.Create(new { value = input });
+								var response = await client.PostAsync("/weatherforecast", body);
+								
+								Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+							}
+					</script></code></pre>
+					<small>examples/lesson-10-deployment-logging-and-tests/Testing/Testing.Tests/WeatherForecastController.cs</small>
 				</section>
 			</section>
 			<section id="wrap-up">
