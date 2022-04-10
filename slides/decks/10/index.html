@@ -21,7 +21,7 @@
 		<div class="slides">
 			<section id="introduction">
 				<section>
-					<h1>Publishing and deploying ASP.NET Core applications</h1>
+					<h3>Publishing and deploying and logging and testing ASP.NET Core applications</h3>
 					<h3>Lesson 10</h3>
 					<h4>SW4BED-01</h4>
 				</section>
@@ -189,15 +189,15 @@
 						</li>
 						<li>Bundling minimizes the number of requests
 							<ul>
-								<li>Combines multiple files into a single file</li>
+								<li>Combines <mark>multiple</mark> files into a <mark>single</mark> file</li>
 							</ul>
 						</li>
-						<li>Minification minimized the response size
+						<li>Minification minimized the response <mark>size</mark>
 							<ul>
 								<li>Removes unnecessary characters from the code without altering functionality</li>
 							</ul>
 						</li>
-						<li>Most frontend frameworks has built-in minification and bundling in their toolchains</li>
+						<li>Most frontend frameworks has <mark>built-in</mark> minification and bundling in their toolchains</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -320,15 +320,15 @@
 									</footer>
 							
 									<environment include="Development">
-											<script src="~/js/fibonacci.js" ></script>
-											<script src="~/js/useless.js"></script>
-											<script src="~/lib/jquery/dist/jquery.js"></script>
-											<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+										&lt;script src="~/js/fibonacci.js" >&gt;&lt;/script&gt;
+										&lt;script src="~/js/useless.js">&gt;&lt;/script&gt;
+										&lt;script src="~/lib/jquery/dist/jquery.js"&gt;&lt;/script&gt;
+										&lt;script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js&gt;&lt;/script&gt;
 									</environment>
 									<environment exclude="Development">
-											<script src="~/lib/jquery/dist/jquery.min.js"></script>
-											<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-											<script src="~/js/site.min.js" asp-append-version="true"></script>
+											&lt;script src="~/lib/jquery/dist/jquery.min.js"&gt;&lt;/script&gt;
+											&lt;script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+											&lt;script src="~/js/site.min.js" asp-append-version="true"&gt;&lt;/script&gt;
 									</environment>
 							
 									@await RenderSectionAsync("Scripts", required: false)
@@ -340,14 +340,14 @@
 				<section>
 					<h2>Bundling and Minification</h2>
 					<ul>
-						<li>ASP.NET Core does not provide native bundling and minification</li>
+					<li>ASP.NET Core does not provide <mark>native</mark> bundling and minification</li>
 						<li>NuGet packages
 							<ul>
 								<li>ASP.NET Core Web Optimizer</li>
 								<li>Bundler and Minifier</li>
 							</ul>
 						</li>
-						<li>Other tools like Gulp and Webpack provide workflow automation</li>
+						<li>Other tools like Gulp and Webpack provide workflow <mark>automation</mark></li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -469,7 +469,7 @@
 						<li>Structured or sematic logging
 							<ul>
 								<li>Attaches additional structures to log messages</li>
-								<li>Makes it easier searchable and filterable</li>
+							<li>Makes it easier <mark>searchable</mark> and filterable</li>
 							</ul>
 						</li>
 					</ul>
@@ -484,7 +484,7 @@
 				<section>
 					<h2>Serilog</h2>
 					<ul>
-						<li>Serilog is a third-party logger</li>
+						<li>Serilog is a <mark>third-party</mark> logger</li>
 						<li>Writes messages to sinks
 							<ul>
 								<li>There are <mark>+100</mark> sinks available on NuGet</li>

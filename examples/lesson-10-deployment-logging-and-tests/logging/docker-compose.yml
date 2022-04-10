@@ -7,6 +7,6 @@ services:
       - ACCEPT_EULA=Y
   # -v /tmp/seq:/data
     ports:
-      - 5020:80/
+      - 5020:80
       - 5341:5341
   

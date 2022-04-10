@@ -18,6 +18,7 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
+    [Route("")]
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
@@ -29,7 +30,22 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
         _logger.LogInformation("Forecast {@forecast}", result);
-        _logger.LogWarning("Day 2 {d}", result[1].Summary);
         return result;
+    }
+    
+    [Route("error")]
+    [HttpGet(Name = "GetWeatherForecastError")]
+    public void GetError()
+    {
+        _logger.LogError("GetWeatherForecastError");
+        throw new Exception("GetWeatherForecastError");
+    }
+    
+    [Route("warning")]
+    [HttpGet(Name = "GetWeatherForecastWarning")]
+    public ActionResult GetWarning()
+    {
+        _logger.LogWarning("GetWeatherForecastWarning");
+        return BadRequest("BadRequest");
     }
 }
