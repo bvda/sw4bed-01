@@ -50,8 +50,37 @@
 			<section>
 				<section>
 					<h2>Encrypting traffic using HTTPS</h2>
+				</section>
+				<section>
+					<h2>Why HTTPS?</h2>
 					<ul>
-						<li>Two certificate</li>
+						<li>We need HTTPS for three reasons:
+							<ul>
+								<li><mark>Privacy</mark> Prevent bad actors from eavesdropping</li>
+								<li><mark>Integrity</mark> Prevent bad actors to modify the message</li>
+								<li><mark>Identification</mark> Guarantee the identity of the sender</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Overview</h2>
+					<ul>
+						<li>HTTP requests are unencrypted by default
+							<ul>
+								<li>They are <mark>plaintext</mark> files sent over the network</li>
+								<li>Attacker could read any data sent to and from your application</li>
+							</ul>
+						</li>
+						<li>We should encrypt the traffic between the client and server to keep</li>
+						<li>Two approaches
+							<ul>
+								<li>Directly in the application</li>
+								<li>SSL/TLS-offloading with reverse proxy</li>
+							</ul>
+						</li>
+						<li>Security headers</li>
+						<li>HTTP redirection</li>
 					</ul>
 				</section>
 				<section>

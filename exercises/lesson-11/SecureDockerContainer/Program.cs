@@ -10,13 +10,23 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+app.Use(async  (context, next) => {
+    var protocol = context.Request.IsHttps;
+    Console.WriteLine(protocol);
+    if (protocol) {
+        await next(context);
+    } else { 
+        context.Response.StatusCode = 400;
+        await context.Response.WriteAsJsonAsync(new { 
+            message = "HTTP not supported. Use HTTPS.",
+            status_code = 400
+        });
+        return; 
+    }
+});
 
 app.UseAuthorization();
 
