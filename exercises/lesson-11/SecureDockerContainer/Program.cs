@@ -15,7 +15,6 @@ app.UseSwaggerUI();
 
 app.Use(async  (context, next) => {
     var protocol = context.Request.IsHttps;
-    Console.WriteLine(protocol);
     if (protocol) {
         await next(context);
     } else { 
