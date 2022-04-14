@@ -1,0 +1,15 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <h1>Cross-site scripting (XSS)</h1>
+    <p>@Model.FormInput</p>
+    <p>@Html.Raw(Model.FormInput)</p>
+    <form method="post">
+        <input type="text" asp-for="FormInput"/>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
