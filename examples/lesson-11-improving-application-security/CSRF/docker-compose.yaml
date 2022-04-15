@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  good:
+    build: ./GoodSite
+    ports:
+      - 5000:80
+      - 5001:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=shhsecret
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/lesson-11.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+  bad:
+    build: ./BadSite
+    ports:
+      - 5010:80
+      - 5011:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTPS_PORT=5011
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=shhsecret
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/lesson-11.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
