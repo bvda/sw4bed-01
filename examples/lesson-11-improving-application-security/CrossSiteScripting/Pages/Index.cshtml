@@ -11,3 +11,11 @@
     <input type="text" asp-for="FormInput"/>
     <input type="submit" value="Submit" />
 </form>
+<ul>
+    @foreach (var t in Model.Names)
+    {
+      <li>
+        @Html.Raw(t)
+      </li>
+    }
+  </ul>

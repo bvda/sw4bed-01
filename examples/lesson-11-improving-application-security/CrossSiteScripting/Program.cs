@@ -1,6 +1,9 @@
+using CrossSiteScripting.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<NameService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
