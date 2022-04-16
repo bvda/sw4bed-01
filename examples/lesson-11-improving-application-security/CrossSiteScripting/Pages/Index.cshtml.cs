@@ -30,8 +30,9 @@ public class IndexModel : PageModel
 
   }
 
-  public void OnPost()
+  public IActionResult OnPost()
   {
     _service.Add(FormInput);
+     return RedirectToPage("Index");
   }
 }

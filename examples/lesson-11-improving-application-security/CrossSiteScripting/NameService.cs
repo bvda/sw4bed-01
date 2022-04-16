@@ -7,6 +7,8 @@ public class NameService {
     Names = _names;
   }
   public void Add(string name) {
-    _names.Add(name);
+    if(!string.IsNullOrEmpty(name)) {
+      _names.Add(name);
+    }
   }
 }
