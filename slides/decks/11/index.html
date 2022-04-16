@@ -260,7 +260,7 @@
 					<h2>Overview</h2>
 					<ul>
 						<li>A security vulnerability that enables the attacker to place client-side scripts into web pages</li>
-						<li>When the page loads, the script will
+						<li>When the page loads, the script could
 							<ul>
 								<li>Steal cookies and session tokens</li>
 								<li>Manipulate the DOM</li>
@@ -273,8 +273,20 @@
 						<h4>References</h4>
 						<ul>
 							<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/cross-site-scripting">Prevent Cross-Site Scripting (XSS) in ASP.NET Core | Microsoft Docs</a></li>
+							<li><a href="https://owasp.org/www-community/attacks/xss/">Cross Site Scripting (XSS) Software Attack | OWASP Foundation</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section>
+					<h2>Protection against XSS</h2>
+					<ul>
+						<li>Treat any (user) input as <mark>untrusted</mark>
+							<ul>
+								<li>Use proper encoding and <mark>sanitize</mark> user input</li>
+							</ul>
+						</li>
+						<li>Luckily, ASP.NET Core provides <mark>default</mark> protection</li>
+					</ul>
 				</section>
 			</section>
 			<section>
@@ -292,6 +304,7 @@
 						<h4>References</h4>
 						<ul>
 							<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-6.0">Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core | Microsoft Docs</a></li>
+
 						</ul>
 					</aside>
 				</section>
