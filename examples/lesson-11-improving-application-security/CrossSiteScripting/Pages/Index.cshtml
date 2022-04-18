@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Cross-site scripting (XSS)</h1>
+<form method="post">
+    <input type="text" asp-for="FormInput"/>
+    <input type="submit" value="Submit" />
+</form>
+<ul>
+    @foreach (var t in Model.Names)
+    {
+      <li>
+        @Html.Raw(t)
+      </li>
+    }
+  </ul>

