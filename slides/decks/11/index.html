@@ -452,16 +452,37 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>
-							CSRF involves a malicious website making authenticated requests to an API on behalf of user
+						<li>CSRF involves a malicious website making authenticated requests to an API on behalf of user
+							<ul>
+								<li>Browsers sends cookies automatically on <code>GET</code> and <code>POST</code> requests</li>
+							</ul>
 						</li>
+						<li>Can be a problem for websites or APIs that use cookies for authentication</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
-							<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-6.0">Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core | Microsoft Docs</a></li>
+							<li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery">Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core | Microsoft Docs</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section>
+					<h2>Protecting against CSRF</h2>
+					<ul>
+						<li>Anti-forgery tokens are added to forms</li>
+						<li>Tokens are stored in a cookie
+							<ul>
+								<li>Generated at runtime</li>
+								<li>Based on session information</li>
+							</ul>
+						</li>Should be used for <code>POST</code>, <code>DELETE</code> and other request types that mutate state</li>
+						<li>ASP.NET Core automatically adds anti-forgery to forms
+							<ul>
+								<li>Razor pages automatically validates them</li>
+								<li>MVC controller does NOT (should be decorated with the <code>[ValidateAntiForgeryToken]</code> attribute)</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 				<section>
 					<h2>CSRF - Vulnerable</h2>
