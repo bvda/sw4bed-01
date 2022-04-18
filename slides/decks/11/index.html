@@ -174,9 +174,25 @@
 				</section>
 				<section>
 					<h2>Docker compose</h2>
-					<ul>
-						<li>You can generate developer certificates with <code>dotnet dev-certs</code></li>
-					</ul>
+					<pre><code class="yaml" data-line-numbers="|4|5|6-8|9-14|15-16|" data-trim data-noescape><script type="text/template">
+						version: "3.9"
+
+						services:
+							webapp:
+								build: .
+								ports:
+									- 5000:80
+									- 5001:443
+								environment:
+									- ASPNETCORE_ENVIRONMENT=Development
+									- ASPNETCORE_HTTPS_PORT=5001
+									- ASPNETCORE_URLS=https://+:443;http://+:80
+									- ASPNETCORE_Kestrel__Certificates__Default__Password=shhsecret
+									- ASPNETCORE_Kestrel__Certificates__Default__Path=/https/lesson-11.pfx
+								volumes:
+									- ~/.aspnet/https:/https:ro
+					</script></code></pre>
+					<small>examples/lesson-11-improving-application-security/SecureDockerContainer/docker-compose.yaml</small>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
