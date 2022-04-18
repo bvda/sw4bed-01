@@ -326,6 +326,45 @@
 						<li>Protecting usernames and passwords</li>
 					</ul>
 				</section>
+				<section>
+					<h2>Open redirect attacks</h2>
+					<ul>
+						<li>The user clicks a link in a safe application and gets redirected to a malicious site
+							<ul>
+								<li>The <code>returnUrl</code> is typically parsed as a query string in the request</li>
+							</ul>
+						</li>
+						<li>Mitigation 
+							<ul>
+								<li>Validate the redirect URL (<code>returnUrl</code>) before the redirection</li>
+							</ul>
+						</li>
+						<li>ASP.NET Core has built-in helper methods
+							<ul>
+								<li>Identity validates <code>returnUrl</code> by default</li>
+								<li><code>IsLocalUrl()</code> is available from <code>IUrlHelper</code></li>
+								<li><code>LocalRedirect()</code> on <code>ControllerBase</code> throws an exception in the provided URL is not local</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes" aria-label="notes">
+						<h4>References</h4>
+						<ul>
+							<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 601-60</li>
+							<li><a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iurlhelper.islocalurl">IUrlHelper.IsLocalUrl(String) Method (Microsoft.AspNetCore.Mvc) | Microsoft Docs</a></li>
+							<li><a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.localredirect">ControllerBase.LocalRedirect(String) Method (Microsoft.AspNetCore.Mvc) | Microsoft Docs</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>SQL injection</h2>
+				</section>
+				<section>
+					<h2>Object reference counting</h2>
+				</section>
+				<section>
+					<h2>User data</h2>
+				</section>
 			</section>
 		</div>
 	</div>
