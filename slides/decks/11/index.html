@@ -144,6 +144,26 @@
 				</section>
 				<section>
 					<h2>Docker</h2>
+					<ul>
+						<li>You could just copy the certificate into container images, but it has some disadvantages:
+							<ul>
+								<li>It makes difficult to use the same image for testing with developer certificates</li>
+								<li>It makes difficult to use the same image for hosting with production certificates</li>
+								<li>There is significant risk of certificate disclosure</li>
+							</ul>
+						</li>
+						<li>When instatiating a container, use the following configuration
+							<ul style="font-size: 0.5em">
+								<li><code>-p 8000:80</code></li>
+								<li><code>-p 8001:443</code></li> 
+								<li><code>-e ASPNETCORE_URLS="https://+;http://+"</code></li> 
+								<li><code>-e ASPNETCORE_HTTPS_PORT=8001</code></li>
+								<li><code>-e ASPNETCORE_Kestrel__Certificates__Default__Password="password"</code></li>
+								<li><code>-e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx</code></li>
+								<li><code>-v ${HOME}/.aspnet/https:/https/</code></li>
+							</ul>
+						</li>
+					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
