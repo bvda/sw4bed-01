@@ -366,7 +366,7 @@
 					<small>examples/lesson-11-improving-application-security/cors/attributes/Startup.cs</small>
 				</section>
 				<section>
-					<h2></h2>
+					<h2>Wrap-up</h2>
 					<ul>
 						<li><mark>Remember</mark>It's the API that needs to add cors
 							<ul>
@@ -376,6 +376,11 @@
 						<li>Be very careful when defining policies
 							<ul>
 								<li>Only allow what is needed and nothing more</li>
+							</ul>
+						</li>
+						<li>The order of the CORS middleware is important
+							<ul>
+								<li>It should be after <code>UseRouting()</code> and before <code>UseEndpoints()</code></li>
 							</ul>
 						</li>
 					</ul>
