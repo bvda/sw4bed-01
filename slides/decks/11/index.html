@@ -204,7 +204,18 @@
 			</section>
 			<section>
 				<section>
-					<h2>Cross-site origin resource sharing (CORS)</h2>
+					<h2>Cross-origin resource sharing (CORS)</h2>
+				</section>
+				<section>
+					<h2>Overview</h2>
+					<ul>
+						<li>Allows browser applications to make requests from one domain to another
+							<ul>
+								<li>This is prevented by the Same-origin policy by default</li>
+							</ul>
+						</li>
+						<li>The need to make cross-origin requests has become common with client-side sigle-page applications (SPAs)</li>
+					</ul>
 				</section>
 				<section>
 					<h2>Same-origin policy</h2>
@@ -226,19 +237,24 @@
 						</li>
 						<li>Defined in <a href="https://datatracker.ietf.org/doc/html/rfc6454">RFC 6454</a></li>
 					</ul>
-					<aside class="notes" aria-label="">
+					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
 							<li><a href="https://datatracker.ietf.org/doc/html/rfc6454">rfc6454</a></li>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">Same-origin policy - Web security | MDN</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section>
 					<h2>Cross-origin resource sharing</h2>
 					<ul>
-						<li>Is a W3C standard that allows a server to relax the same-origin policy</li>
-						<li>Is not a security feature, CORS relaxes security. An API is not safer by allowing CORS</li>
-						<li>Allows a server to explicitly allow some cross-origin requests while rejecting others</li>
+						<li>Is a W3C standard that allows a server to <mark>relax</mark> the same-origin policy</li>
+						<li>Is not a security feature, CORS relaxes security.
+							<ul>
+								<li>APIs is not safer by allowing cross-origin requests</li>
+							</ul>
+					</li>
+						<li>Allows a server to <mark>explicitly</mark> allow some cross-origin requests, while rejecting others</li>
 					</ul>
 				</section>
 				<section>
@@ -307,6 +323,47 @@
 					</script>
 					</code></pre>
 					<small>examples/lesson11-improving-application-security/cors/middleware/Startup.cs</small>
+				</section>
+				<section>
+					<h2>Policies</h2>
+					<pre><code class="cs" data-line-numbers="|4-5,15|6-13|17-18,24|20-22|21|" data-trim data-noescape><script type="text/template">
+						public class Startup
+						{
+							...
+							public void ConfigureServices(IServiceCollection services)
+							{
+									services.AddCors(options =>
+									{
+										options.AddPolicy("swafe-01.dk", builder =>
+										{
+											builder.WithOrigins(
+													"https://swafe-01.dk"
+											).AllowAnyHeader().AllowAnyMethod();
+										});
+										options.AddPolicy("MyLocalhostPolicy", builder =>
+										{
+											builder.WithOrigins(
+													"http://localhost:4200",
+													"http://localhost:3000"
+											).AllowAnyHeader().AllowAnyMethod();
+										});
+									}
+								);
+								...
+							}
+							...
+							public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+							{
+								...
+								app.UseRouting();
+								app.UseCors();
+								app.UseAuthorization();
+								...
+							}
+						}
+					</script>
+					</code></pre>
+					<small>examples/lesson-11-improving-application-security/cors/attributes/Startup.cs</small>
 				</section>
 			</section>
 			<section>

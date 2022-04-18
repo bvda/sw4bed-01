@@ -69,8 +69,8 @@ namespace endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "weatherForecast111",
-                    pattern: "{controlkkkkler}",
+                    name: "weatherForecast",
+                    pattern: "{controller}",
                     defaults: new { action = "Get" }
                 );
                 endpoints.MapGet("/echo",
