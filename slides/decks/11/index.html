@@ -384,10 +384,31 @@
 					</aside>
 				</section>
 				<section>
-					<h2>Object reference counting</h2>
+					<h2>Direct object referencing</h2>
+					<ul>
+						<li>A bad actor can access "hidden" data by guessing the object references
+							<ul>
+								<li>What comes after <code>/Recipes/Edit/120</code>?</li>
+							</ul>
+						</li>
+						<li>Mitigation
+							<ul>
+								<li>Use resource-based authorization</li>
+							</ul>
+						</li>
+						<li>Can be sidestepped with pseudo-random generated IDs (but why not do it right from the start?)</li>
+					</ul>
+					<aside class="notes" aria-label="notes">
+						<h4>References</h4>
+						<ul>
+							<li></li>
+						</ul>
+					</aside>
 				</section>
 				<section>
 					<h2>User data</h2>
+					<p>Do not store data that is not needed</p>
+					<h2>🤷‍♂️</h2>
 				</section>
 			</section>
 		</div>
