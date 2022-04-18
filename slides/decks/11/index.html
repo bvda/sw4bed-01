@@ -263,7 +263,7 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>A security vulnerability that enables the attacker to place client-side scripts into web pages</li>
+						<li>A security vulnerability that enables bad actors to place client-side scripts into web pages</li>
 						<li>When the page loads, the script could
 							<ul>
 								<li>Steal cookies and session tokens</li>
@@ -350,7 +350,7 @@
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
 						<ul>
-							<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 601-60</li>
+							<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 601-603</li>
 							<li><a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iurlhelper.islocalurl">IUrlHelper.IsLocalUrl(String) Method (Microsoft.AspNetCore.Mvc) | Microsoft Docs</a></li>
 							<li><a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.localredirect">ControllerBase.LocalRedirect(String) Method (Microsoft.AspNetCore.Mvc) | Microsoft Docs</a></li>
 						</ul>
@@ -358,6 +358,28 @@
 				</section>
 				<section>
 					<h2>SQL injection</h2>
+					<ul>
+						<li>Bad actors crafts malicious input that is processed to a vulnerable application
+							<ul>
+								<li>Submitted through a form</li>
+								<li>Passed in the URL as a query string</li>
+							</ul>
+						</li>
+						<li>Exposes data stored in the database</li>
+						<li>Mitigation
+							<ul>
+								<li>Use a Entity Framework Core (or any other ORM)</li>
+								<li>Use parameterized queries</li>
+								<li>Do not concatenate user input into crafted queries</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes" aria-label="notes">
+						<h4>References</h4>
+						<ul>
+							<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 603-604</li>
+						</ul>
+					</aside>
 				</section>
 				<section>
 					<h2>Object reference counting</h2>
