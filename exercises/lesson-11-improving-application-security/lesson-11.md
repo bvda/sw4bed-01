@@ -1,13 +1,14 @@
 # Lesson 11 exercises
 ## Host Docker with HTTPS
-When we publish our applications with Docker and inspect the container as it i
+First, we'll setup HTTPS[^1] with docker:
+1. Create a new application with `dotnet new` or your favorite wizard in Visual Studio
+2. Add a `Dockerfile` file to the project and add the necessary layers to create an image
+3. Add a `docker-compose.yaml` file and configure the container[^2]
 
-```
-docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
-docker run --rm -it -p 5000:80 -p 5001:443 \
--e ASPNETCORE_URLS="https://+;http://+" \
--e ASPNETCORE_HTTPS_PORT=5001 \
--e ASPNETCORE_Kestrel__Certificates__Default__Password="secret" \
--e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx \
--v ~/.aspnet/https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp/
-```
+You can checkout `examples/lesson-11-improving-application-security/CrossSiteScripting/docker-compose.yaml` if you need some inspiration or want to try it out for yourself
+
+## Setup CORS for a specific origins
+Next up, we have two new SPAs (written in Angular) that wants to communicate with our   
+
+[^1]: https://docs.microsoft.com/en-us/aspnet/core/security/docker-https
+[^2]: https://docs.microsoft.com/en-us/aspnet/core/security/docker-compose-https
