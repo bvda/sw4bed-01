@@ -17,19 +17,19 @@ public class ListController : ControllerBase
         _service = service;
     }
 
-    [HttpGet(Name = "GetListController")]
+    [HttpGet]
     public ActionResult<List<ListItem<string>>> Get()
     {
         return _service.GetItems();
     }
 
-    [HttpPost(Name = "AddItem")]
+    [HttpPost]
     public ActionResult<List<ListItem<string>>> Post(ListItem<string> item) {
         return _service.AddItemToList(item);
     }
 
     [Route("{index}")]
-    [HttpDelete(Name = "RemoveItemByIndex")]
+    [HttpDelete]
     public ActionResult<List<ListItem<string>>> DeleteByIndex(int index) {
         return _service.RemoveItem(index);
     }

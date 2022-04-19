@@ -19,7 +19,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [Route("")]
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet]
     public IEnumerable<WeatherForecast> Get()
     {
         var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -34,7 +34,7 @@ public class WeatherForecastController : ControllerBase
     }
     
     [Route("error")]
-    [HttpGet(Name = "GetWeatherForecastError")]
+    [HttpGet]
     public void GetError()
     {
         _logger.LogError("GetWeatherForecastError");
@@ -42,7 +42,7 @@ public class WeatherForecastController : ControllerBase
     }
     
     [Route("warning")]
-    [HttpGet(Name = "GetWeatherForecastWarning")]
+    [HttpGet]
     public ActionResult GetWarning()
     {
         _logger.LogWarning("GetWeatherForecastWarning");
