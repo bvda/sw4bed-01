@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -17,13 +18,14 @@ public class IndexModel : PageModel
   public void OnGet()
   {
   }
-
-  public void OnPost()
+  
+  public IActionResult OnPost()
   {
     _logger.LogInformation("OnPost");
+    return RedirectToPage("Index");
   }
 
-  public async void OnPostSignIn()
+  public async Task<IActionResult> OnPostSignIn()
   {
     _logger.LogInformation("OnPostSignIn");
     var claims = new List<Claim>
@@ -45,7 +47,7 @@ public class IndexModel : PageModel
       // The time at which the authentication ticket expires. A 
       // value set here overrides the ExpireTimeSpan option of 
       // CookieAuthenticationOptions set with AddCookie.
-
+      
       //IsPersistent = true,
       // Whether the authentication session is persisted across 
       // multiple requests. When used with cookies, controls
@@ -65,5 +67,6 @@ public class IndexModel : PageModel
         new ClaimsPrincipal(claimsIdentity),
         authProperties
     );
+    return RedirectToPage("Index");
   }
 }

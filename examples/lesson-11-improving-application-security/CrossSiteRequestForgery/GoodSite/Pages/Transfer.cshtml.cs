@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GoodSite.Pages
 {
-    [IgnoreAntiforgeryToken]
+
     public class TransferModel : PageModel
     {
 
@@ -16,7 +16,8 @@ namespace GoodSite.Pages
         public void OnGet()
         {
         }
-
+        
+        [IgnoreAntiforgeryToken]
         public void OnPost()
         {
             _logger.LogDebug("OnTransferPost");
