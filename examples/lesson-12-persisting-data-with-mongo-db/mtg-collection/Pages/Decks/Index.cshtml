@@ -1,5 +1,5 @@
 ﻿@page
-@model mtg_collection.Pages.Deck.IndexModel
+@model mtg_collection.Pages.Decks.IndexModel
 
 @{
 }
@@ -14,3 +14,9 @@
     <button type="submit"class="btn btn-primary">Create</button>
   </div>
 </form>
+<ul>
+  @foreach (var deck in Model.Decks)
+  {
+    <li>@deck.Id @deck.Name</li>
+  }
+</ul>

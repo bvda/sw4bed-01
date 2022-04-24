@@ -1,36 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using mtg_collection.Services;
-namespace mtg_collection.Pages.Deck;
+using mtg_collection.Models;
+
+namespace mtg_collection.Pages.Decks;
 
 public class IndexModel : PageModel
 {
-
     [BindProperty]
-    public InputModel Input { get; set; }
+    public InputModel? Input { get; set; }
     private readonly DeckService _service;
 
-    public IList<Models.Deck> Decks { get; set; } = new List<Models.Deck>();
+    public IList<Deck> Decks { get; set; } = new List<Deck>();
     public IndexModel(DeckService service) {
         _service = service;
     }
     public async Task<IActionResult> OnGet(string? id)
     {
         Decks = await _service.GetDecks(id);
-        // Input = new InputModel {
-        //     Name = id;
-        // };
         return Page();
     }
 
     public IActionResult OnPost() {
-         _service.CreateDeck(new Models.Deck {
-            Name = "Test"
+        _service.CreateDeck(new Deck {
+            Name = Input?.Name
         });
-        return RedirectToPage("/Deck/Index");
+        return RedirectToPage("/Decks/Index");
     }
 
     public class InputModel {
-    public string? Name { get; set; }
+        public string? Name { get; set; }
     }
 }
