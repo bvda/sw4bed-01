@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace mtg_collection.Services;
 
-using mtg_collection.Data;
+using mtg_collection.Models;
 
 public class CardService {
 

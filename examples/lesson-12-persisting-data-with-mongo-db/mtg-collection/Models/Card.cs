@@ -1,8 +1,10 @@
+using MongoDB.Bson;
 using System.Text.Json.Serialization;
 
-namespace mtg_collection.Data;
+namespace mtg_collection.Models;
 
 public class Card {
+  public ObjectId Id { get; set; }
   public string Name { get; set; } = "";
   [JsonPropertyName("mana_cost")]
   public string ManaCost { get; set; } = "";

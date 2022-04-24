@@ -1,0 +1,16 @@
+﻿@page
+@model mtg_collection.Pages.Deck.IndexModel
+
+@{
+}
+
+<form method="post">
+  <div class="d-flex">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Name" asp-for="Input.Name" />
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <button type="submit"class="btn btn-primary">Create</button>
+  </div>
+</form>

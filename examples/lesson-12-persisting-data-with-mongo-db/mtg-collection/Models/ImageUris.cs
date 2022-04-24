@@ -1,4 +1,4 @@
-namespace mtg_collection.Data;
+namespace mtg_collection.Models;
 
 public class ImageUris {
    public string? Small { get; set; }

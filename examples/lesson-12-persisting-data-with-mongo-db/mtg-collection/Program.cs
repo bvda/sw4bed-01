@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<MongoService>();
 builder.Services.AddSingleton<CardService>();
+builder.Services.AddSingleton<DeckService>();
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using mtg_collection.Services;
-using mtg_collection.Data;
+using mtg_collection.Models;
 
 namespace mtg_collection.Pages;
 
