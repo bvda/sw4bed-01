@@ -24,10 +24,10 @@
 </form>
 
 @foreach(var c in Model.Cards) {
-    <div class="d-flex">
-        <div class="me-4">
+    <div class="d-flex mb-4">
+        <div class="d-flex align-items-center flex-column me-4">
             <img src="@c.ImageUris?.Small" alt="@c.Name" />
-            <p>@c.Artist</p>
+            <small class="text-muted">@c.Artist</small>
         </div>
         <div>
             <h4>@c.Name</h4>
