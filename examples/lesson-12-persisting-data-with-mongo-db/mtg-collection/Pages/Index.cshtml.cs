@@ -25,16 +25,6 @@ public class IndexModel : PageModel
     public async Task<IActionResult> OnGetAsync(string name, string type)
     {
         Cards = await _service.Search(name, type);
-        // var client = new MongoClient("mongodb://root:example@localhost:27017");
-        // var database = client.GetDatabase("mtg");
-        // var collection = database.GetCollection<Card>("cards");
-        // // IMongoCollection<BsonDocument> collection = ; // initialize to the collection to write to.
-        // using(var file = new StreamReader("lea-p2.json")) {
-        //     var cards = JsonSerializer.Deserialize<List<Card>>(file.ReadToEnd(), new JsonSerializerOptions {
-        //         PropertyNameCaseInsensitive = true
-        //     });
-        //     collection.InsertMany(cards);
-        // }
         SearchModel = new InputSearchModel {
             Name = name,
             Type = type,

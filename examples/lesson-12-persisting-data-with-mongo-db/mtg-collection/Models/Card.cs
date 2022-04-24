@@ -1,10 +1,11 @@
-using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 
 namespace mtg_collection.Models;
 
 public class Card {
-  public ObjectId Id { get; set; }
+  [BsonId]
+  public string Id { get; set; } = "";
   public string Name { get; set; } = "";
   [JsonPropertyName("mana_cost")]
   public string ManaCost { get; set; } = "";
@@ -19,7 +20,7 @@ public class Card {
   [JsonPropertyName("set_name")] 
   public string Set { get; set; } = "";
   public string Rarity { get; set; } = "";
-  [JsonPropertyName("image_uris")]
   public string Artist { get; set; } = "";
+  [JsonPropertyName("image_uris")]
   public ImageUris? ImageUris { get; set; } 
 }

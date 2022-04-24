@@ -17,6 +17,6 @@
 <ul>
   @foreach (var deck in Model.Decks)
   {
-    <li>@deck.Id @deck.Name</li>
+    <li><a href="/Decks/Details?id=@deck.Id">@deck.Name</a></li>
   }
 </ul>

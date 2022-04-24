@@ -18,6 +18,9 @@ public class DeckService {
   public async Task<IList<Deck>> GetDecks(string? id) {
     var builder = Builders<Deck>.Filter;
     var filter = builder.Empty;
+    if(id is not null) {
+      filter &= builder.Eq(x => x.Id, id);
+    }
     return await _collection.Find(filter).ToListAsync();
   }
 
