@@ -597,6 +597,73 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Downloads</h2>
+						<ul>
+							<li>The following methods are available
+								<ul>
+									<li><code>DownloadAsBytes()</code></li>
+									<li><code>DownloadToStream()</code>
+										<ul>
+											<li>Remember to close the <code>Stream</code>when done—it is the applications responsibility</li>
+										</ul>
+									</li>
+									<li><code>OpenDownloadStream()</code></li>
+								</ul>
+							</li>
+							<li>All methods above also have an <code>async</code> version</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/downloadingfiles/">Downloading Files</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>Finding files</h4>
+						<ul>
+							<li>Each file stored in GridFS has a unique <code>Id</code> assigned to it
+								<ul>
+									<li>This is the primary way for accessing files</li>
+								</ul>
+							</li>
+							<li>The <code>Find</code> method can be used to find matching files using <code>FilterDefinition&lt;GridFSFileInfo&gt;</code></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/downloadingfiles/">Finding Files</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Finding files</h2>
+						<pre><code class="cs" data-line-numbers="|3-8|4|5-6|7-8|10|12-13,16|14-15|18-19,22|20|" data-trim data-noescape><script type="text/template">
+							IGridFSBucket bucket;
+							
+							var filter = Builders<GridFSFileInfo>.Filter.And( 
+    						Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "securityvideo"),
+    						Builders<GridFSFileInfo>.Filter.Gte(x => x.UploadDateTime, 
+											new DateTime(2015, 1, 1, 0, 0, 0, DateTimeKind.Utc)),
+    						Builders<GridFSFileInfo>.Filter.Lt(x => x.UploadDateTime, 
+											new DateTime(2015, 2, 1, 0, 0, 0, DateTimeKind.Utc)));
+						
+							var sort = Builders<GridFSFileInfo>.Sort.Descending(x => x.UploadDateTime);
+							
+							var options = new GridFSFindOptions
+							{
+									Limit = 1,
+									Sort = sort
+							};
+
+							using (var cursor = await bucket.FindAsync(filter, options))
+							{
+								var fileInfo = (await cursor.ToListAsync()).FirstOrDefault();
+								// fileInfo either has the matching file information or is null
+							}
+						</script></code></pre>
+					</section>
 				</section>
 				<section>
 					<h2>Wrap-up</h2>
