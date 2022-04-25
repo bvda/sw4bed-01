@@ -124,6 +124,39 @@
 					</section>
 				</section>
 				<section>
+					<section>
+						<h2>GridFS</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>GridFS is used for storing binary information
+								<ul>
+									<li>Maximum document size is 16 MB</li>
+								</ul>
+							</li>
+							<li>Files are broken into chunks
+								<ul>
+									<li>Each chuck is individually uploaded</li>
+									<li>Files are reassembled from chunks when downloaded</li>
+								</ul>
+							</li>
+							<li>Files a stored in two collections
+								<ul>
+									<li><code>fs.files</code> Each file has entry that contains metadata</li>
+									<li><code>fs.chunks</code> Each file has as many chunks as needed to store the file</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/">GridFS</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
 					<h2>Wrap-up</h2>
 				</section>
 			</div>
