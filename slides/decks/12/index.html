@@ -319,9 +319,6 @@
 						</aside>
 					</section>
 					<section>
-						<h2>Projection</h2>
-					</section>
-					<section>
 						<h2>LINQ</h2>
 						<ul>
 							<li>The .NET Driver contains an implementation of LINQ
@@ -330,8 +327,15 @@
 								</ul>
 							</li>
 							<li>The driver provides an <code>AsQueryable</code> extension method on <code>IMongoCollection</code></li>
-							<li></li>
 						</ul>
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+						var query = from p in collection.AsQueryable()
+												select new { p.Name, p.Age };
+						// or
+
+						var query = collection.AsQueryable()
+								.Select(p => new { p.Name, p.Age });
+						</script></code></pre>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
@@ -379,11 +383,42 @@
 					</section>
 					<section>
 						<h2>Update</h2>
+						<ul>
+							<li>To update at most one document
+								<ul>
+									<li>May be zero if none match the filter</li>
+								</ul>
+							</li>
+							<li>Here we update the first document that meets the filter <code>x == 10</code> and set the value of <code>i</code> to <code>110</code></li>
+						</ul>
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+							var filter = Builders<BsonDocument>.Filter.Eq("i", 10);
+							var update = Builders<BsonDocument>.Update.Set("i", 110);
+
+							collection.UpdateOne(filter, update);
+							// or
+							await collection.UpdateOneAsync(filter, update);
+						</script></code></pre>
 					</section>
 					<section>
 						<h2>Update operators</h2>
+						<ul>
+							<li>There are numerous update operators Available
+								<ul>
+									<li><code>$currentDate</code> Sets the value of field to current date</li>
+									<li><code>$inc</code> Increments the value of a field by specified amount</li>
+									<li><code>$min</code>/<code>$max</code> Only update field less/greater than value</li>
+									<li><code>$mul</code> Multiply field by specified amount</li>
+									<li><code>$rename</code> Renames a field</li>
+									<li><code>$set</code> Sets the value of a field in a document</li>
+									<li><code>$unset</code> Removes specified field from a document</li>
+									<li><code>$setOnInsert</code> Sets the value of field if an update results in an insert of a document</li>
+								</ul>
+							</li>
+							<li>All these operations are performed in the database</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
-							<h4></h4>
+							<h4>References</h4>
 							<ul>
 								<li><a href="https://www.mongodb.com/docs/manual/reference/operator/update-field/">Field Update Operators — MongoDB Manual</a></li>
 								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/getting_started/quick_tour/#updating-documents">Quick Tour</a></li>
