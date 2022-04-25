@@ -13,11 +13,7 @@ public class MongoService {
       cm.AutoMap();
       cm.SetIgnoreExtraElements(true);
     });
-    // BsonClassMap.RegisterClassMap<Deck>(cm => {
-    //   cm.AutoMap();
-    //   cm.SetIgnoreExtraElements(true);
-    // });
-    _client = new MongoClient("mongodb://root:example@localhost:27017");
+    _client = new MongoClient("mongodb://root:example@localhost:27018");
     var db = _client.GetDatabase("mtg");
     if(_client.GetDatabase("mtg").ListCollections().ToList().Count == 0) {
         var collection = db.GetCollection<Card>("cards");

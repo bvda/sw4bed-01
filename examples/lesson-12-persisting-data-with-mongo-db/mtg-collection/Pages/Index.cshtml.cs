@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using mtg_collection.Services;
 using mtg_collection.Models;
@@ -15,7 +16,12 @@ public class IndexModel : PageModel
 
     public IList<Card> Cards { get; set; } = new List<Card>();
 
-    public List<string> Sets {get; set; } = new List<string>();
+    public List<SelectListItem> Sets { get; } = new List<SelectListItem> {
+        new SelectListItem { Value = "lea", Text = "Alpha" },
+        new SelectListItem { Value = "arn", Text = "Arabian Night" },
+        new SelectListItem { Value = "atq", Text = "Antiquities" },
+        new SelectListItem { Value = "leg", Text = "Legends" },
+    };
 
     public IndexModel(ILogger<IndexModel> logger, CardService service)
     {
@@ -24,21 +30,19 @@ public class IndexModel : PageModel
         SearchModel = new InputSearchModel();
     }
 
-    public async Task<IActionResult> OnGetAsync(string name, string type, string set)
+    public async Task<IActionResult> OnGetAsync(string name, string type, string setcode)
     {
-        Cards = await _service.Search(name, type, set);
-        // Console.WriteLine(name+type+set);
+        Cards = await _service.Search(name, type, setcode);
         SearchModel = new InputSearchModel {
             Name = name,
             Type = type,
-            SetCode = set,
+            SetCode = setcode,
         };
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string name, string type, string set) {
-        // await _service.Search(SearchModel.Name, SearchModel.Type, SearchModel.SetCode);
-        return RedirectToPage("Index", new { Name = SearchModel.Name, Type = SearchModel.Type, SetCode = SearchModel.SetCode});
+    public IActionResult OnPost(string name, string type, string set) {
+        return RedirectToPage("Index", new { Name = SearchModel.Name, Type = SearchModel.Type, SetCode = SearchModel.SetCode });
     }
 
     public class InputSearchModel {

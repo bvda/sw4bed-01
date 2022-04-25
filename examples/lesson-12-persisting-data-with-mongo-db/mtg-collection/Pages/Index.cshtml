@@ -19,14 +19,7 @@
         </div>
     </div>
     <div class="d-flex">
-        <select class="form-select" asp-for="SearchModel.SetCode"
-        asp-items="@">
-            <option value="" selected>Open this select menu</option>
-            <option value="lea">Alpha</option>
-            <option value="arn">Arabian Nights</option>
-            <option value="atq">Antiquities</option>
-            <option value="leg">Legends</option>
-        </select>
+        <select class="form-select" asp-for="SearchModel.SetCode" asp-items="@Model.Sets"></select>
     </div>
     <div class="input-group mb-3">
         <button type="submit"class="btn btn-primary">Search</button>
