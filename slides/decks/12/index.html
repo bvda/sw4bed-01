@@ -243,6 +243,45 @@
 					</section>
 					<section>
 						<h2>Combine filters</h2>
+						<pre><code class="cs" data-line-numbers="|14|18,35|19|20|22,24|23|26-28|30,32|31|34|" data-trim data-noescape><script type="text/template">
+							using MongoDB.Bson;
+							using MongoDB.Driver;
+							
+							namespace mtg_collection.Services;
+							
+							using mtg_collection.Models;
+							
+							public class CardService {
+							
+								private readonly ILogger<CardService> _logger;
+								private readonly IMongoCollection<Card> _collection;
+
+								public CardService(ILogger<CardService> logger, MongoService service) {
+									_collection = service.Client.GetDatabase("mtg").GetCollection<Card>("cards");
+									_logger = logger;
+								}
+							
+								public async Task<IList<Card>> Search(string? name = null, string? type = null, string? set = null) {
+									var builder = Builders<Card>.Filter;
+									var filter = builder.Empty;
+
+									if(name?.Length > 0) {
+										filter &= builder.Regex(x => x.Name, new BsonRegularExpression($"/{name}/i"));
+									}
+
+									if(type?.Length > 0) {
+										filter &= builder.Regex(x => x.Type, new BsonRegularExpression($"/{type}/i"));
+									}
+
+									if(set?.Length > 0) {
+										filter &= builder.Eq(x => x.SetCode, set);
+									}
+
+									return await _collection.Find(filter).ToListAsync();
+								}
+							}
+						</script></code></pre>
+						<small>examples/lesson-12-persisting-data-with-mongo-db/mtg-collection/Services/CardService.cs</small>
 					</section>
 					<section>
 						<h2>Sorting</h2>
@@ -260,6 +299,38 @@
 				<section>
 					<section>
 						<h2>Mutating documents</h2>
+					</section>
+					<section>
+						<h2><code>FindAndModify</code> methods</h2>
+						<ul>
+							<li>Finds and performs an operation on a documents</li>
+							<li>Available methods
+								<ul>
+									<li><code>FindOneAndDelete</code></li>
+									<li><code>FindOneAndReplace</code></li>
+									<li><code>FindOneAndUpdate</code></li>
+								</ul>
+							</li>
+							<li>Returns either the original version or the new version
+								<ul>
+									<li>The original version is return as default</li>
+									<li>Define <code>ReturnDocument</code> and other options in an options object
+										<ul>
+											<li><code>Projection</code> Format result using a <code>ProjectionDefinitionBuilder</code></li>
+											<li><code>Sort</code> Since filtering could result in multiple selections, change the order by sorting</li>
+											<li><code>IsUpsert</code> When replacing and updating, determine if a document is created if it does not exist</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>Reference</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/crud/writing/#find-and-modify">Writing</a></li>
+								<li><a href="https://www.mongodb.com/docs/manual/reference/command/findAndModify/">findAndModify — MongoDB Manual</a></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Update</h2>
