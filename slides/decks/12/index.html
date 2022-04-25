@@ -629,6 +629,13 @@
 								</ul>
 							</li>
 							<li>The <code>Find</code> method can be used to find matching files using <code>FilterDefinition&lt;GridFSFileInfo&gt;</code></li>
+							<li><code>GridFSFileInfo</code> is a strongly typed classes
+								<ul>
+									<li>Represents information from the <code>fs.files</code> collection</li>
+									<li>Wrapper around a backing <code>BsonDocument</code> that makes it easier to extract information about files</li>
+									<li>Store any additional information in the <code>Metadata</code> property</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
