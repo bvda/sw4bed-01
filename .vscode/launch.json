@@ -1,7 +1,17 @@
 {
   "version": "0.2.0",
   "configurations": [
-  {
+    {
+      "name": ".NET Core Launch (MTG Collection)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/examples/lesson-12-persisting-data-with-mongo-db/mtg-collection/bin/Debug/net6.0/mtg-collection.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    },{
     "name": ".NET Core Launch (WebAPIConfiguration)",
     "type": "coreclr",
     "request": "launch",

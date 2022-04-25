@@ -14,7 +14,7 @@ public class CardService {
     _logger = logger;
   }
 
-  public async Task<IList<Card>> Search(string? name = "", string? type = "") {
+  public async Task<IList<Card>> Search(string? name = null, string? type = null, string? set = null) {
     var builder = Builders<Card>.Filter;
     var filter = builder.Empty;
     if(name?.Length > 0) {
@@ -23,6 +23,10 @@ public class CardService {
     if(type?.Length > 0) {
       filter &= builder.Regex(x => x.Type, new BsonRegularExpression($"/{type}/i"));
     }
+    if(set?.Length > 0) {
+      filter &= builder.Eq(x => x.SetCode, set);
+    }
+    Console.WriteLine(_collection.Find(filter).ToList().Count);
     return await _collection.Find(filter).ToListAsync();;
   }
 }

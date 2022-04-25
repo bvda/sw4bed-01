@@ -18,6 +18,15 @@
             <input type="text" class="form-control" placeholder="Type" asp-for="SearchModel.Type" />
         </div>
     </div>
+    <div class="d-flex">
+        <select class="form-select" asp-for="SearchModel.SetCode">
+            <option value="" selected>Open this select menu</option>
+            <option value="lea">Alpha</option>
+            <option value="arn">Arabian Nights</option>
+            <option value="atq">Antiquities</option>
+            <option value="leg">Legends</option>
+        </select>
+    </div>
     <div class="input-group mb-3">
         <button type="submit"class="btn btn-primary">Search</button>
     </div>

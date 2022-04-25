@@ -21,11 +21,13 @@ public class MongoService {
     var db = _client.GetDatabase("mtg");
     if(_client.GetDatabase("mtg").ListCollections().ToList().Count == 0) {
         var collection = db.GetCollection<Card>("cards");
-        using(var file = new StreamReader("lea-p1.json")) {
-            var cards = JsonSerializer.Deserialize<List<Card>>(file.ReadToEnd(), new JsonSerializerOptions {
-                PropertyNameCaseInsensitive = true
-            });
-            collection.InsertMany(cards);
+        foreach(var path in new [] {"lea.json", "arn.json", "atq.json", "leg.json"}) {
+          using(var file = new StreamReader(path)) {
+              var cards = JsonSerializer.Deserialize<List<Card>>(file.ReadToEnd(), new JsonSerializerOptions {
+                  PropertyNameCaseInsensitive = true
+              });
+              collection.InsertMany(cards);
+          }
         }
     }
   }
