@@ -59,9 +59,32 @@
 					</section>
 					<section>
 						<h2>MongoDB Driver</h2>
+						<ul>
+							<li>MongoDB provides an official C# driver</li>
+							<li>Get the lastest version from NuGet
+								<ul>
+									<li>.NET CLI <code>dotnet add package MongoDB.Driver</code></li>
+									<li>Package Manager <code>Install-Package MongoDB.Driver</code></li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://www.mongodb.com/docs/drivers/csharp/">MongoDB C#/.NET Driver — MongoDB Drivers</a></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Setting up a connection</h2>
+						<small><code>mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]</code></small>
+						<ul>
+							<li><code>mongodb://</code> Prefix to identify the string <sup>(required)</sup>	</li>
+							<li><code>username@password@</code> Authentication credentials <sup>(optional)</sup></li>
+							<li><code>host[:port]</code> Host and port for instance <sup>(host required, port optional (defaults to 27017))</sup></li>
+							<li><code>/defaultauthdb</code> Database to use for authentication <sup>(optional)</sup></li>
+							<li><code>?options</code> Query string for specific options in <code>&lt;name&gt;=&lt;name&gt;</code> format <sup>(optional)</sup></li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
