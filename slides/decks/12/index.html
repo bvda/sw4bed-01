@@ -491,6 +491,112 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Buckets</h2>
+						<ul>
+							<li>A <code>GridFSBucket</code> object is the root object
+								<ul>
+									<li>You should always interact with GridFS through such an object</li>
+								</ul>
+							</li>
+						</ul>
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+							IMongoDatabase database;
+
+							var bucket = new GridFSBucket(database);
+						</script></code></pre>
+						<ul>
+							<li>Provide <code>GridFSBucketOptions</code> object</li>
+						</ul>	
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+							IMongoDatabase database;
+
+							var bucket = new GridFSBucket(database, new GridFSBucketOptions
+							{
+									BucketName = "videos",
+									ChunkSizeBytes = 1048576, // 1MB
+									WriteConcern = WriteConcern.WMajority,
+									ReadPreference = ReadPreference.Secondary
+							});
+						</script></code></pre>
+						<aside class="notes" aria-label="">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/gettingstarted/">Getting Started</a></li>
+							</ul>
+						</aside>						
+					</section>
+					<section>
+						<h2>Uploading files</h2>
+						<ul>
+							<li>The two main approaches to upload files to GridFS
+								<ul>
+									<li>The driver uploads a file from a source provided by the application</li>
+									<li>The driver supplies a <code>Stream</code> object that the appication can write content to</li>
+								</ul>
+							</li>
+							<li>Both approaches let you define a <code>GridFSUploadOptions</code> object</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/uploadingfiles/">Uploading Files</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Uploading from files</h2>
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+							IGridFSBucket bucket;
+
+							byte[] source;
+							
+							var options = new GridFSUploadOptions
+							{
+									ChunkSizeBytes = 64512, // 63KB
+									Metadata = new BsonDocument
+									{
+											{ "resolution", "1080P" },
+											{ "copyrighted", true }
+									} 
+							};  
+
+							var id = bucket.UploadFromBytes("filename", source, options);
+							// or
+							var id = await bucket.UploadFromBytesAsync("filename", source, options);
+						</script></code></pre>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/uploadingfiles/">Uploading Files</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Uploading from <code>Stream</code></h2>
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+							IGridFSBucket bucket;
+							
+							using (var stream = bucket.OpenUploadStream("filename"))
+							{
+									var id = stream.Id; // the unique Id of the file being uploaded
+									// write the contents of the file to stream using synchronous Stream methods
+									stream.Close(); // optional because Dispose calls Close
+							}
+							using (var stream = await bucket.OpenUploadStreamAsync("filename"))
+							{
+									var id = stream.Id; // the unique Id of the file being uploaded
+									// write the contents of the file to stream using asynchronous Stream methods
+									await stream.CloseAsync(); // optional but recommended so Dispose does not block
+							}
+						</script></code></pre>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/uploadingfiles/">Uploading Files</a></li>
+							</ul>
+						</aside>
+					</section>
 				</section>
 				<section>
 					<h2>Wrap-up</h2>
