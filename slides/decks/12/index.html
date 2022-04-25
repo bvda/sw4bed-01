@@ -33,16 +33,45 @@
 					</section>
 					<section>
 						<h2>Overview</h2>
+						<ul>
+							<li>Mongo is a NoSQL database
+								<ul>
+									<li>More specifically: A <mark>document</mark> database</li>
+								</ul>
+									<li><mark>Document</mark> Store data
+										<ul>
+											<li>Set of <mark>key-value</mark> pairs</li>
+											<li>Documents are stored in <mark>collections</mark></li>
+										</ul>
+									</li>
+									<li>Collections are <mark>organized</mark> stores of documents
+										<ul>
+											<li>usually with common fields</li>
+										</ul>
+									<li>Uses the <mark>JSON</mark> format when viewing and updating
+										<ul>
+											<li>Stores and transfers data in <mark>BSON</mark> format</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 					<section>
 						<h2>MongoDB Driver</h2>
 					</section>
 					<section>
 						<h2>Setting up a connection</h2>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://www.mongodb.com/docs/manual/reference/connection-string/">Connection String URI Format — MongoDB Manual</a></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Mapping classes</h2>
-						<aside class="notes">
+						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/bson/mapping/">Mapping Classes</a></li>
@@ -73,7 +102,7 @@
 					</section>
 					<section>
 						<h2>Filtering</h2>
-						<aside>
+						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/definitions">Definitions and Builders</a></li>
