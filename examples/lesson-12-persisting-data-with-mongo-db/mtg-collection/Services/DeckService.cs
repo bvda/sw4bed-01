@@ -1,7 +1,5 @@
-
-using mtg_collection.Models;
-using MongoDB.Bson;
 using MongoDB.Driver;
+using mtg_collection.Models;
 
 namespace mtg_collection.Services;
 
