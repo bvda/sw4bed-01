@@ -249,7 +249,7 @@
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/definitions">Definitions and Builders</a></li>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/definitions/#filters">Definitions and Builders</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -297,6 +297,26 @@
 					</section>
 					<section>
 						<h2>Sorting</h2>
+						<ul>
+							<li>The <code>SortDefinitionBuilder&lt;TDocument&gt;</code> renders sort documents
+								<ul>
+									<li>Provides a type-safe API for building MongoDB sort syntax</li>
+								</ul>
+							</li>
+						</ul>
+						<pre><code class="cs" data-line-numbers="|14|18,35|19|20|22,24|23|26-28|30,32|31|34|" data-trim data-noescape><script type="text/template">
+							var builder = Builders<Widget>.Sort;
+							
+							var sort = builder.Ascending(x => x.X).Descending(x => x.Y);
+							// or
+							var sort = builder.Ascending("X").Descending("Y");
+						</script></code></pre>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/definitions/#sorts">Definitions and Builders</a></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Projection</h2>
