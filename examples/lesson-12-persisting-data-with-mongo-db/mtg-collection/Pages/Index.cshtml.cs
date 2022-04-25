@@ -15,7 +15,7 @@ public class IndexModel : PageModel
 
     public IList<Card> Cards { get; set; } = new List<Card>();
 
-    public List<string> Sets {get; set; } = new List<string>({});
+    public List<string> Sets {get; set; } = new List<string>();
 
     public IndexModel(ILogger<IndexModel> logger, CardService service)
     {
