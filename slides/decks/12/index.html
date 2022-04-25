@@ -133,6 +133,9 @@
 				<section>
 					<section>
 						<h2>Creating documents</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
 						<ul>
 							<li>Use <code>InsertOne</code> or <code>InsertOneAsync</code> to insert a single document</li>
 							<li>Use <code>InsertMany</code> or <code>InsertManyAsync</code> to insert multiple documents at once</li>
@@ -426,7 +429,28 @@
 						</aside>
 					</section>
 					<section>
-						<h2>Deleting</h2>
+						<h2>Delete</h2>
+						<ul>
+							<li>To delete at most one document
+								<ul>
+									<li>May be zero if none match the filter</li>
+								</ul>
+							</li>
+							<li>Here we delete all document that meets the filter <code>i</code> greater than or equal to <code>100</code></li>
+						</ul>
+						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
+							var filter = Builders<BsonDocument>.Filter.Gte("i", 100);
+							
+							var result = collection.DeleteMany(filter);
+							// or
+							var result = await collection.DeleteManyAsync(filter);
+							
+							Console.WriteLine(result.DeletedCount);
+						</script></code></pre>
+						<ul>
+							<li>The delete methods return <code>DeleteResult</code> which provides information about the operation</li>
+						</ul>
+					</section>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
