@@ -221,9 +221,6 @@
 						</script></code></pre>
 						<small>examples/lesson-12-persisting-data-with-mongo-db/mtg-collection/Services/MongoService.cs</small>
 					</section>
-					<section>
-						<h2>Code example from Deck</h2>
-					</section>
 				</section>
 				<section>
 					<section>
@@ -234,6 +231,21 @@
 					</section>
 					<section>
 						<h2>Filtering</h2>
+						<ul>
+							<li>Filters are defined as <code>FilterDefinition&lt;TDocument&gt;</code> and can be defined in different ways:
+								<ul>
+									<li>JSON string: <code>"{ x: 1 }"</code></li>
+									<li><code>BsonDocument</code>: <code>new BsonDocument("x", 1);</code></li>
+									<li>Both renders to <code>{ x: 1 }</code></li>
+								</ul>
+							</li>
+							<li>Provides a type-safe API
+								<ul>
+									<li>Helpful when building complex queries</li>
+								</ul>
+							</li>
+							<li>The <code>&</code> (AND), <code>|</code> (OR), and <code>!</code> (NOT) operators are overloaded</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
