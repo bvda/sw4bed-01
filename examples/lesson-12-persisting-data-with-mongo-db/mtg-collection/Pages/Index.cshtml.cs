@@ -17,6 +17,7 @@ public class IndexModel : PageModel
     public IList<Card> Cards { get; set; } = new List<Card>();
 
     public List<SelectListItem> Sets { get; } = new List<SelectListItem> {
+        new SelectListItem { Value = "", Text = "All" },
         new SelectListItem { Value = "lea", Text = "Alpha" },
         new SelectListItem { Value = "arn", Text = "Arabian Night" },
         new SelectListItem { Value = "atq", Text = "Antiquities" },

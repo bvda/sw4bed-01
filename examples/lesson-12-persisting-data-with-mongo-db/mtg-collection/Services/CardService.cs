@@ -26,6 +26,6 @@ public class CardService {
     if(set?.Length > 0) {
       filter &= builder.Eq(x => x.SetCode, set);
     }
-    return await _collection.Find(filter).ToListAsync();;
+    return await _collection.Find(filter).ToListAsync();
   }
 }
