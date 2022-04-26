@@ -25,6 +25,20 @@
 					</section>
 					<section>
 						<h2>Agenda</h2>
+						<ul>
+							<li>Document databases</li>
+							<li>MongoDB C# Driver
+								<ul>
+									<li>Setting up connections</li>
+									<li>CRUD operations</li>
+								</ul>
+							</li>
+							<li>GridFS
+								<ul>
+									<li>Storing large files in MongoDB</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 				</section>
 				<section>
@@ -109,15 +123,15 @@
 					<section>
 						<h2>Mapping classes</h2>
 						<ul>
-							<li>Using <code>BsonDocument</code> provides a fluid and dynamic shema
+							<li>Using <code>BsonDocument</code> provides a <mark>fluid</mark> and <mark>dynamic</mark>dynamic schema
 								<ul>
 									<li>Usually there is an application scheme</li>
 									<li>Application schemes are often implemented using POCOs</li>
 								</ul>
 							</li>
-							<li>The .NET BSON library supports mapping to and from BSON/JSON 
+							<li>The .NET BSON library supports <mark>mapping</mark> to and from BSON/JSON 
 								<ul>
-									<li>The driver will map most class automatically</li>
+									<li>The driver will map most class <mark>automatically</mark></li>
 									<li>Use <code>RegisterClassMap&lt;Clazz&gt;()</code> for special cases</li>
 								</ul>
 							</li>
@@ -137,8 +151,18 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Use <code>InsertOne</code> or <code>InsertOneAsync</code> to insert a single document</li>
-							<li>Use <code>InsertMany</code> or <code>InsertManyAsync</code> to insert multiple documents at once</li>
+							<li>Add new documents to a collection
+								<ul>
+									<li>If the collection does not exist, it will be created</li>
+								</ul>
+							</li>
+							<li>Available methods
+								<ul>
+									<li>Use <code>InsertOne</code> or <code>InsertOneAsync</code> to insert a <mark>single</mark> document</li>
+									<li>Use <code>InsertMany</code> or <code>InsertManyAsync</code> to insert <mark>multiple</mark> documents at once</li>
+								</ul>
+							</li>
+							<li>All insert operations are <mark>atomic</mark> at document-level</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -502,6 +526,7 @@
 							<h4>References</h4>
 							<ul>
 								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/gridfs/">GridFS</a></li>
+								<li><a href="https://www.mongodb.com/docs/manual/core/gridfs/">GridFS — MongoDB Manual</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -688,6 +713,20 @@
 				</section>
 				<section>
 					<h2>Wrap-up</h2>
+					<ul>
+						<li>Document databases</li>
+						<li>MongoDB C# Driver
+							<ul>
+								<li>Setting up connections</li>
+								<li>CRUD operations</li>
+							</ul>
+						</li>
+						<li>GridFS
+							<ul>
+								<li>Storing large files in MongoDB</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 			</div>
 		</div>
