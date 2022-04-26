@@ -18,13 +18,18 @@ We want to be able to explore the awesome art of the game, so we need to be able
 
 ## Exercise 12-3
 ### Add pagination to `Index`
-Right now, everything is fine since we are only loading 783 cards. But there are more than 22.630 unique cards printed (in more than 49.900 variants). This would be a lot of data to handle for the browser, and does not exactly account for at great user experience, so we need to add pagination[^3]. You can find some information and inspiration[^4]
+Right now, everything is fine since we are only loading 783 cards. But there are more than 22.630 unique cards printed (in more than 49.900 variants). This would be a lot of data to handle for the browser, and does not exactly account for at great user experience, so we need to add pagination[^3]. You can find some information and inspiration[^4].
+
+1. Add (or update) a handler that will paginate the card collection so it only return at most 50 cards per page
 
 ## Exercise 12-4
 ### Add card search to `Decks/Details`
+Add a search feature in the details page, where you can add cards to the deck.
 
 ## Exercise 12-5
 ### Add more cards
+Add the data in `exercises/lesson-12/drk.json`. You will have to fix the JSON before it will be processed. Remember to remove the database between each run in order to seed the database
+
 If you are having too good of a day, check out the set(s) Apocalyse and/or Innistrad on Scryfall[^1] (you can find more information about the model[^2] on their site)
 
 [^1]: https://scryfall.com/docs/api/
