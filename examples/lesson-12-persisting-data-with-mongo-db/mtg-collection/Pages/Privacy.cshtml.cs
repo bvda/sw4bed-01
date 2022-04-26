@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace mtg_collection.Pages;
+namespace MTGCollection.Pages;
 
 public class PrivacyModel : PageModel
 {

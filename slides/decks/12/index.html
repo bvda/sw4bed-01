@@ -175,9 +175,9 @@
 						<h2><code>InsertOne</code></h2>
 						<pre><code class="cs" data-line-numbers="|11-14|25-27|" data-trim data-noescape><script type="text/template">
 							using MongoDB.Driver;
-							using mtg_collection.Models;
+							using MTGCollection.Models;
 
-							namespace mtg_collection.Services;
+							namespace MTGCollection.Services;
 
 							public class DeckService {
 
@@ -210,10 +210,10 @@
 						<pre><code class="cs" data-line-numbers="|12-30|13|15|17-29|19|21-28|22,27|23-25|26|" data-trim data-noescape><script type="text/template">
 							using MongoDB.Driver;
 							using MongoDB.Bson.Serialization;
-							using mtg_collection.Models;
+							using MTGCollection.Models;
 							using System.Text.Json;
 							
-							namespace mtg_collection.Services;
+							namespace MTGCollection.Services;
 							
 							public class MongoService {
 								
@@ -280,12 +280,12 @@
 									<li>Both renders to <code>{ x: 1 }</code></li>
 								</ul>
 							</li>
-							<li>Provides a type-safe API
+							<li>Provides a <mark>type-safe</mark> API
 								<ul>
 									<li>Helpful when building complex queries</li>
 								</ul>
 							</li>
-							<li>The <code>&</code> (AND), <code>|</code> (OR), and <code>!</code> (NOT) operators are overloaded</li>
+							<li>The <code>&</code> (AND), <code>|</code> (OR), and <code>!</code> (NOT) operators are <mark>overloaded</mark></li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -300,9 +300,9 @@
 							using MongoDB.Bson;
 							using MongoDB.Driver;
 							
-							namespace mtg_collection.Services;
+							namespace MTGCollection.Services;
 							
-							using mtg_collection.Models;
+							using MTGCollection.Models;
 							
 							public class CardService {
 							

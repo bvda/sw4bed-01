@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using mtg_collection.Services;
-using mtg_collection.Models;
+using MTGCollection.Services;
+using MTGCollection.Models;
 
-namespace mtg_collection.Pages.Decks;
+namespace MTGCollection.Pages.Decks;
 
 public class IndexModel : PageModel
 {

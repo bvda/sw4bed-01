@@ -1,8 +1,8 @@
 using MongoDB.Driver;
-using mtg_collection.Models;
+using MTGCollection.Models;
 using System.Text.Json;
 
-namespace mtg_collection.Services;
+namespace MTGCollection.Services;
 
 public class MongoService {
   

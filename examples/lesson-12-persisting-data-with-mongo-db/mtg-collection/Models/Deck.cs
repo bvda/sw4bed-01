@@ -1,7 +1,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace mtg_collection.Models;
+namespace MTGCollection.Models;
 
 public class Deck {
   [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
