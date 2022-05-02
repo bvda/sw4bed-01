@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "0c82eb44-d198-4513-bdc6-90aac06ac93a",
+		"name": "SW4BED-01 Handin 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Protocol is HTTPS\", () => {",
+							"    pm.expect(pm.request.url.protocol).to.eql('https')",
+							"})",
+							"",
+							"pm.test(\"Response format\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res).to.be.a('array')",
+							"    pm.expect(res[0].name).to.be.a('string')",
+							"    pm.expect(res[0].collectibleCount).to.be.a('number')",
+							"})",
+							"",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+							"});",
+							"",
+							"pm.test(\"Return list of sets\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res.length).to.eql(29)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5000/sets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"sets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rarities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Protocol is HTTPS\", () => {",
+							"    pm.expect(pm.request.url.protocol).to.eql('https')",
+							"})",
+							"",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+							"});",
+							"",
+							"pm.test(\"Response format\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res).to.be.a('array')",
+							"    pm.expect(res[0].name).to.be.a('string')",
+							"})",
+							"",
+							"pm.test(\"Return list of sets\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res.length).to.eql(5)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5000/rarities",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rarities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Classes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Protocol is HTTPS\", () => {",
+							"    pm.expect(pm.request.url.protocol).to.eql('https')",
+							"})",
+							"",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+							"});",
+							"",
+							"pm.test(\"Response format\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res).to.be.a('array')",
+							"    pm.expect(res[0].name).to.be.a('string')",
+							"})",
+							"",
+							"pm.test(\"Return list of sets\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res.length).to.eql(11)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5000/classes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Protocol is HTTPS\", () => {",
+							"    pm.expect(pm.request.url.protocol).to.eql('https')",
+							"})",
+							"",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+							"});",
+							"",
+							"pm.test(\"Response format\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res).to.be.a('array')",
+							"    pm.expect(res[0].name).to.be.a('string')",
+							"})",
+							"",
+							"pm.test(\"Return list of sets\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res.length).to.eql(5)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5000/types",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cards",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let queries = pm.collectionVariables.get('queries')",
+							"",
+							"if(!queries || queries.length == 0) {",
+							"    queries = [",
+							"        { query: \"\", result: 4093 }, ",
+							"        { query: \"setid=1658\", result: 135 }, ",
+							"        { query: \"setid=1646\", result: 382 }, ",
+							"        { query: \"artist=Zoltan Boros\", result: 146 },",
+							"        { query: \"artist=Zoltan Boros&rarityid=2\", result: 5 },",
+							"        { query: \"setid=1337\", result: 0 },",
+							"        { query: \"classid=6\", result: 295 },",
+							"        { query: \"classid=12&artist=Zoltan Boros&rarityid=5&setId=1637\", result: 6 }",
+							"    ]",
+							"}",
+							"",
+							"let query = queries.shift()",
+							"",
+							"pm.collectionVariables.set('query', query.query)",
+							"pm.collectionVariables.set('result',query.result)",
+							"pm.collectionVariables.set('queries', queries)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const query = pm.collectionVariables.get('query')",
+							"const result = pm.collectionVariables.get('result')",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Protocol is HTTPS\", () => {",
+							"    pm.expect(pm.request.url.protocol).to.eql('https')",
+							"})",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+							"});",
+							"",
+							"pm.test(\"Return list of cards\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res.length).to.eql(result)",
+							"})",
+							"",
+							"pm.test(\"Response format\", () => {",
+							"    const res = pm.response.json()",
+							"    pm.expect(res).to.be.a('array')",
+							"    if(res.length > 0) {",
+							"        pm.expect(res[0].name).to.be.a('string')",
+							"        pm.expect(res[0].set).to.be.a('string')",
+							"        pm.expect(res[0].class).to.be.a('string')",
+							"    }",
+							"})",
+							"",
+							"const queries = pm.collectionVariables.get('queries')",
+							"if(queries && queries.length > 0) {",
+							"    postman.setNextRequest('Cards')",
+							"} else {",
+							"    postman.setNextRequest(null)",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5000/cards?{{query}}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"cards"
+					],
+					"query": [
+						{
+							"key": "{{query}}",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "query",
+			"value": ""
+		},
+		{
+			"key": "queries",
+			"value": ""
+		},
+		{
+			"key": "result",
+			"value": ""
+		}
+	]
+}
