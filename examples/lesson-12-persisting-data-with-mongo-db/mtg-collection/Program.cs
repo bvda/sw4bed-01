@@ -1,4 +1,4 @@
-using mtg_collection.Services;
+using MTGCollection.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

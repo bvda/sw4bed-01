@@ -1,7 +1,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 
-namespace mtg_collection.Models;
+namespace MTGCollection.Models;
 
 public class Card {
   [BsonId]

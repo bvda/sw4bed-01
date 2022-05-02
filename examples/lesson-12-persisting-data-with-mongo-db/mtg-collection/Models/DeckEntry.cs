@@ -1,4 +1,4 @@
-namespace mtg_collection.Models;
+namespace MTGCollection.Models;
 
 public class DeckEntry {
   public Card? Card { get; set; }

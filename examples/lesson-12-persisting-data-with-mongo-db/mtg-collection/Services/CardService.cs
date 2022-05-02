@@ -1,9 +1,9 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace mtg_collection.Services;
+namespace MTGCollection.Services;
 
-using mtg_collection.Models;
+using MTGCollection.Models;
 
 public class CardService {
 
@@ -30,7 +30,7 @@ public class CardService {
     if(set?.Length > 0) {
       filter &= builder.Eq(x => x.SetCode, set);
     }
-    
+
     return await _collection.Find(filter).ToListAsync();
   }
 }
