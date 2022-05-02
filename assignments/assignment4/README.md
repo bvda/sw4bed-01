@@ -13,11 +13,12 @@ I have written some Postman test suite, so you can test your API as you implemen
 ## Requirements
 ### Functional requirements
 - `F1` An endpoint @ `GET /cards` that returns all available card
-	- `F1.1` Should have a query parameter `page` that is used for pagination
-	- `F1.2` Each page should consist of at most 100 entries
-	- `F1.3` Should have a query parameter `setid` that is used for filtering cards based on sets
-	- `F1.4` Should have a query parameter `artist` that filters on artist name (exact)
-	- `F1.5` Should have a query parameter `classid` that filters on class
+	- `F1.1` Shall have a query parameter `page` that is used for pagination
+	- `F1.2` Each page shall consist of at most 100 entries
+	- `F1.3` Shall have a query parameter `setid` that is used for filtering cards based on sets
+	- `F1.4` Shall have a query parameter `artist` that filters on artist name (exact)
+	- `F1.5` Shall have a query parameter `classid` that filters on class
+  - `F1.6` Shall have a query paramenter `rarityid` that filters on rarity
 - `F2` An endpoint @ `GET /sets` that returns all available sets
 - `F3` An endpoint @ `GET /rarities` that returns all available rarities
 - `F4` An endpoint @ `GET /classes` that returns all available classes
