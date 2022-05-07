@@ -34,8 +34,18 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li><code>IHostedService</code></li>
-							<li><code>BackgroundService</code></li>
+							<li>No direct interaction with users
+								<ul>
+									<li>Runs in the background</li>
+									<li>Typically processes item from a queue or perform long-running processes</li>
+								</ul>
+							</li>
+							<li>Can be implemented in various ways
+								<ul>
+									<li><code>IHostedService</code></li>
+									<li><code>BackgroundService</code></li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -58,6 +68,7 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
+							<li>Moving work to the background, enhances UI responsiveness</li>
 							<li>Running background task with Timer</li>
 							<li>Using scoped services in background tasks</li>
 						</ul>
@@ -68,6 +79,27 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Running on a timer</h2>
+					</section>
+					<section>
+						<h2>Scoped services in background tasks</h2>
+						<ul>
+							<li>The ASP.NET framework creates a new container scope every time a new request is received</li>
+							<li><code>IHostedService</code> services are created exactly once when the application starts
+								<ul>
+									<li>This can be a challenge, if we want to use a scoped service</li>
+									<li>Any dependencies added to a service must have a limetime that is equal or longer than that of service itself</li>
+								</ul>
+							<li>Create container scopes with <code>IServiceCollection.CreateScope()</code></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>book pp.694-695</li>
+							</ul>
+						</aside>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -75,10 +107,30 @@
 					</section>
 					<section>
 						<h2>Overview</h2>
+						<ul>
+							<li>HTTP not added by default
+								<ul>
+									<li>Add <code>package Microsoft.Extensions.Http</code> if you need to fetch data with HTTP</li>
+								</ul>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
+								<li>book, pp. 698-700</li>
 								<li><a href=""></a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>walkthrough</h2>
+						<ul>
+							<li><code>DBContext is registered as scoped per default</code></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/ef/core/dbcontext-configuration/"></a></li>
 							</ul>
 						</aside>
 					</section>
