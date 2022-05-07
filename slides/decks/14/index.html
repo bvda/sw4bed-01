@@ -33,6 +33,10 @@
 					</section>
 					<section>
 						<h2>Overview</h2>
+						<ul>
+							<li><code>IHostedService</code></li>
+							<li><code>BackgroundService</code></li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
@@ -78,13 +82,26 @@
 							</ul>
 						</aside>
 					</section>
-				</section>
-				<section>
 					<section>
-						<h2>Background tasks<br />using<br/>Quartz.NET</h2>
-					</section>
-					<section>
-						<h2>Overview</h2>
+						<h2>Running in production</h2>
+						<ul>
+							<li>Worker services and .NET console application
+								<ul>
+									<li>Intended for long-running processes</li>
+								</ul>
+							</li>
+							<li>Commonly registered as service with the operating system
+								<ul>
+									<li>Windows Service on Microsoft-based systems</li>
+									<li><code>systemd</code> on Unix-based systems</li>
+								</ul>
+							</li>
+							<li>Can also run in containers
+								<ul>
+									<li>Deploy just like any other ASP.NET Core application</li>
+								</ul>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
@@ -92,12 +109,57 @@
 							</ul>
 						</aside>
 					</section>
+				</section>
+				<section>
 					<section>
-						<h2>Installation</h2>
+						<h2>Background tasks<br />using<br/>Quartz.NET</h2>
+					</section>
+					<section>
+						<h2>Overview</h2>
+						<ul>
+							<li>When more control over when specific tasks are scheduled</li>
+							<li>Quartz.NET main concepts
+								<ul>
+									<li><mark>Jobs</mark> Background tasks that implements the logic</li>
+									<li><mark>Triggers</mark> Control when Jobs will run</li>
+									<li><mark>Job Factory</mark> Creates instances of Jobs</li>
+									<li><mark>Scheduler</mark> Keeps track of application triggers</li>
+								</ul>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href=""></a></li>
+								<li>Book pp.703-704</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Installation</h2>
+						<ol>
+							<li>Add the NuGet packages
+								<ul>
+									<li><code>dotnet add package Quartz.Extensions.Hosting</code></li>
+								</ul>
+							</li>
+							<li>Add the scheduler to IServiceCollection
+								<ul>
+									<li><code>AddQuartzHostedService()</code></li>
+									<li>Set <code>WaitForJobsToComplete</code> to <code>true</code></li>
+								</ul>
+							</li>
+							<li>Configure the required services in <code>ConfigureServices</code>
+								<ul>
+									<li></li>
+								</ul>
+							</li>
+						</ol>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href=""></a></li>
+								<li>book pp. 704-705</li>
 							</ul>
 						</aside>
 					</section>
