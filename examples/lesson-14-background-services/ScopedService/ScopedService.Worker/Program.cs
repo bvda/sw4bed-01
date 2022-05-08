@@ -22,13 +22,9 @@ using (var scope = host.Services.CreateScope())
     var currencies = context.Currencies.FirstOrDefault();
     if (currencies == null)
     {
-      context.Currencies.Add(new Currency { Name = "United States dollar", Symbol = "USD" });
-      context.Currencies.Add(new Currency { Name = "Euro", Symbol = "EUR" });
-      context.Currencies.Add(new Currency { Name = " Japanese yen", Symbol = "JPY" });
+
     }
     context.SaveChanges();
-
-
   }
   catch (Exception ex)
   {
