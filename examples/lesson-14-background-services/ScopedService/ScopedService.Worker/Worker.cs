@@ -19,8 +19,13 @@ public class Worker : BackgroundService
     {
       using (var scope = _provider.CreateScope())
       {
-        var context = scope.ServiceProvider.GetRequiredService<CurrencyService>();
-        // _logger.LogInformation(context.Currencies.AsEnumerable().ElementAt(new Random().Next(3)).Name);
+        var api = scope.ServiceProvider.GetRequiredService<CurrencyService>();
+        var db = scope.ServiceProvider.GetRequiredService<ExchangeDbContext>();
+        var result = await api.GetRandomCurrency();
+        if (result is not null) {
+          await db.AddAsync(result);
+          await db.SaveChangesAsync();
+        }
       }
       _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
       await Task.Delay(1000, stoppingToken);

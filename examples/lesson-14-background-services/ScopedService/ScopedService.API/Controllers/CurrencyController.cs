@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using ScopedService.Data;
 
@@ -12,13 +13,20 @@ public class CurrencyController : ControllerBase
     {
       new Currency { Name = "United States dollar", Symbol = "USD" },
       new Currency { Name = "Euro", Symbol = "EUR" },
-      new Currency { Name = " Japanese yen", Symbol = "JPY" },
+      new Currency { Name = "Japanese yen", Symbol = "JPY" },
+      new Currency { Name = "Danish krone", Symbol = "DKK"},
+      new Currency { Name = "Renminbi", Symbol = "CNY"},
+      new Currency { Name = "Swiss franc", Symbol = "CHF"},
+      new Currency { Name = "Pound sterling", Symbol = "GBP"},
+      new Currency { Name = "Russian ruble", Symbol = "RUB"},
     };
     private readonly ILogger<CurrencyController> _logger;
+    private readonly ExchangeDbContext _context;
 
-    public CurrencyController(ILogger<CurrencyController> logger)
+    public CurrencyController(ILogger<CurrencyController> logger, ExchangeDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     [HttpGet("single", Name = "GetSingle")]
@@ -28,8 +36,8 @@ public class CurrencyController : ControllerBase
     }
 
     [HttpGet("", Name = "GetAll")]
-    public ActionResult<Currency[]> GetAll()
+    public async Task<ActionResult<IEnumerable<Currency>>> GetAll()
     {
-      return Currencies;
+      return await _context.Currencies.ToListAsync();
     }
 }

@@ -4,11 +4,11 @@ using ScopedService.Worker;
 using ScopedService.Data;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
       services.AddHostedService<Worker>();
       services.AddHttpClient<CurrencyService>();
-      services.AddDbContext<ExchangeDbContext>(options => options.UseInMemoryDatabase("Exchange"));
+      services.AddDbContext<ExchangeDbContext>(options => options.UseSqlServer(context.Configuration.GetConnectionString("Exchange")));
     })
     .Build();
 

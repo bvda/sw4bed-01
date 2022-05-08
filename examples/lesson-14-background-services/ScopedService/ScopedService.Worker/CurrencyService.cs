@@ -11,7 +11,7 @@ public class CurrencyService {
     _client.BaseAddress = new Uri("https://localhost:5000");
   }
 
-  public async Task<IEnumerable<Currency>?> GetCurrencies() {
-    return await _client.GetFromJsonAsync<IEnumerable<Currency>>("/api/currencies");
+  public async Task<Currency?> GetRandomCurrency() {
+    return await _client.GetFromJsonAsync<Currency>("api/currencies/single");
   }
 }

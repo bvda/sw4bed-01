@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server
+    user: root
+    volumes:
+      - scoped-service:/var/opt/mssql/data
+    environment:
+      SA_PASSWORD: "suchSecureVeryWordSoPassW0w!"
+      ACCEPT_EULA: "Y"
+    ports:
+    - "1433:1433"
+volumes:
+  scoped-service:
+    name: scoped-service-db
