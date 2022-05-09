@@ -21,18 +21,14 @@ public class Order {
 
 ## Exercise 14-02
 ### Add a service for handling orders
-Add an `OrderService` to the project with the following scaffold:
+Add an `OrderService` to the project with the following interface:
 
 ```cs
-public class OrderService {
-
-  public List<Order> Orders { get; set; }
-
-  public void CreateOrder(Order order) {
-    // Push `order` to `Orders`
-  }
+public interface IOrderService {
+  Task<List<Order>> GetOrders();
+  void CreateOrder(Order order);
+  void ProcessOrders();
 }
-
 ```
 
 Inject `OrderService` into `OrdersController` and update the `POST` method, so it uses the service
@@ -40,13 +36,13 @@ Inject `OrderService` into `OrdersController` and update the `POST` method, so i
 ## Exercise 14-03
 ### Add a Database
 1. Set up a `OrderDbContext` with a set of `Order` objects (you can use `localdb`, an In-memory database, or spin up an SQL Server in Docker)
-1. Inject `OrderDbContext` into `OrdersController` and update the `GET` method, so it returns all `Order` objects from `OrderDbContext`.
+1. Inject `OrderDbContext` into `OrderService` and update the `GET` method, so it returns all `Order` objects from `OrderDbContext` by using `IOrderService`.
 
 ## Exercise 14-04
 ### Add a `BackgroundService` for processing orders
 Add a `OrderBackgroundService` to your project to handle the orders.
 
 1. Create the class file in your project
-2. Inject `OrderService` in the constructor and create a scope `IServiceProvider` to create an instance of `OrderDbContext`
-3. Write all content in `Orders` from `OrderService` to `OrderDbContext`
+2. Inject `IServiceProvider` in the constructor and create a scope  to create an instance of `IOrderService`
+3. Remove all `Orders` from `OrderDbContext` by using the `IOrderService` instance
 4. The task should run every ten (10) seconds
