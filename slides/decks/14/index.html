@@ -429,6 +429,33 @@
 						</aside>
 					</section>
 					<section>
+						<h2>Setup Quartz</h2>
+						<pre><code class="cs" data-line-numbers="|1,17-18,19,21|3|4|6|7,14|8|9|10|11,14|12|13|19-21|" data-trim data-noescape><script type="text/template">
+							builder.Services.AddQuartz(
+								q => {
+									q.UseMicrosoftDependencyInjectionJobFactory();
+									var keyWrite = new JobKey("WriteRandomNumberJob");
+									// ...
+									q.AddJob<WriteRandomNumberJob>(keyWrite);
+									q.AddTrigger(opts => opts
+										.ForJob(keyWrite)
+										.WithIdentity(keyWrite.Name)
+										.StartNow()
+										.WithSimpleSchedule(x => x
+											.WithInterval(TimeSpan.FromSeconds(5))
+											.RepeatForever()
+										)
+									);
+									// ...
+								}
+							);
+							builder.Services.AddQuartzHostedService(
+									q => q.WaitForJobsToComplete = true
+							);
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/CurrencyService/CurrencyServiceFactory.cs</small>
+					</section>
+					<section>
 						<h2>Job configuration</h2>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
