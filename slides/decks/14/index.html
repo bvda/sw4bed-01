@@ -194,46 +194,124 @@
 						</aside>
 					</section>
 					<section>
-						<section>
-							<h2>Scoped services in background tasks</h2>
-							<pre><code class="cs" data-line-numbers="|10-11,14|13|20-21,29|22-23|24|25,28|26-27|" data-trim data-noescape><script type="text/template">
-								using ScopedService.Data;
-	
-								namespace ScopedService.Worker;
-								
-								public class Worker : BackgroundService
+						<h2>Scoped services in background tasks</h2>
+						<pre><code class="cs" data-line-numbers="|10-11,14|13|20-21,29|22-23|24|25,28|26-27|" data-trim data-noescape><script type="text/template">
+							using ScopedService.Data;
+
+							namespace ScopedService.Worker;
+							
+							public class Worker : BackgroundService
+							{
+								private readonly ILogger<Worker> _logger;
+								private readonly IServiceProvider _provider;
+							
+								public Worker(ILogger<Worker> logger, IServiceProvider provider)
 								{
-									private readonly ILogger<Worker> _logger;
-									private readonly IServiceProvider _provider;
-								
-									public Worker(ILogger<Worker> logger, IServiceProvider provider)
+									_logger = logger;
+									_provider = provider;
+								}
+							
+								protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+								{
+									while (!stoppingToken.IsCancellationRequested)
 									{
-										_logger = logger;
-										_provider = provider;
-									}
-								
-									protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-									{
-										while (!stoppingToken.IsCancellationRequested)
+										using (var scope = _provider.CreateScope())
 										{
-											using (var scope = _provider.CreateScope())
-											{
-												var api = scope.ServiceProvider.GetRequiredService<CurrencyService>();
-												var db = scope.ServiceProvider.GetRequiredService<ExchangeDbContext>();
-												var result = await api.GetRandomCurrency();
-												if (result is not null) {
-													await db.AddAsync(result);
-													await db.SaveChangesAsync();
-												}
+											var api = scope.ServiceProvider.GetRequiredService<CurrencyService>();
+											var db = scope.ServiceProvider.GetRequiredService<ExchangeDbContext>();
+											var result = await api.GetRandomCurrency();
+											if (result is not null) {
+												await db.AddAsync(result);
+												await db.SaveChangesAsync();
 											}
-											_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-											await Task.Delay(1000, stoppingToken);
 										}
+										_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+										await Task.Delay(1000, stoppingToken);
 									}
-								}							
-							</script></code></pre>
-							<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Worker.cs</small>
-						</section>
+								}
+							}							
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Worker.cs</small>
+					</section>
+					<section>
+						<h2>Problems</h2>
+						<ul>
+							<li>Typed clients are designed to be short-lived
+								<ul>
+									<li>To take advantage of <code>HttpClient</code> handler rotation</li>
+								</ul>
+							</li>
+							<li>Background services are <mark>singletons</mark>
+								<ul>
+									<li>Created exactly once for the application lifetime</li>
+								</ul>
+							</li>
+							<li><mark>Solution</mark> Apply the factory pattern for HTTP services</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://www.stevejgordon.co.uk/ihttpclientfactory-patterns-using-typed-clients-from-singleton-services">IHttpClientFactory Patterns: Using Typed Clients from Singleton Services - Steve Gordon - Code with Steve</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Service factory</h2>
+						<pre><code class="cs" data-line-numbers="|12-15|17-20|" data-trim data-noescape><script type="text/template">
+							namespace ScopedService.Worker;
+
+							public interface ICurrencyServiceFactory 
+							{
+								ICurrencyService GetCurrencyService();
+							}
+							
+							public class CurrencyServiceFactory : ICurrencyServiceFactory 
+							{
+								private readonly IServiceProvider _provider;
+							
+								public CurrencyServiceFactory(IServiceProvider provider) 
+								{
+									_provider = provider;
+								}
+							
+								public ICurrencyService GetCurrencyService() 
+								{
+									return _provider.GetRequiredService<ICurrencyService>();
+								}
+							}
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/CurrencyService/CurrencyServiceFactory.cs</small>
+					</section>
+					<section>
+						<h2>Worker with factory</h2>
+						<pre><code class="cs" data-line-numbers="|8,10-13,15-16,24|19-20|" data-trim data-noescape><script type="text/template">
+							using ScopedService.Data;
+
+							namespace ScopedService.Worker;
+							
+							public class CorrectWorker : BackgroundService
+							{
+								private readonly ILogger<CorrectWorker> _logger;
+								private readonly ICurrencyServiceFactory _factory;
+							
+								public CorrectWorker(ILogger<CorrectWorker> logger, ICurrencyServiceFactory factory) {
+									_logger = logger;
+									_factory = factory;
+								}
+							
+								protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+								{
+									while (!stoppingToken.IsCancellationRequested)
+									{
+										var api = _factory.GetCurrencyService();
+										var result = await api.GetRandomCurrency();
+										_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+										await Task.Delay(1000, stoppingToken);
+									}
+								}
+							}
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/CurrencyService/CurrencyServiceFactory.cs</small>
 					</section>
 				</section>
 				<section>
