@@ -94,13 +94,18 @@
 									<li>Just as with any other service</li>
 								</ul>
 							</li>
-							<li>Control the frequency of task executing with timers
+							<li>Control the <mark>frequency</mark> of task executing with timers
 								<ul>
 									<li>Simple schedule: Run <code>X</code> after time <code>Y</code> has elapsed</li>
 									<li>Use <code>Task.Delay()</code> to specify timespan</li>
 								</ul>
 							</li>
-							<li></li>
+							<li><code>BackgroundService</code> implements <code>IHostedService</code>
+								<ul>
+									<li>Abstracts away some pitfalls</li>
+									<li>Makes it easier to run <code>async</code>/<code>await</code> and enforces <mark>best-pratices</mark> patterns</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -147,6 +152,30 @@
 						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Worker.cs</small>
 					</section>
 					<section>
+						<h2>Registering background tasks</h2>
+						<pre><code class="cs" data-line-numbers="|9|10-14|" data-trim data-noescape><script type="text/template">
+							using Microsoft.EntityFrameworkCore;
+
+							using ScopedService.Worker;
+							using ScopedService.Data;
+							
+							IHost host = Host.CreateDefaultBuilder(args)
+									.ConfigureServices((context, services) =>
+									{
+										services.AddHostedService<Worker>();
+										services.AddHttpClient<CurrencyService>();
+										services.AddDbContext<ExchangeDbContext>(options => 
+										options
+											.UseSqlServer(context.Configuration.GetConnectionString("Exchange"))
+										);
+									})
+									.Build();
+							
+							await host.RunAsync();
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Program.cs</small>
+					</section>
+					<section>
 						<h2>Scoped services in background tasks</h2>
 						<ul>
 							<li>The ASP.NET framework creates a new container scope every time a new request is received</li>
@@ -163,6 +192,48 @@
 								<li>book pp.694-695</li>
 							</ul>
 						</aside>
+					</section>
+					<section>
+						<section>
+							<h2>Scoped services in background tasks</h2>
+							<pre><code class="cs" data-line-numbers="|10-11,14|13|20-21,29|22-23|24|25,28|26-27|" data-trim data-noescape><script type="text/template">
+								using ScopedService.Data;
+	
+								namespace ScopedService.Worker;
+								
+								public class Worker : BackgroundService
+								{
+									private readonly ILogger<Worker> _logger;
+									private readonly IServiceProvider _provider;
+								
+									public Worker(ILogger<Worker> logger, IServiceProvider provider)
+									{
+										_logger = logger;
+										_provider = provider;
+									}
+								
+									protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+									{
+										while (!stoppingToken.IsCancellationRequested)
+										{
+											using (var scope = _provider.CreateScope())
+											{
+												var api = scope.ServiceProvider.GetRequiredService<CurrencyService>();
+												var db = scope.ServiceProvider.GetRequiredService<ExchangeDbContext>();
+												var result = await api.GetRandomCurrency();
+												if (result is not null) {
+													await db.AddAsync(result);
+													await db.SaveChangesAsync();
+												}
+											}
+											_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+											await Task.Delay(1000, stoppingToken);
+										}
+									}
+								}							
+							</script></code></pre>
+							<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Worker.cs</small>
+						</section>
 					</section>
 				</section>
 				<section>

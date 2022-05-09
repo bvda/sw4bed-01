@@ -3,7 +3,11 @@ using ScopedService.Data;
 
 namespace ScopedService.Worker;
 
-public class CurrencyService {
+public interface ICurrencyService {
+  public Task<Currency?> GetRandomCurrency();
+}
+
+public class CurrencyService: ICurrencyService {
   private readonly HttpClient _client;
   
   public CurrencyService(HttpClient client) {
