@@ -416,7 +416,7 @@
 							</li>
 							<li>Configure the required services in <code>ConfigureServices</code>
 								<ul>
-									<li></li>
+									<li>Setup triggers and jobs</li>
 								</ul>
 							</li>
 						</ol>
@@ -466,12 +466,43 @@
 					</section>
 					<section>
 						<h2>Clustering</h2>
+						<ul>
+							<li>Must be considered when <mark>scaling</mark> the application <mark>horizontally</mark>
+								<ul>
+									<li><mark>Challenge</mark> Each instance would create a background task</li>
+								</ul>
+							</li>
+							<li>Possible solutions
+								<ul>
+									<li>Move the task to a <mark>separate</mark> application (a <mark>headless</mark> worker service)</li>
+									<li>Enable clustering to distribute tasks <mark>across</mark> instances</li>
+								</ul>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
 								<li><a href=""></a></li>
+								<li>Book, pp.708-711</li>
 							</ul>
 						</aside>
+					</section>
+					<section>
+						<h2>Quartz clustering</h2>
+						<pre><code class="cs" data-line-numbers="|4,9|5|6|7|8|" data-trim data-noescape><script type="text/template">
+							builder.Services.AddQuartz(
+								q => {
+									// ...
+									q.UsePersistentStore(s => {
+											s.UseSqlServer(connectionString);
+											s.UseClustering();
+											s.UseProperties = true;
+											s.UseJsonSerializer();
+								});
+							}
+						);
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/Quartz/Quartz.API/Program.cs</small>
 					</section>
 				</section>
 				<section>
