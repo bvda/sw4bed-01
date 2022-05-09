@@ -25,6 +25,17 @@
 					</section>
 					<section>
 						<h2>Agenda</h2>
+						<ul>
+							<li>Background services</li>
+							<li>Implementing background tasks in .NET</li>
+							<li>Quartz.NET
+								<ul>
+									<li>Scheduling</li>
+									<li>Clustering</li>
+								</ul>
+							</li>
+							<li>Deploying background tasks</li>
+						</ul>
 					</section>
 				</section>
 				<section>
@@ -58,7 +69,18 @@
 					<section>
 						<h2>Use cases</h2>
 						<ul>
-							<li></li>
+							<li>Send out order confirmations from a webshop
+								<ul>
+									<li>Batching mails can improve performance on the backend</li>
+									<li>The user interface is not busy waiting for the mail to go through</li>
+								</ul>
+							</li>
+							<li>Caching data from external sources
+								<ul>
+									<li>Improve response time for our own APIs</li>
+									<li>Consider what data is cachable. Not all data are good candidates</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 				</section>
@@ -316,7 +338,7 @@
 				</section>
 				<section>
 					<section>
-						<h2>Headless worker services using <code>IHost</code></h2>
+						<h2>Headless worker services</h2>
 					</section>
 					<section>
 						<h2>Overview</h2>
@@ -349,31 +371,6 @@
 						</aside>
 					</section>
 					<section>
-						<h2>Installing as a service</h2>
-						<ul>
-							<li>Running the service as a <code>systemd</code> application on Linux
-								<ul>
-									<li>Add the <code>Microsoft.Extensions.Hosting.Systemd</code> NuGet package</li>
-									<li>Call <code>UseSystemd()</code> on <code>IHostBuilder</code></li>
-								</ul>
-							</li>
-							<li>Run as a Windows service
-								<ul>
-									<li>Add <code>Microsoft.Extensions.Hosting.WindowsServices</code> NuGet package</li>
-									<li>Call <code>UseWindowdService()</code> on <code>IHostBuilder</code></li>
-								</ul>
-							</li>
-							<li>We can also run ASP.NET Core as services</li>
-						</ul>
-						<aside class="notes" aria-label="notes">
-							<h4>References</h4>
-							<ul>
-								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx">Host ASP.NET Core on Linux with Nginx | Microsoft Docs</a></li>
-								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/windows-service">Host ASP.NET Core in a Windows Service | Microsoft Docs</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section>
 						<h2>Running in production</h2>
 						<ul>
 							<li>Worker services and .NET console application
@@ -397,6 +394,32 @@
 							<h4>References</h4>
 							<ul>
 								<li><a href=""></a></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Installing as a service</h2>
+						<ul>
+							<li>Running the service as a <code>systemd</code> application on Linux
+								<ul>
+									<li>Add the <code>Microsoft.Extensions.Hosting.Systemd</code> NuGet package</li>
+									<li>Call <code>UseSystemd()</code> on <code>IHostBuilder</code></li>
+								</ul>
+							</li>
+							<li>Run as a Windows service
+								<ul>
+									<li>Add <code>Microsoft.Extensions.Hosting.WindowsServices</code> NuGet package</li>
+									<li>Call <code>UseWindowdService()</code> on <code>IHostBuilder</code></li>
+								</ul>
+							</li>
+							<li>We can also run ASP.NET Core as services</li>
+							<li>There are security considerations that needs to be addressed</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx">Host ASP.NET Core on Linux with Nginx | Microsoft Docs</a></li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/windows-service">Host ASP.NET Core in a Windows Service | Microsoft Docs</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -482,13 +505,33 @@
 						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/CurrencyService/CurrencyServiceFactory.cs</small>
 					</section>
 					<section>
-						<h2>Job configuration</h2>
-						<aside class="notes" aria-label="notes">
-							<h4>References</h4>
-							<ul>
-								<li><a href=""></a></li>
-							</ul>
-						</aside>
+						<h2><code>IJob</code> implementation</h2>
+						<pre><code class="cs" data-line-numbers="|5-6,23|16-22|" data-trim data-noescape><script type="text/template">
+							using Quartz.Data;
+
+							namespace Quartz.API;
+
+							public class WriteRandomNumberJob : IJob
+							{
+								private readonly ILogger<WriteRandomNumberJob> _logger;
+								private readonly RandomNumberDbContext _dbContext;
+
+								public WriteRandomNumberJob(ILogger<WriteRandomNumberJob> logger, RandomNumberDbContext dbContext) 
+								{
+									_dbContext = dbContext;
+									_logger = logger;
+								}
+
+								public async Task Execute(IJobExecutionContext context)
+								{
+									await _dbContext.AddAsync(new RandomNumber {
+										Number = new Random().Next()
+									});
+									await _dbContext.SaveChangesAsync();
+								}
+							}
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/Quartz/Quartz.API/WriteRandomNumberJob.cs</small>
 					</section>
 					<section>
 						<h2>Clustering</h2>
@@ -570,6 +613,16 @@
 				</section>
 				<section>
 					<h2>Wrap-up</h2>
+					<ul>
+						<li>Background services
+							<ul>
+								<li>Use cases</li>
+								<li>Deployment</li>
+							</ul>
+						</li>
+						<li>Implementing background tasks in .NET</li>
+						<li>Quartz.NET</li>
+					</ul>
 				</section>
 			</div>
 		</div>
