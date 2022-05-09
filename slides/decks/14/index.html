@@ -34,10 +34,11 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
+							<li>ASP.NET Core apps only create tasks in <mark>response</mark> to a requests</li>
 							<li>No direct interaction with users
 								<ul>
-									<li>Runs in the background</li>
-									<li>Typically processes item from a queue or perform long-running processes</li>
+									<li>Runs in the <mark>background</mark></li>
+									<li>Typically processes item from a <mark>queue</mark> or perform long-running processes</li>
 								</ul>
 							</li>
 							<li>Can be implemented in various ways
@@ -54,10 +55,16 @@
 							</ul>
 						</aside>
 					</section>
+					<section>
+						<h2>Use cases</h2>
+						<ul>
+							<li></li>
+						</ul>
+					</section>
 				</section>
 				<section>
 					<section>
-						<h2>Running tasks<br />with<br /><code>IHostedService</code></h2>
+						<h2>Implementing background tasks<br />with<br /><code>BackgroundService</code></h2>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
@@ -69,7 +76,7 @@
 						<h2>Overview</h2>
 						<ul>
 							<li>Moving work to the background, enhances UI responsiveness</li>
-							<li>Running background task with Timer</li>
+							<li>Running background task with timers</li>
 							<li>Using scoped services in background tasks</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
@@ -81,6 +88,63 @@
 					</section>
 					<section>
 						<h2>Running on a timer</h2>
+						<ul>
+							<li>Register background services in <code>ConfigureServices</code>
+								<ul>
+									<li>Just as with any other service</li>
+								</ul>
+							</li>
+							<li>Control the frequency of task executing with timers
+								<ul>
+									<li>Simple schedule: Run <code>X</code> after time <code>Y</code> has elapsed</li>
+									<li>Use <code>Task.Delay()</code> to specify timespan</li>
+								</ul>
+							</li>
+							<li></li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+						</aside>
+					</section>
+					<section>
+						<h2>Timed background task</h2>
+						<pre><code class="cs" data-line-numbers="|5|10-14|16-17,33|18-19,32|31|" data-trim data-noescape><script type="text/template">
+							using ScopedService.Data;
+
+							namespace ScopedService.Worker;
+							
+							public class Worker : BackgroundService
+							{
+								private readonly ILogger<Worker> _logger;
+								private readonly IServiceProvider _provider;
+							
+								public Worker(ILogger<Worker> logger, IServiceProvider provider)
+								{
+									_logger = logger;
+									_provider = provider;
+								}
+							
+								protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+								{
+									while (!stoppingToken.IsCancellationRequested)
+									{
+										using (var scope = _provider.CreateScope())
+										{
+											var api = scope.ServiceProvider.GetRequiredService<CurrencyService>();
+											var db = scope.ServiceProvider.GetRequiredService<ExchangeDbContext>();
+											var result = await api.GetRandomCurrency();
+											if (result is not null) {
+												await db.AddAsync(result);
+												await db.SaveChangesAsync();
+											}
+										}
+										_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+										await Task.Delay(1000, stoppingToken);
+									}
+								}
+							}							
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Worker.cs</small>
 					</section>
 					<section>
 						<h2>Scoped services in background tasks</h2>
