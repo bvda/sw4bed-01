@@ -321,9 +321,22 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>HTTP not added by default
+							<li>Background tasks can be created in <mark>two</mark> ways
 								<ul>
-									<li>Add <code>package Microsoft.Extensions.Http</code> if you need to fetch data with HTTP</li>
+									<li>Classes implementing <code>BackgroundService</code> in <mark>ASP.NET</mark> Core projects</li>
+									<li><mark>Stand-alone</mark> .NET applications</li>
+								</ul>
+							</li>
+							<li>HTTP functionality not added by default
+								<ul>
+									<li>Add <code>package Microsoft.Extensions.Http</code> if you need to fetch data using HTTP</li>
+								</ul>
+							</li>
+							<li>Stand-alone services use the <mark>same</mark> features as ASP.NET Core
+								<ul>
+									<li>Dependency Injection (Lesson 06)</li>
+									<li>Configuration (Lesson 07)</li>
+									<li>Logging (Lesson 10)</li>
 								</ul>
 							</li>
 						</ul>
@@ -336,14 +349,26 @@
 						</aside>
 					</section>
 					<section>
-						<h2>walkthrough</h2>
+						<h2>Installing as a service</h2>
 						<ul>
-							<li><code>DBContext is registered as scoped per default</code></li>
+							<li>Running the service as a <code>systemd</code> application on Linux
+								<ul>
+									<li>Add the <code>Microsoft.Extensions.Hosting.Systemd</code> NuGet package</li>
+									<li>Call <code>UseSystemd()</code> on <code>IHostBuilder</code></li>
+								</ul>
+							</li>
+							<li>Run as a Windows service
+								<ul>
+									<li>Add <code>Microsoft.Extensions.Hosting.WindowsServices</code> NuGet package</li>
+									<li>Call <code>UseWindowdService()</code> on <code>IHostBuilder</code></li>
+								</ul>
+							</li>
+							<li>We can also run ASP.NET Core as services</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li><a href="https://docs.microsoft.com/en-us/ef/core/dbcontext-configuration/"></a></li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-6.0#monitor-the-app">Host ASP.NET Core on Linux with Nginx | Microsoft Docs</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -514,6 +539,31 @@
 									<li>book, p. 710</li>
 								</ul>
 							</li>
+						</aside>
+					</section>
+					<section>
+						<h2>Persistent database</h2>
+						<ul>
+							<li>Quartz.NET relies on a <mark>persistent</mark> database for clustering
+								<ul>
+									<li>Support a wide range of databases: MySQL, Oracle, SQL Server, etc.</li>
+								</ul>
+							</li>
+							<li>Uses database as backing store
+								<ul>
+									<li>Can also be used for only persistence</li>
+									<li>If used for clustering, must support <mark>locking</mark> primitives</li>
+								</ul>
+							</li>
+							<li>Does not create the tables automatically
+								<ul>
+									<li>Add the required tables <mark>manually</mark></li>
+									<li>Can be managed with Entity Framework Core <mark>migrations</mark></li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
 						</aside>
 					</section>
 				</section>
