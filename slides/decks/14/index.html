@@ -396,47 +396,53 @@
 					<section>
 						<h2>Running in production</h2>
 						<ul>
-							<li>Worker services and .NET console application
+							<li>Worker services are .NET console application
 								<ul>
-									<li>Intended for long-running processes</li>
+									<li>Intended for <mark>long-running</mark> processes</li>
 								</ul>
 							</li>
-							<li>Commonly registered as service with the operating system
+							<li>Commonly <mark>registered</mark> as service with the operating system
 								<ul>
 									<li>Windows Service on Microsoft-based systems</li>
 									<li><code>systemd</code> on Unix-based systems</li>
 								</ul>
 							</li>
-							<li>Can also run in containers
+							<li>Can be deployed like any other .NET application
 								<ul>
-									<li>Deploy just like any other ASP.NET Core application</li>
+									<li>Running in an isolated <mark>container</mark></li>
+									<li><mark>Framework-dependent</mark> where the .NET runtime is installed on the host machine</li>
+									<li><mark>Self-contained</mark> where the the .NET runtime is bundled with the application</li>
 								</ul>
 							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li><a href=""></a></li>
+								<li><a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy">Host and deploy ASP.NET Core | Microsoft Docs</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section>
 						<h2>Installing as a service</h2>
 						<ul>
-							<li>Running the service as a <code>systemd</code> application on Linux
+							<li>Running the service as a <code>systemd</code> application on <mark>Linux</mark>
 								<ul>
 									<li>Add the <code>Microsoft.Extensions.Hosting.Systemd</code> NuGet package</li>
 									<li>Call <code>UseSystemd()</code> on <code>IHostBuilder</code></li>
 								</ul>
 							</li>
-							<li>Run as a Windows service
+							<li>Run as a <mark>Windows</mark> service
 								<ul>
 									<li>Add <code>Microsoft.Extensions.Hosting.WindowsServices</code> NuGet package</li>
 									<li>Call <code>UseWindowdService()</code> on <code>IHostBuilder</code></li>
 								</ul>
 							</li>
-							<li>We can also run ASP.NET Core as services</li>
-							<li>There are security considerations that needs to be addressed</li>
+							<li>We can register ASP.NET Core applications as services
+								<ul>
+									<li>The underlying Krestel server runs as an <code>IHostedService</code></li>
+								</ul>
+							</li>
+							<li>There are <mark>security</mark> considerations that needs to be addressed</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
