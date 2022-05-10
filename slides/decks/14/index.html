@@ -28,13 +28,8 @@
 						<ul>
 							<li>Background services</li>
 							<li>Implementing background tasks in .NET</li>
-							<li>Quartz.NET
-								<ul>
-									<li>Scheduling</li>
-									<li>Clustering</li>
-								</ul>
-							</li>
 							<li>Deploying background tasks</li>
+							<li>Quartz.NET</li>
 						</ul>
 					</section>
 				</section>
@@ -69,16 +64,16 @@
 					<section>
 						<h2>Use cases</h2>
 						<ul>
-							<li>Batching email 
+							<li><mark>Batching</mark> email 
 								<ul>
 									<li>Send out order confirmations from a webshop</li>
 									<li>The user interface is not busy waiting for the mail to go through</li>
 									<li>Send out news letters once each day/week/month</li>
 								</ul>
 							</li>
-							<li>Caching data from external sources
+							<li><mark>Caching</mark> data from external sources
 								<ul>
-									<li>Improve response time for our own APIs</li>
+									<li>Improve response time for our APIs</li>
 									<li>Consider what data is cachable. Not all data are good candidates</li>
 								</ul>
 							</li>
@@ -98,9 +93,9 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Moving work to the background, enhances UI responsiveness</li>
-							<li>Running background task with timers</li>
-							<li>Using scoped services in background tasks</li>
+							<li>Moving work to the <mark>background</mark> enhances UI responsiveness</li>
+							<li>Running background tasks with <mark>timers</mark></li>
+							<li>Using <mark>scoped</mark> services in background tasks</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -201,11 +196,11 @@
 					<section>
 						<h2>Scoped services in background tasks</h2>
 						<ul>
-							<li>The ASP.NET framework creates a new container scope every time a new request is received</li>
-							<li><code>IHostedService</code> services are created exactly once when the application starts
+							<li>The ASP.NET framework creates a new container <mark>scope</mark> every time a new request is received</li>
+							<li><code>IHostedService</code> services are created exactly <mark>once</mark> when the application starts
 								<ul>
 									<li>This can be a challenge, if we want to use a scoped service</li>
-									<li>Any dependencies added to a service must have a limetime that is equal or longer than that of service itself</li>
+									<li>Any dependencies added to a service must have a <mark>lifetime</mark> that is <mark>equal</mark> or <mark>longer</mark> than that of service itself</li>
 								</ul>
 							<li>Create container scopes with <code>IServiceCollection.CreateScope()</code></li>
 						</ul>
@@ -255,6 +250,33 @@
 							}							
 						</script></code></pre>
 						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/Worker.cs</small>
+					</section>
+					<section>
+						<h2>Service with <code>HttpClient</code></h2>
+						<pre><code class="cs" data-line-numbers="|6,8,10,21|13-16|7,18-20|" data-trim data-noescape><script type="text/template">
+							using System.Net.Http.Json;
+							using ScopedService.Data;
+							
+							namespace ScopedService.Worker;
+							
+							public interface ICurrencyService {
+								public Task<Currency?> GetRandomCurrency();
+							}
+							
+							public class CurrencyService : ICurrencyService {
+								private readonly HttpClient _client;
+								
+								public CurrencyService(HttpClient client) {
+									_client = client;
+									_client.BaseAddress = new Uri("https://localhost:5000");
+								}
+							
+								public async Task<Currency?> GetRandomCurrency() {
+									return await _client.GetFromJsonAsync<Currency>("api/currencies/single");
+								}
+							}							
+						</script></code></pre>
+						<small>examples/lesson-14-background-services/ScopedService/ScopedService.Worker/CurrencyService/CurrencyService.cs</small>
 					</section>
 					<section>
 						<h2>Problems</h2>
