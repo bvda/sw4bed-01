@@ -26,8 +26,8 @@ public class OrderService: IOrderService {
   }
 
   public async void ProcessOrders() {
-    _context.Orders.ToList().ForEach(o => {
-      _context.Remove(o);  
+    _context.Orders.ToList().ForEach(order => {
+      _context.Remove(order);  
     });
     await _context.SaveChangesAsync();
   }
