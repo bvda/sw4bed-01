@@ -224,7 +224,7 @@
 							"        { query: \"\", result: 4093 }, ",
 							"        { query: \"setid=1658\", result: 135 }, ",
 							"        { query: \"setid=1646\", result: 382 }, ",
-							"        { query: \"artist=Zoltan Boros\", result: 146 },",
+							"        { query: \"artist=Zoltan Boros\", result: 147 },",
 							"        { query: \"artist=Zoltan Boros&rarityid=2\", result: 5 },",
 							"        { query: \"setid=1337\", result: 0 },",
 							"        { query: \"classid=6\", result: 295 },",
