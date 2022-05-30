@@ -12,7 +12,12 @@ public class MongoService {
     }
   }
 
-  public MongoService() {
-    _client = new MongoClient(/* connection string */); 
+  public MongoService(string connectionString) {
+    _client = new MongoClient(connectionString);
+  }
+
+  public async Task<bool> IsSeeded(string database) {
+    var cursor = await _client.GetDatabase(database).ListCollectionsAsync();
+    return (await cursor.ToListAsync()).Count > 0;
   }
 }
