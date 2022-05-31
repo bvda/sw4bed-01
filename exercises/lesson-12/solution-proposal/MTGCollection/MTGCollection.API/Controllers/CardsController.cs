@@ -18,7 +18,7 @@ public class CardsController : ControllerBase
   }
 
   [HttpGet(Name = "GetCards")]
-  public async Task<IList<Card>> GetAsync(string? name = "", string? type = null, string? set = null, string? artist = null) {
-    return await _cardService.Search(name, type, set, artist);
+  public async Task<IList<Card>> GetAsync(string? name = "", string? type = null, string? set = null, string? artist = null, int? page = null) {
+    return await _cardService.Search(name, type, set, artist, page);
   }
 }
