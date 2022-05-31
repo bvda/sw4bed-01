@@ -16,7 +16,7 @@ public class CardService {
     _collection = service.Client.GetDatabase("mtg").GetCollection<Card>("cards");
   }
 
-  public async Task<IList<Card>> Search(string? name = null, string? type = null, string? set = null) {
+  public async Task<IList<Card>> Search(string? name = null, string? type = null, string? set = null, string? artist = null) {
     var builder = Builders<Card>.Filter;
     var filter = builder.Empty;
 
@@ -30,6 +30,10 @@ public class CardService {
 
     if(set?.Length > 0) {
       filter &= builder.Eq(x => x.SetCode, set);
+    }
+
+    if(artist?.Length > 0) {
+      filter &= builder.Regex(x => x.Artist, new BsonRegularExpression($"/{artist}/i"));
     }
 
     return await _collection.Find(filter).ToListAsync();
