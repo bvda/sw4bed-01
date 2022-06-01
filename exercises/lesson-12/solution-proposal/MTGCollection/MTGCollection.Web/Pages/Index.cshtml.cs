@@ -29,10 +29,20 @@ public class IndexModel : PageModel
         _service = service;
     }
 
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(string name, string type, string setcode)
     {
-        Cards = await _service.GetCards();
+        Cards = await _service.GetCards(name, type, setcode);
+        SearchModel = new InputSearchModel 
+        {
+            Name = name,
+            Type = type,
+            SetCode = setcode,
+        };
         return Page();
+    }
+
+    public IActionResult OnPost(string name, string type, string set) {
+        return RedirectToPage("Index", new { Name = SearchModel.Name, Type = SearchModel.Type, SetCode = SearchModel.SetCode });
     }
 
     public class InputSearchModel {

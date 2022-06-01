@@ -11,8 +11,8 @@ public class MtgCollectionService {
     _client.BaseAddress = new Uri("https://localhost:5001");
   }
 
-  public async Task<IList<Card>> GetCards() 
+  public async Task<IList<Card>> GetCards(string name, string type, string set) 
   {
-    return await _client.GetFromJsonAsync<IList<Card>>("cards");
+    return await _client.GetFromJsonAsync<IList<Card>>($"cards?name={name}&type={type}&set={set}");
   }
 }
