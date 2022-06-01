@@ -36,14 +36,15 @@ public class CardService {
     if(artist?.Length > 0) {
       filter &= builder.Regex(x => x.Artist, new BsonRegularExpression($"/{artist}/i"));
     } 
-    Console.WriteLine(page * limit);
+
     var result = _collection.Find<Card>(filter);
     var count = await result.CountDocumentsAsync();
+    
     if(await result.CountDocumentsAsync() >= limit) {
-      return await result.Skip(page * limit).Limit(limit).ToListAsync<Card>();
-    } else {
-      return await result.ToListAsync<Card>();
+      result = result.Skip(page * limit).Limit(limit);
     }
+
+    return await result.ToListAsync<Card>();
   }
 
   public async Task<IList<Card>> GetAllCards() {
