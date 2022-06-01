@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTGCollection.Data", "MTGCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTGCollection.Model", "MTGCollection.Model\MTGCollection.Model.csproj", "{264B48F2-122E-4883-B29A-E4925ABFBDA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTGCollection.Web", "MTGCollection.Web\MTGCollection.Web.csproj", "{99CB2B01-5E0E-4E9A-8DBB-6071166BA084}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{264B48F2-122E-4883-B29A-E4925ABFBDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{264B48F2-122E-4883-B29A-E4925ABFBDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{264B48F2-122E-4883-B29A-E4925ABFBDA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99CB2B01-5E0E-4E9A-8DBB-6071166BA084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99CB2B01-5E0E-4E9A-8DBB-6071166BA084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99CB2B01-5E0E-4E9A-8DBB-6071166BA084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99CB2B01-5E0E-4E9A-8DBB-6071166BA084}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
