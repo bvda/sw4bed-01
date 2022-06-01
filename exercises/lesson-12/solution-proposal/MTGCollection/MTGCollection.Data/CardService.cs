@@ -19,7 +19,7 @@ public class CardService {
   public async Task<IList<Card>> Search(string? name = null, string? type = null, string? set = null, string? artist = null, int? page = null) {
     var builder = Builders<Card>.Filter;
     var filter = builder.Empty;
-    var limit = 100;
+    var limit = 50;
 
     if(name?.Length > 0) {
       filter &= builder.Regex(x => x.Name, new BsonRegularExpression($"/{name}/i"));
@@ -37,7 +37,13 @@ public class CardService {
       filter &= builder.Regex(x => x.Artist, new BsonRegularExpression($"/{artist}/i"));
     } 
     Console.WriteLine(page * limit);
-    return await _collection.Find(filter).Skip(page * limit).Limit(limit).ToListAsync();
+    var result = _collection.Find<Card>(filter);
+    var count = await result.CountDocumentsAsync();
+    if(await result.CountDocumentsAsync() >= limit) {
+      return await result.Skip(page * limit).Limit(limit).ToListAsync<Card>();
+    } else {
+      return await result.ToListAsync<Card>();
+    }
   }
 
   public async Task<IList<Card>> GetAllCards() {
