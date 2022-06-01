@@ -8,3 +8,38 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<form method="post">
+    <div class="d-flex">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Name" asp-for="SearchModel.Name" />
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Type" asp-for="SearchModel.Type" />
+        </div>
+    </div>
+    <div class="d-flex">
+        <select class="form-select" asp-for="SearchModel.SetCode" asp-items="@Model.Sets"></select>
+    </div>
+    <div class="input-group mb-3">
+        <button type="submit"class="btn btn-primary">Search</button>
+    </div>
+</form>
+@foreach(var c in Model.Cards) {
+    <div class="d-flex mb-4">
+        <div class="d-flex align-items-center flex-column me-4">
+            <img src="@c.ImageUris?.Small" alt="@c.Name" />
+            <small class="text-muted">@c.Artist</small>
+        </div>
+        <div>
+            <h4>@c.Name</h4>
+            <div>
+                <span class="d-block">@c.ManaCost</span>
+                <small>@c.Type</small>
+            </div>
+            <p>@c.OracleText</p>
+            <div class="d-flex">
+                <small>@c.Set — @c.Rarity</small>
+            </div>
+        </div>
+    </div>
+}

@@ -1,7 +1,10 @@
+using MTGCollection.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient<MtgCollectionService>();
 
 var app = builder.Build();
 
