@@ -1,5 +1,4 @@
 using MongoDB.Driver;
-using MongoDB.Bson;
 using MTGCollection.Models;
 
 namespace MTGCollection.Data;
@@ -23,6 +22,6 @@ public class DecksService
 
   public async Task CreateDeck(Deck deck) 
   {
-    // await _collection.InsertOneAsync(new BsonDocument(deck));
+    await _collection.InsertOneAsync(deck);
   }
 }

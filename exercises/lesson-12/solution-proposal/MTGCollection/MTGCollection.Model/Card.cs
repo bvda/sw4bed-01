@@ -4,6 +4,8 @@ namespace MTGCollection.Models;
 
 public class Card {
   public string Id { get; set; } = "";
+  [JsonPropertyName("oracle_id")]
+  public string OracleId { get; set; } = "";
   public string Name { get; set; } = "";
   [JsonPropertyName("mana_cost")]
   public string ManaCost { get; set; } = "";

@@ -1,4 +1,7 @@
 using MongoDB.Driver;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
+using MTGCollection.Models;
 
 namespace MTGCollection.Data;
 
@@ -13,6 +16,15 @@ public class MongoService {
   }
 
   public MongoService(string connectionString) {
+    BsonClassMap.RegisterClassMap<Deck>(cm => 
+    {
+      cm.AutoMap();
+      cm.MapIdField(c => c.Id).SetIdGenerator(StringObjectIdGenerator.Instance);
+    });
+    BsonClassMap.RegisterClassMap<Card>(cm => {
+      cm.AutoMap();
+      cm.MapIdField(c => c.Id).SetIdGenerator(StringObjectIdGenerator.Instance);
+    });
     _client = new MongoClient(connectionString);
   }
 
