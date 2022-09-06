@@ -6,7 +6,7 @@
 #### macOS 
 Installing Docker on a macOS system should straightforward, just follow https://docs.docker.com/desktop/mac/install/ and you should be up and running in no time.
 
-However, if you are sporting a M1 chip, you will be required to use Rosetta.
+However, if you are sporting an Apple Chip, be sure to get correct version of Docker Desktop.
 
 #### Linux
 Running Linux? Then you are a bit on your own. Check out https://docs.docker.com/engine/install/ and find the installation instructions for your distribution.
