@@ -14,9 +14,12 @@ namespace BlockchainExplorer.Services {
       var transactions = JsonSerializer.Deserialize<Transaction[]>(fs, new JsonSerializerOptions {
         PropertyNameCaseInsensitive = true,
       });
-      _transactions = transactions;
-      Transactions = _transactions;
-      Wallets = _transactions;
+
+      if(transactions is not null) {
+        _transactions = transactions;
+        Transactions = _transactions;
+        Wallets = _transactions;
+      }
     }
 
     public TransactionService OrderBy(bool ascending) {

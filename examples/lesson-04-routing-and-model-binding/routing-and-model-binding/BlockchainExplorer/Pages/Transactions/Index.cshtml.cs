@@ -28,11 +28,13 @@ namespace BlockchainExplorer.Pages.Transactions
 
     public void OnGet()
     {
-      TimeFilter = new TimeFilter {
-        To = BindingModel.To,
-        From = BindingModel.From,
-      };
-      Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
+      if(BindingModel is not null) {
+        TimeFilter = new TimeFilter {
+          To = BindingModel.To,
+          From = BindingModel.From,
+        };
+        Transactions = _service.OrderBy(BindingModel.Ascending).Filter(BindingModel.From, BindingModel.To).Transactions;
+      }
     }
 
     public IActionResult OnPost() {
@@ -56,7 +58,7 @@ namespace BlockchainExplorer.Pages.Transactions
     public int To { get; set; }
     
     [BitcoinGenesisRange]
-    public int From { get; set; }
+    public int? From { get; set; }
 
   }
 }

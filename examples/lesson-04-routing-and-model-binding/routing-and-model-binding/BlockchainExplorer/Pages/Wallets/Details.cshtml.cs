@@ -9,7 +9,7 @@ namespace BlockchainExplorer.Pages.Wallets
     public class DetailsModel : PageModel
     {
         [BindProperty]
-        public string Wallet { get; set; }
+        public string Wallet { get; set; } = "";
         public IList<Transaction> Transactions = new List<Transaction>();
 
         public DetailsModel(TransactionService service) {
