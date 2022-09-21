@@ -6,7 +6,7 @@ We are going to build a contact book
 Setup the project and add template files.
 
 - Create a new ASP.NET Core Web app (Razor Pages) with `dotnet new`[^1].
-- Add a new folder in `Pages` called `Contact` and add a page called `Index` and a page called `Details`
+- Add a new folder in `Pages` called `Contacts` and add a page called `Index` and a page called `Details`
 - Add a link to `Contacts` to the navigation bar (check out `/Pages/Shared/_Layout.cshtml`)
 
 ## Exercise 04-2
