@@ -68,8 +68,12 @@
 					<section>
 						<h2>Routing middleware</h2>
 						<ul>
-							<li><code>RoutingMiddleware</code> <mark>selects</mark> the endpoint</li>
-							<li><code>EndpointMiddleware</code> <mark>executes</mark> the endpoint</li>
+							<li> Implemented using two pieces of middleware
+								<ul>
+									<li><code>RoutingMiddleware</code> <mark>selects</mark> the endpoint</li>
+									<li><code>EndpointMiddleware</code> <mark>executes</mark> the endpoint</li>
+								</ul>
+							</li>
 							<li>The advantages of having two separate pieces of middleware:
 								<ul>
 									<li>All middleware between <code>RoutingMiddleware</code> and <code>EndpointMiddleware</code> can see what is going to be executed</li>
@@ -77,6 +81,12 @@
 							</li>
 							<li>Use case: <code>AuthorizationMiddleware</code>—control endpoint execution based on permissions</li>
 						</ul>
+						<aside class="notes" aria-label="notes">
+							<h4>References</h4>
+							<ul>
+								<li>ASP.NET Core in Action, 2nd edition (ISBN 9781617298301), pp. 127-130</li>
+							</ul>	
+						</aside>
 					</section>
 					<section>
 						<h2>Convention-based routing</h2>
@@ -105,8 +115,8 @@
 							<li>Uses Convention-based generation of attribute routes</li>
 							<li>The best of both worlds:
 								<ul>
-									<li>Predictability and terseness from convention-based routing</li>
-									<li>Flexibility for easy URL customization from attribute routing</li>
+									<li><mark>Predictability</mark> and terseness from convention-based routing</li>
+									<li><mark>Flexibility</mark> for easy URL customization from attribute routing</li>
 								</ul>
 							</li>
 						</ul>
@@ -128,8 +138,8 @@
 							<li>Convention-based generation of attribute routes</li>
 							<li>Generates route templates for each page
 								<ul>
-									<li>A single route template based on file path </li>
-									<li>Path of page relative to the Razor Pages root directory (<code>/Pages</code>)</li>
+									<li>A single route template based on <mark>file path</mark></li>
+									<li>Path of page <mark>relative</mark> to the Razor Pages root directory (<code>/Pages</code>)</li>
 								</ul>
 							</li>
 							<li>Routing is not case sensitive</li>
@@ -170,7 +180,7 @@
 							<li>Route template is comprised of <mark>segments</mark>
 								<ul>
 									<li><span style="color: tomato; font-family: monospace;">product</span>–A literal value must be exactly matched</li>
-									<li><span style="color: cornflowerblue; font-family: monospace;">category</span>–A route parameter will match to anything</li>
+									<li><span style="color: cornflowerblue; font-family: monospace;">category</span>, <span style="color: cornflowerblue; font-family: monospace;">name</span>–A route parameter will match to anything</li>
 								</ul>
 							</li>
 							<li>Other features:
@@ -214,12 +224,12 @@
 						<h4>Route template syntax</h4>
 						<h2>Constraints for route parameters</h2>
 						<ul>
-							<li>The routing template syntax might be a too broad
+							<li>The routing template syntax might be a too <mark>broad</mark>
 								<ul>
 									<li>If route parameter is <code>string</code> where <code>int</code> is expected, the application will throw an exception</li>
 								</ul>
 							</li>
-							<li>Restricts template matching
+							<li><mark>Restricts</mark> template matching
 								<ul>
 									<li>Use to ensure the route values are <mark>convertible</mark> to appropiate types</li>
 								</ul>
@@ -376,7 +386,7 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Models in Razorpages (and MVC)
+							<li>Models in Razor pages (and MVC)
 								<ul>
 									<li>Binding model</li>
 									<li>Application model</li>
@@ -402,12 +412,12 @@
 									<li>Route data</li>
 									<li>Query string parameters</li>
 								</ul>
-								<li>Provides data for Razor pages and MVC Controllers</li>
+								<li>Provides data for Razor pages and MVC controllers</li>
 								<li>Converts string data to .NET types</li>
-								<li>Annotate properties with <code>[BindProperty]</code>
+								<li><mark>Annotate</mark> properties with <code>[BindProperty]</code>
 									<ul>
 										<li>Create a separate binding class to hold multiple bindable values</li>
-										<li>Binding classes should be a nested class</li>
+										<li>Binding classes should be a <mark>nested</mark> class</li>
 									</ul>
 								</li>
 							</li>
@@ -490,7 +500,7 @@
 					<section>
 						<h2><code>[From*]</code> attributes</h2>
 						<ul>
-							<li>If the default source is not correct, use these to secify source
+							<li>If the default source is not correct, use these to specify source
 								<ul>
 									<li><code>[FromQuery]</code>—Gets values from the query string</li>
 									<li><code>[FromRoute]</code>—Gets values from route data</li>
@@ -499,7 +509,7 @@
 									<li><code>[FromForm]</code>—Gets values from HTTP headers</li>
 								</ul>
 							</li>
-							<li>Added to the individal properties, rather than to the model class</li>
+							<li>Added to the <mark>individual</mark> properties, rather than to the model class</li>
 						</ul>
 						<aside class="notes" aria-label="">
 							<h4>References</h4>
@@ -518,8 +528,8 @@
 						<ul>
 							<li>Improve overall data quality
 								<ul>
-									<li>Accuracy-are users providing a usable value?</li>
-									<li>Completeness-are they providing all values needed?</li>
+									<li>Accuracy—are users providing a usable value?</li>
+									<li>Completeness—are they providing all values needed?</li>
 								</ul>
 							</li>
 							<li>Display useful messages to users
@@ -555,7 +565,7 @@
 									<li><code>[Required]</code>—validates that a property in not <code>null</code></li>
 								</ul>
 							</li>
-							<li>Does not validate business rules</li>
+							<li>Does <mark>NOT</mark> validate business rules</li>
 							<li>Also used with Entity Framework Core</li>
 						</ul>
 						<aside class="notes" aria-label="notes">

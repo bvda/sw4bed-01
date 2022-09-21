@@ -13,7 +13,7 @@
       <div class="ms-2 me-auto">
         <div class="fw-bold">@DateTimeOffset.FromUnixTimeSeconds(@t.Timestamp).DateTime.Date.ToLongDateString()</div>
         <div class="fs-6 text-muted">@t.Timestamp</div>
-        <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code> to <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
+        <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
       </div>
       <span class="badge bg-primary rounded-pill align-self-center">@t.Amount</span>
     </li>
@@ -27,7 +27,7 @@
     <div class="ms-2 me-auto">
       <div class="fw-bold">@DateTimeOffset.FromUnixTimeSeconds(@t.Timestamp).DateTime.Date.ToLongDateString()</div>
       <div class="fs-6 text-muted">@t.Timestamp</div>
-      <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code> to <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Recipient}))'>@t.Recipient</a></code>
+      <code><a href='@(Url.Page("/Wallets/Details", new { wallet = t.Sender}))'>@t.Sender</a></code>
     </div>
     <span class="badge bg-primary rounded-pill align-self-center">@t.Amount</span>
   </li>
