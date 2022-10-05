@@ -92,7 +92,7 @@ public class Job
 	public string? Location { get; set; } 
 	[MaxLength(2000)]  
 	public string? Comments { get; set; }
-	public List<Model>? Models { get; set; } // Got object cycles? Use a DTO!
+	public List<Model>? Models { get; set; }
 	public List<Expense>? Expenses { get; set; }
 }
 
