@@ -18,6 +18,8 @@ Der skal IKKE implementeres authentication og authorization i dette projekt. Det
 ### Krav til SignalR
 Medarbejderen, som er ansvarlig for økonomien, vil gerne have en meddelelse, hver gang der oprettes en ny udgift. Så derfor skal backenden også kunne levere en html-side, som opdateres hver gang der oprettes en ny udgift.
 
+TODO: SignalR implementering skal være type sikker (strongly typed )
+
 ### API specifikation
 
 **Models**
@@ -80,7 +82,7 @@ public class Job
 	public long JobId { get; set; } 
 	[MaxLength(64)]  
 	public string? Customer { get; set; }  
-	public DateTimeOffset StartDate { get; set; } 
+	public DateTime StartDate { get; set; } 
 	public int Days { get; set; } 
 	[MaxLength(128)]
 	public string? Location { get; set; } 
@@ -108,3 +110,30 @@ public class Expense
 
 [^1]: https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new
 [^2]: https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction
+
+## Hints
+### Relateret data
+Som udgangspunkt hiver EF Core ikke relateret data som `Jobs`, `Expenses` og `Models` ud, når man tilgår det gennem en `DbContext`.
+
+Der findes en række strategier, som benyttes, når man gerne vil have det med: Explicit loading, eager loading og lazy loading. De har hver deres fordele og ulemper. Jeg til råde jeg til at kigge på https://learn.microsoft.com/en-us/ef/core/querying/related-data/. I mit løsningsforslag benyttes der Explicit loading, men det er op til jer hvilken strategi der bruges i jeres afleveringer.
+
+### Serialisering
+Noget man ofte støder på, når man arbejder med Object Relational Mappers (ORMs) kan der opstå cirkulære referencer, når modeller serialiseres. Nogle framework ignorerer det, andre smider en exception (ASP.NET hører til de sidste).
+
+Her er et hurtigt fix, som er "god nok" til opgaven
+```csharp
+// Program.cs
+using System.Text.Json.Serialization;
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+	x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+);
+
+```
+
+Hvis I er friske på at tage udfordringen op, kan I se, om I kan lave DTOs uden cirkulære referencer og mappe jeres returværdier dertil før det serialiseres og sendes ud til klienten.
+
+### Mapster
+Når I skal mappe fra jeres DTOs til databasemodeller, kan det hurtigt blive til en del linjer kode. Mængden af kode kan mindsken ved at bruge en mapper. Tjek Mapster (https://github.com/MapsterMapper/Mapster) og/eller AutoMapper (https://automapper.org/) ud. Hvis I ruller med Mapster, kan I med fordel tage et kig på https://github.com/MapsterMapper/Mapster/wiki/Ignoring-members for at blive i stand til at lave partial mappings, hvor vi kun mapper nogle af de properties, vi har på vores klasser.
+
+Happy hacking!
