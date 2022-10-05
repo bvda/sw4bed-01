@@ -18,8 +18,6 @@ Der skal IKKE implementeres authentication og authorization i dette projekt. Det
 ### Krav til SignalR
 Medarbejderen, som er ansvarlig for økonomien, vil gerne have en meddelelse, hver gang der oprettes en ny udgift. Så derfor skal backenden også kunne levere en html-side, som opdateres hver gang der oprettes en ny udgift.
 
-TODO: SignalR implementering skal være type sikker (strongly typed )
-
 ### API specifikation
 
 **Models**
@@ -43,10 +41,6 @@ TODO: SignalR implementering skal være type sikker (strongly typed )
 - Oprette en ny udgift
 
 ### Specifikation af databasens tre tabeller
-
-TODO: Strukturen skal være (mere) nested
-TODO: Fif til mapping (https://github.com/MapsterMapper/Mapster)
-
 ```csharp
 public class Model
 {
