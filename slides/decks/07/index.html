@@ -418,17 +418,18 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Never store passwords or other sensitive data in source code</li>
-							<li>Production secrets should not be used for development</li>
-							<li>Secrets should not be deployed with the application
+							<li><mark>NEVER</mark> store passwords or other sensitive data in source code</li>
+							<li><mark>Production</mark> secrets should not be used for <mark>development</mark></li>
+							<li>Secrets should not be <mark>deployed</mark> with the application
 								<ul>
-									<li>They should be accessed through the environment</li>
+									<li>They should be accessed through the <mark>environment</mark></li>
 								</ul>
 							</li>
 							<li>Examples of sensitive data:
 								<ul>
 									<li>Connection strings</li>
 									<li>API keys</li>
+									<li>Certificates</li>
 								</ul>
 							</li>
 						</ul>
@@ -436,9 +437,9 @@
 					<section>
 						<h2>App secrets</h2>
 						<ul>
-							<li>The Secret Manager tools stores sensitive data during <mark>development</mark>
+							<li>The Secret Manager tools <mark>stores</mark> sensitive data during <mark>development</mark>
 								<ul>
-									<li>App secrets are stored in a separate location from the project tree</li>
+									<li>App secrets are stored in a <mark>separate</mark> location from the project tree</li>
 									<li>Not checked into source control</li>
 									<li>Does not encrypt the stored secrets and should not be treated as a trusted store</li>
 								</ul>
@@ -469,8 +470,8 @@
 							</li>
 							<li>Accessing User Secrets
 								<ul>
-									<li>Can be mapped to option classes as any other settings</li>
-									<li>Can be accessed as any other environment variable</li>
+									<li>Can be <mark>mapped</mark> to option classes as any other settings</li>
+									<li>Can be accessed as any other <mark>environment</mark> variable</li>
 								</ul>
 							</li>
 						</ul>
