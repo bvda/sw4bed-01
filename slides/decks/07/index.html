@@ -70,8 +70,8 @@
 						<ul>
 							<li>ASP.NET Core uses configuration providers
 								<ul>
-									<li>Loads key-value pairs (<code>{"key":"value"}</code></li>
-									<li>An application can have any number of configuration providers</li>
+									<li>Loads <mark>key-value</mark> pairs (<code>{"key":"value"}</code></li>
+									<li>An application can have <mark>any</mark> number of configuration providers</li>
 								</ul>
 							</li>
 							<li>Available providers:
@@ -90,7 +90,7 @@
 					<section>
 						<h2>Loading configurations</h2>
 						<ul>
-							<li>Applied in the following order (default configuration):
+							<li>Applied in the following <mark>order</mark> (default configuration):
 								<ul>
 									<li>Add host configuration</li>
 									<li><code>appsettings.json</code></li>
@@ -105,12 +105,12 @@
 					<section>
 						<h2>Overriding settings</h2>
 						<ul>
-							<li>Load settings from multiple sources to create "layers" i a configuration
+							<li>Load settings from <mark>multiple</mark> sources to create "layers" i a configuration
 								<ul>
-									<li>The order in which configuration providers are added is significant</li>
+									<li>The <mark>order</mark> in which configuration providers are added is <mark>significant</mark></li>
 								</ul>
 							</li>
-							<li>Produces a single cohesive configuration object</li>
+							<li>Produces a single <mark>cohesive</mark> configuration object</li>
 						</ul>
 						<img src="../../assets/layered-configuration.jpg" width="60%" alt="layered-configuration" />
 						<aside class="notes" aria-label="notes">
@@ -148,13 +148,13 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>The preferred way to read hierarchical configuration data</li>
+							<li>The preferred way to read <mark>hierarchical</mark> configuration data</li>
 							<li>Provide <mark>strongly</mark> type access to groups of related settings
 								<ul>
 									<li>Isolatation by scenario(s) adhere to Interface Segregation Principle (ISP) and separation of concerns</li>
 								</ul>
 							</li>
-							<li>Validation of configuration data</li>
+							<li><mark>Validation</mark> of configuration data</li>
 							<li>Should be used instead of <code>IConfiguration</code></li>
 							<li>Used troughout the ASP.NET Core</li>
 						</ul>
@@ -168,16 +168,16 @@
 					<section>
 						<h2>The <code>IOptions</code> interface</h2>
 						<ul>
-							<li>A simple interface with a single property (<code>Value</code>), which contains the configured POCO options class at runtime</li>
+							<li>A <mark>simple</mark> interface with a single property (<code>Value</code>), which contains the configured Plain Old CLR Object (POCO) options class at runtime</li>
 							<li>How to use <code>IOptions</code>
 								<ul>
-									<li>Options classes are configured at startup in <code>Program.cs</code></li>
-									<li>Injected in Controller and/or Model classes</li>
+									<li>Options classes are configured at <mark>startup</mark> in <code>Program.cs</code></li>
+									<li>Injected in <code>Controller</code> and/or <code>Model</code> classes</li>
 								</ul>
 							</li>
-							<li>Options loaded with <code>IOptions</code> created exactly once
+							<li>Options loaded with <code>IOptions</code> created <mark>exactly</mark> once
 								<ul>
-									<li>Use <code>IOptionsSnapshot</code> to recreate options upon changes</li>
+									<li>Use <code>IOptionsSnapshot</code> to <mark>recreate</mark> options upon changes</li>
 								</ul>
 							</li>
 						</ul>
@@ -193,15 +193,15 @@
 						<ul>
 							<li>POCO classes need to
 								<ul>
-									<li>Be non-abstract</li>
-									<li>Have a default constructor</li>
+									<li>Be <mark>non-abstract</mark></li>
+									<li>Have a <mark>default</mark> constructor</li>
 								</ul>
 							</li>
-							<li>Properties need to adhere to the following rules to bind automatically
+							<li>Properties need to <mark>adhere</mark> to the following <mark>rules</mark> to bind automatically
 								<ul>
 									<li>Declared with the <code>public</code> access modifier</li>
 									<li>Have a <code>get</code> accessor (<code>set</code>-only properties will not be bound)</li>
-									<li>Have a <code>set</code>  accessor (or non-<code>null</code> value for complex types)</li>
+									<li>Have a <code>set</code> accessor (or non-<code>null</code> value for complex types)</li>
 									<li>Is not an indexer</li>
 								</ul>
 							</li>
@@ -301,12 +301,12 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>ASP.NET Core configures application behavior based on environments</li>
+							<li>ASP.NET Core configures application behavior based on <mark>environments</mark></li>
 							<li>Three environments defined per default:
 								<ul>
-									<li><mark>Development</mark> Used for development on local machines</li>
-									<li><mark>Staging</mark> A nearly exact replica of the production environment</li>
-									<li><mark>Production</mark> The environment exposed to end-users</li>
+									<li><mark>Development</mark> Used for development on <mark>local</mark> machines</li>
+									<li><mark>Staging</mark> A nearly exact <mark>environments</mark> of the production environment</li>
+									<li><mark>Production</mark> The environment exposed to <mark>end-users</mark></li>
 								</ul>
 							</li>
 							<li>Defined in enviroment variable <code>ASPNETCORE_ENVIRONMENT</code> 
