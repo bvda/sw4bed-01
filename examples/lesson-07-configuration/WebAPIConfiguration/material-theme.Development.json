@@ -7,11 +7,16 @@
     "SecondaryLight": "#ffc947",
     "SecondaryDark": "#c66900"
   },
-  "Fonts": [{
+  "Fonts": {
+    "Display": {
       "Name": "Display",
-      "Size": 24
-    }, {
+      "Size": 48,
+      "Color": "skyblue"
+    },
+    "Body": {
       "Name": "Body",
-      "Size": 12
-  }]  
+      "Size": 12,
+      "Color": "tomato"
+    }
+  }
 }

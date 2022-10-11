@@ -10,18 +10,32 @@ export class ThemeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTheme(): Observable<Colors> {
-    return this.httpClient.get<Colors>(this.API_URL)
+  getTheme(): Observable<AppShell> {
+    return this.httpClient.get<AppShell>(this.API_URL)
   }
 }
 
+export interface AppShell { 
+  colors: Colors;
+  fonts: Fonts;
+}
+
 export interface Colors {
-  colors: {
     primary: string;
     primaryLight: string;
     primaryDark: string;
     secondary: string;
     secondaryLight: string;
     secondaryDark: string;
-  }
+}
+
+export interface Fonts {
+  display: Font;
+  body: Font;
+}
+
+export interface Font {
+  name: string;
+  size: number;
+  color: string;
 }

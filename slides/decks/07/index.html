@@ -418,17 +418,16 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Never store passwords or other sensitive data in source code</li>
+							<li><mark>NEVER</mark> store passwords or other sensitive data in source code
+								<ul>
+									<li>Connection strings</li>
+									<li>API keys</li>
+								</ul>
+							</li>
 							<li>Production secrets should not be used for development</li>
 							<li>Secrets should not be deployed with the application
 								<ul>
 									<li>They should be accessed through the environment</li>
-								</ul>
-							</li>
-							<li>Examples of sensitive data:
-								<ul>
-									<li>Connection strings</li>
-									<li>API keys</li>
 								</ul>
 							</li>
 						</ul>
