@@ -47,7 +47,7 @@
 						<ul>
 							<li>Tweak various settings at deploy time
 								<ul>
-									<li>No need for re-compilation or restarts</li>
+									<li>No need for <mark>re-compilation</mark> or <mark>restarts</mark></li>
 									<li>A <mark>setting</mark> is a value that changes the <mark>behavior</mark> of an application</li>
 								</ul>
 							</li>
@@ -91,14 +91,14 @@
 						<h2>Loading configurations</h2>
 						<ul>
 							<li>Applied in the following <mark>order</mark> (default configuration):
-								<ul>
+								<ol>
 									<li>Add host configuration</li>
 									<li><code>appsettings.json</code></li>
 									<li><code>appsettings.{ENVIRONMENT}.json</code></li>
 									<li>App secrets (when running in the <code>Development</code> environment)</li>
 									<li>Environment variables</li>
 									<li>Command-line arguments</li>
-								</ul>
+								</ol>
 							</li>
 						</ul>
 					</section>
