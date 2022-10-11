@@ -7,14 +7,11 @@
     "SecondaryLight": "#ffc947",
     "SecondaryDark": "#c66900"
   },
-  "Fonts": {
-    "Display": {
-      "Url": "",
+  "Fonts": [{
+      "Name": "Display",
       "Size": 24
-    },
-    "Body": {
-      "Url": "",
+    }, {
+      "Name": "Body",
       "Size": 12
-    }
-  }  
+  }]  
 }
