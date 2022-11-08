@@ -5,7 +5,7 @@ The purpose of this exercise is to extract configuration from an existing app an
 ## Exercise 07-1
 The first thing we need to do is to get a Docker container up and running:
 1. Setup a Docker container running Microsoft SQL Server[^2] (get the image with `docker pull mcr.microsoft.com/mssql/server` if haven't got it already)
-2. Choose a strong password and add that as the environment variable `SA_PASSWORD` when starting the container with the following command: `docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD={VeryStrongPasswordHere!}" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest`
+2. Choose a strong password and add that as the environment variable `SA_PASSWORD` when starting the container with the following command: `docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD={VeryStrongPasswordHere!}" -p 1433:1433 -d mcr.microsoft.com/mssql/server`
 3. Add the connection string as the environment variable
 
 ## Exercise 07-2

@@ -1,37 +1,45 @@
-<h2>Theme selector</h2>
-<div style="display: flex;">
-  <div style="margin-right: 10px;">
-    <h3>Primary</h3>
-    <div *ngIf="result | async as theme">
-      <div style="display: flex; align-items: center;">
-        <div class="color-box" [ngStyle]="{'background': theme.colors.primary}"></div>
-        <span>{{ theme.colors.primary }}</span>
-      </div>
-      <div style="display: flex; align-items: center;">
-        <div class="color-box" [ngStyle]="{'background': theme.colors.primaryLight}"></div>
-        <span>{{ theme.colors.primaryLight }}</span>
-      </div>
-      <div style="display: flex; align-items: center;">
-        <div class="color-box" [ngStyle]="{'background': theme.colors.primaryDark}"></div>
-        <span>{{ theme.colors.primaryDark }}</span>
-      </div>
-    </div>  
+<div *ngIf="result | async as theme" style="display: flex; flex-direction: column;">
+  <h2 [ngStyle]="{'font-size': theme.fonts.display.size + 'px', 'color': theme.fonts.display.color}">Theme selector</h2>
+  <div style="display: flex;">
+    <div style="margin-right: 10px;">
+      <h3>Primary</h3>
+      <div>
+        <div style="display: flex; align-items: center;">
+          <div class="color-box" [ngStyle]="{'background': theme.colors.primary}"></div>
+          <span>{{ theme.colors.primary }}</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="color-box" [ngStyle]="{'background': theme.colors.primaryLight}"></div>
+          <span>{{ theme.colors.primaryLight }}</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="color-box" [ngStyle]="{'background': theme.colors.primaryDark}"></div>
+          <span>{{ theme.colors.primaryDark }}</span>
+        </div>
+      </div>  
+    </div>
+    <div>
+      <h3>Secondary</h3>
+      <div>
+        <div style="display: flex; align-items: center;">
+          <div class="color-box" [ngStyle]="{'background': theme.colors.secondary}"></div>
+          <span>{{ theme.colors.secondary }}</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="color-box" [ngStyle]="{'background': theme.colors.secondaryLight}"></div>
+          <span>{{ theme.colors.secondaryLight }}</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="color-box" [ngStyle]="{'background': theme.colors.secondaryDark}"></div>
+          <span>{{ theme.colors.secondaryDark }}</span>
+        </div>
+      </div>  
+    </div>
   </div>
-  <div>
-    <h3>Secondary</h3>
-    <div *ngIf="result | async as theme">
-      <div style="display: flex; align-items: center;">
-        <div class="color-box" [ngStyle]="{'background': theme.colors.secondary}"></div>
-        <span>{{ theme.colors.secondary }}</span>
-      </div>
-      <div style="display: flex; align-items: center;">
-        <div class="color-box" [ngStyle]="{'background': theme.colors.secondaryLight}"></div>
-        <span>{{ theme.colors.secondaryLight }}</span>
-      </div>
-      <div style="display: flex; align-items: center;">
-        <div class="color-box" [ngStyle]="{'background': theme.colors.secondaryDark}"></div>
-        <span>{{ theme.colors.secondaryDark }}</span>
-      </div>
-    </div>  
+  <div style="margin-top: 10px;">
+    <h2 style="font-family: monospace">Data</h2>
+    <pre>
+{{ theme | json }}
+    </pre>
   </div>
 </div>

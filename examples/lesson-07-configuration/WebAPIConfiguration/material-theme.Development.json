@@ -9,12 +9,14 @@
   },
   "Fonts": {
     "Display": {
-      "Url": "",
-      "Size": 24
+      "Name": "Display",
+      "Size": 48,
+      "Color": "skyblue"
     },
     "Body": {
-      "Url": "",
-      "Size": 12
+      "Name": "Body",
+      "Size": 12,
+      "Color": "tomato"
     }
-  }  
+  }
 }

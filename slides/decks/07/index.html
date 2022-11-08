@@ -47,7 +47,7 @@
 						<ul>
 							<li>Tweak various settings at deploy time
 								<ul>
-									<li>No need for re-compilation or restarts</li>
+									<li>No need for <mark>re-compilation</mark> or <mark>restarts</mark></li>
 									<li>A <mark>setting</mark> is a value that changes the <mark>behavior</mark> of an application</li>
 								</ul>
 							</li>
@@ -91,14 +91,14 @@
 						<h2>Loading configurations</h2>
 						<ul>
 							<li>Applied in the following <mark>order</mark> (default configuration):
-								<ul>
+								<ol>
 									<li>Add host configuration</li>
 									<li><code>appsettings.json</code></li>
 									<li><code>appsettings.{ENVIRONMENT}.json</code></li>
 									<li>App secrets (when running in the <code>Development</code> environment)</li>
 									<li>Environment variables</li>
 									<li>Command-line arguments</li>
-								</ul>
+								</ol>
 							</li>
 						</ul>
 					</section>
@@ -418,18 +418,16 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li><mark>NEVER</mark> store passwords or other sensitive data in source code</li>
-							<li>Production secrets should not be used for <mark>development</mark></li>
-							<li>Secrets should not be <mark>deployed</mark> with the application
-								<ul>
-									<li>They should be accessed through the <mark>environment</mark></li>
-								</ul>
-							</li>
-							<li>Examples of sensitive data:
+							<li><mark>NEVER</mark> store passwords or other sensitive data in source code
 								<ul>
 									<li>Connection strings</li>
 									<li>API keys</li>
-									<li>Certificates</li>
+								</ul>
+							</li>
+							<li>Production secrets should not be used for development</li>
+							<li>Secrets should not be deployed with the application
+								<ul>
+									<li>They should be accessed through the <mark>environment</mark></li>
 								</ul>
 							</li>
 						</ul>
@@ -437,11 +435,11 @@
 					<section>
 						<h2>App secrets</h2>
 						<ul>
-							<li>The Secret Manager tools <mark>stores</mark> sensitive data during <mark>development</mark>
+							<li>The Secret Manager tools stores <mark>sensitive</mark> data during <mark>development</mark>
 								<ul>
 									<li>App secrets are stored in a <mark>separate</mark> location from the project tree</li>
-									<li>Not checked into source control</li>
-									<li>Does not encrypt the stored secrets and should not be treated as a trusted store</li>
+									<li><mark>NOT</mark> checked into source control</li>
+									<li>Does NOT <mark>encrypt</mark> the stored secrets and should NOT be treated as a trusted store</li>
 								</ul>
 							</li>
 							<li>Secrets are created as name-value pairs</li>
@@ -470,8 +468,8 @@
 							</li>
 							<li>Accessing User Secrets
 								<ul>
-									<li>Can be <mark>mapped</mark> to option classes as any other settings</li>
-									<li>Can be accessed as any other <mark>environment</mark> variable</li>
+									<li>Can be <mark>mapped</mark> to <code>Option</code> classes as any other settings</li>
+									<li>Can be accessed as any other environment variable</li>
 								</ul>
 							</li>
 						</ul>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Colors, ThemeService } from './theme.service';
+import { AppShell, ThemeService } from './theme.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { Colors, ThemeService } from './theme.service';
 export class AppComponent {
   title = 'configurable-frontend';
 
-  result: Observable<Colors>
+  result: Observable<AppShell>
 
   constructor(private themeService: ThemeService) {
     this.result = this.themeService.getTheme()
