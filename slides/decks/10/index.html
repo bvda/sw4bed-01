@@ -41,7 +41,7 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li><code>dotnet publish</code> builds a project for deployment
+						<li><code>dotnet publish</code> builds a project for <mark>deployment</mark>
 							<ul>
 								<li>Produces assembly files, dependencies and the .NET runtime (optional)</li>
 								<li>Output located in <code>bin/publish</code></li>
@@ -53,7 +53,7 @@
 				<section id="hosting-model">
 					<h2>ASP.NET Core hosting model</h2>
 					<ul>
-						<li>An ASP.NET Core app is running in a web server in a console applications
+						<li>An ASP.NET Core app is running in a <mark>web server</mark> in a <mark>console</mark> applications
 							<ul>
 								<li>Typically a Krestel instance</li>
 							</ul>
@@ -62,7 +62,7 @@
 							<ul>
 								<li>Receives requests and return responses</li>
 								<li>Passes any request to the application itself to generate a response</li>
-								<li>The request passes through the middleware pipeline</li>
+								<li>The request passes through the <mark>middleware</mark> pipeline</li>
 							</ul>
 						</li>
 					</ul>
@@ -81,9 +81,9 @@
 				<section id="reverse-proxy">
 					<h2>Reverse proxies</h2>
 					<ul>
-						<li>A reverse proxy is responsible for receiving requests and forwarding them to the appropiate destination
+						<li>A reverse proxy is responsible for <mark>receiving</mark> requests and <mark>forwarding</mark> them to the appropiate <mark>destination</mark>
 						</li>
-						<li>Exposed directly to the internet
+						<li>Exposed <mark>directly</mark> to the internet
 							<ul>
 								<li>Underlying services are exposed to the proxy</li>
 							</ul>
@@ -97,7 +97,7 @@
 						</li>
 						<li>Some downsides of using a reverse proxy
 							<ul>
-								<li>Increased complexity</li>
+								<li>Increased <mark>complexity</mark></li>
 							</ul>
 						</li>
 					</ul>
@@ -111,7 +111,7 @@
 				<section>
 					<h2>Deployments</h2>
 					<ul>
-						<li>Runtime/framework-dependent
+						<li><mark>Runtime/framework-dependent</mark>
 							<ul>
 								<li>Small deployments</li>
 								<li>Cross-platform</li>
@@ -120,7 +120,7 @@
 								<li>.NET may change</li>
 							</ul>
 						</li>
-						<li>Self-contained
+						<li><mark>Self-contained</mark>
 							<ul>
 								<li>Bundle .NET Framework and application together</li>
 								<li>Platform-dependent</li>
@@ -145,14 +145,14 @@
 						<li>Internet Information Services (IIS)
 							<ul>
 								<li>Application pools</li>
-								<li>In-process and out-of-process hosting</li>
+								<li><mark>In-process</mark> and <mark>out-of-process</mark> hosting</li>
 							</ul>
 						</li>
 						<li>Nginx
 							<ul>
 								<li>Add <code>ForwardedHeadersMiddleware</code>–remember to enable it by setting
 									<code>ASPNETCORE_FORWARDEDHEADERS_ENABLED</code> to <code>true</code></li>
-								<li>Use the correct syntax for environment variables</li>
+								<li>Use the correct <mark>syntax</mark> for environment variables</li>
 							</ul>
 						</li>
 						<li>Apache
@@ -181,13 +181,13 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>The browser must request each file and wait for a response
+						<li>The browser must request <mark>each</mark> file and <mark>wait</mark> for a response
 							<ul>
 								<li>This can take a lot of time!</li>
-								<li>Have a massive impact on the perceived speed of the application</li>
+								<li>Have a massive <mark>impact</mark> on the perceived <mark>speed</mark> of the application</li>
 							</ul>
 						</li>
-						<li>Bundling minimizes the number of requests
+						<li>Bundling <mark>minimizes</mark> the number of requests
 							<ul>
 								<li>Combines <mark>multiple</mark> files into a <mark>single</mark> file</li>
 							</ul>
@@ -209,7 +209,7 @@
 				</section>
 				<section>
 					<h2>Bundling and minification</h2>
-					<pre><code class="csharp" data-line-numbers="|4-11|13-24|26-30|33-51|54|" data-trim data-noescape><script type="text/template">
+					<pre><code class="js" data-line-numbers="|4-11|13-24|26-30|33-51|54|" data-trim data-noescape><script type="text/template">
 							// examples/lesson-10-deployment-logging-and-tests/bundling-and-minification/wwwroot/js/fibonacci.js
 							// https://medium.com/developers-writing/fibonacci-sequence-algorithm-in-javascript-b253dc7e320e
 
@@ -390,17 +390,17 @@
 				<section>
 					<h2>Logging abstractions</h2>
 					<ul>
-						<li>ASP.NET Core includes a generic logging interface
+						<li>ASP.NET Core includes a <mark>generic</mark> logging interface
 							<ul>
 								<li><code>ILogger</code>—Interface used in controllers and page models</li>
 								<li><code>ILoggerProvider</code>—Used to create custom instances of <code>ILogger</code></li>
 								<li><code>ILoggerFactory</code>—The glue that bind loggers and providers together</li>
 							</ul>
 						</li>
-						<li>ASP.NET Core provides a range of built-in loggers
+						<li>ASP.NET Core provides a range of <mark>built-in</mark> loggers
 							<ul>
-								<li>A range of third-party is offered</li>
-								<li>You can build your own customer loggers</li>
+								<li>A range of <mark>third-party</mark> is offered</li>
+								<li>You can build your own custom loggers</li>
 							</ul>
 						</li>
 					</ul>
@@ -418,14 +418,14 @@
 						<li>Log levels (verbosity)
 							<ul>
 								<li>Indicates the <mark>importance</mark> (seriousness) of the event</li>
-								<li>Used for filtering events during inspection</li>
+								<li>Used for <mark>filtering</mark> events during inspection</li>
 								<li>Defined by the <code>LogLevel</code> enum</li>
 							</ul>
 						</li>
 						<li>Categories (filtering)
 							<ul>
-								<li>Used for filtering event during inspection</li>
-								<li>Best practise is to use fully quailified class name
+								<li>Used for <mark>filtering</mark> event during inspection</li>
+								<li>Best practise is to use fully <mark>quailified</mark> class names
 									<ul>
 										<li>Inject <code>ILogger&lt;T&gt;</code> in methods should be enough most of the time</li>
 									</ul>
