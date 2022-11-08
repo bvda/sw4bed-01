@@ -48,7 +48,7 @@ public class ListServiceTest
   public void ItemRemovedAtIndex(int index, int[] before, int[] after) 
   { 
     var service = new ListService<int>();
-    service.Items.AddRange(before.Select(x => new ListItem<int> { Item = x}).ToList());
+    service.Items.AddRange(before.Select(x => new ListItem<int> { Item = x }).ToList());
     var output = service.RemoveItem(index);
     var expected = after.Select(x => new ListItem<int> { Item = x}).ToList();
 

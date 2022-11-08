@@ -8,6 +8,7 @@ public class ListService<T> {
 
   public List<ListItem<T>> AddItemToList(ListItem<T> item) {
     // Implement
+    Items.Add(item);
     return new List<ListItem<T>>(Items);
   }
 
@@ -18,6 +19,7 @@ public class ListService<T> {
 
   public List<ListItem<T>> RemoveItem(int index) {
     // Implement
-    return new List<ListItem<T>>(Items);
+    Items.RemoveAt(index);
+    return Items;
   }
 }
