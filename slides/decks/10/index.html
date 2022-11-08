@@ -425,7 +425,7 @@
 						<li>Categories (filtering)
 							<ul>
 								<li>Used for <mark>filtering</mark> event during inspection</li>
-								<li>Best practise is to use fully <mark>quailified</mark> class names
+								<li>Best practise is to use fully <mark>qualified</mark> class names
 									<ul>
 										<li>Inject <code>ILogger&lt;T&gt;</code> in methods should be enough most of the time</li>
 									</ul>
@@ -512,16 +512,16 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>Testing is generally considered good practice</li>
+						<li>Testing is <mark>generally</mark> considered good practice</li>
 						<li>Identify errors and verify changes to the code base</li>
 						<li>Different types of tests
 							<ul>
 								<li>Unit testing—test a component in <mark>isolation</mark></li>
 								<li>Integration testing—test a <mark>collection</mark> of components</li>
-								<li>User interface testing–interacts with <mark>browser</mark> (end-to-end)</li>
+								<li>User interface testing—interacts with <mark>browser</mark> (end-to-end)</li>
 							</ul>
 						</li>
-						<li>Can (should) be automated with Continuous Integration (CI)</li>
+						<li>Can (should) be <mark>automated</mark> with Continuous Integration (CI)</li>
 					</ul>
 				</section>
 				<section>
@@ -529,11 +529,11 @@
 					<ul>
 						<li>xUnit is am open-source unit testing tool for .NET
 							<ul>
-								<li>Written by the authors of NUnit</li>
+								<li>Written by the authors of <mark>NUnit</mark></li>
 								<li>Used as testing tool for ASP.NET Core</li>
 							</ul>
 						</li>
-						<li>Use In-memory database to test <code>DbContext</code></li>
+						<li>Use <mark>In-memory</mark> database to test <code>DbContext</code></li>
 						<li>Writing tests for xUnit
 							<ul>
 								<li>Tests are denoted by the <code>[Fact]</code> or <code>[Theory]</code>attribute</li>
@@ -605,7 +605,7 @@
 				<section>
 					<h2>Integration test for API controllers</h2>
 					<ul>
-						<li>Ensures application components function at level that includes infrastructure
+						<li>Ensures application components function at <mark>infrastructure</mark> level, which includes
 							<ul>
 								<li>Databases</li>
 								<li>File systems</li>
@@ -613,7 +613,7 @@
 								<li>Request-response pipelines</li>
 							</ul>
 						</li>
-						<li>Limit to the most important scenarios</li>
+						<li>Limit to the most <mark>important</mark> scenarios</li>
 						<li>Use the <code>Microsoft.AspNetCore.Mvc.Testing</code> NuGet package</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
