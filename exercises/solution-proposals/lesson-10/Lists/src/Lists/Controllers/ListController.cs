@@ -20,6 +20,7 @@ public class ListController : ControllerBase
     [HttpGet]
     public ActionResult<List<ListItem<string>>> Get()
     {
+        _logger.LogInformation("GetItems");
         return _service.GetItems();
     }
 

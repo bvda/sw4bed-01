@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  seq:
+    image: datalust/seq
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+  # -v /tmp/seq:/data
+    ports:
+      - 5020:80
+      - 5341:5341
+  

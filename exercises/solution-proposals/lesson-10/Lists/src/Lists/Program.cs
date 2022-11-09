@@ -1,6 +1,12 @@
 using Lists.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Setup logging
+builder.Host.UseSerilog((context, services, configuration) => {
+    configuration.ReadFrom.Configuration(context.Configuration).Enrich.FromLogContext().WriteTo.Console();
+});
 
 // Add services to the container.
 builder.Services.AddSingleton<ListService<string>>();
