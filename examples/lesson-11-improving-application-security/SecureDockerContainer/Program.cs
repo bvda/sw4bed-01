@@ -13,19 +13,19 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.Use(async  (context, next) => {
-    var protocol = context.Request.IsHttps;
-    if (protocol) {
-        await next(context);
-    } else { 
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsJsonAsync(new { 
-            message = "HTTP not supported. Use HTTPS.",
-            status_code = 400
-        });
-        return; 
-    }
-});
+// app.Use(async  (context, next) => {
+//     var protocol = context.Request.IsHttps;
+//     if (protocol) {
+//         await next(context);
+//     } else { 
+//         context.Response.StatusCode = 400;
+//         await context.Response.WriteAsJsonAsync(new { 
+//             message = "HTTP not supported. Use HTTPS.",
+//             status_code = 400
+//         });
+//         return; 
+//     }
+// });
 
 app.UseAuthorization();
 

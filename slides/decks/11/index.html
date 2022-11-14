@@ -28,11 +28,11 @@
 				<section id="agenda">
 					<h2>Agenda</h2>
 					<ul>
-						<li>Encrypting traffic using HTTPS</li>
-						<li>Defending against cross-site scripting attacks (XSS)</li>
-						<li>Protecting from cross-site request forgery attacks (CSRF)</li>
-						<li>Allowing calls from other origins using Cross-origin Resource Sharing (CORS)</li>
-						<li>Other attack vectors</li>
+						<li><mark>Encrypting</mark> traffic using HTTPS</li>
+						<li><mark>Defending</mark> against cross-site scripting attacks (XSS)</li>
+						<li><mark>Protecting</mark> from cross-site request forgery attacks (CSRF)</li>
+						<li>Allowing calls from other <mark>origins</mark> using Cross-origin Resource Sharing (CORS)</li>
+						<li>Other attack <mark>vectors</mark></li>
 					</ul>
 				</section>
 			</section>
@@ -51,7 +51,7 @@
 							<li>So we do not introduce <mark>vulnerabilities</mark> in our applications</li>
 						</ul>
 					</li>
-					<li>We will look at it from an ASP.NET Core point-of-view
+					<li>We will look at security from an ASP.NET Core point-of-view
 						<ul>
 							<li>But everything is <mark>applicable</mark> to other technology stacks</li>
 						</ul>
@@ -77,13 +77,13 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>HTTP requests are unencrypted by default
+						<li>HTTP requests are <mark>unencrypted</mark> by default
 							<ul>
 								<li>They are <mark>plaintext</mark> files sent over the network</li>
 							</ul>
 						</li>
 						<li>Transport Layer Security (TLS) is a cryptographic <mark>protocol</mark> used to encrypt communication</li>
-						<li>Two approaches
+						<li>Two <mark>approaches</mark>
 							<ul>
 								<li>Directly in the application</li>
 								<li>TLS-offloading with reverse proxy (Transport Layer Security)</li>
@@ -103,7 +103,7 @@
 							</ul>
 						</li>
 						<li>Data <mark>encrypted</mark> with the public key can only be <mark>decrypted</mark> with the private key</li>
-						<li>TLS handshake
+						<li>TLS <mark>handshake</mark>
 							<ul>
 								<li>Client/server key exchange and verification</li>
 								<li>Master secret</li>
@@ -121,11 +121,11 @@
 				<section>
 					<h2>Certificate authorities</h2>
 					<ul>
-						<li>CAs are special <mark>trusted</mark> entities, and browsers are hardcoded to trust certain root certificates</li>
-						<li>When using ASP.NET Core development certificates
+						<li>Certificate authorities (CAs) are special <mark>trusted</mark> entities, and browsers are hardcoded to trust certain <mark>root</mark> certificates</li>
+						<li>ASP.NET Core uses development certificates for development
 							<ul>
 								<li>Not trusted by default</li>
-								<li><mark>Explicitly</mark> trust development certificates</li>
+								<li>You must <mark>explicitly</mark> trust development certificates</li>
 								<li>Cannot be used in production environments (Let's Encrypt, Azure, AWS, Cloudflare, etc.)</li>
 							</ul>
 						</li>
@@ -145,11 +145,11 @@
 				<section>
 					<h2>Docker</h2>
 					<ul>
-						<li>You could just copy the certificate into container images, but it has some disadvantages:
+						<li>You could just <mark>copy</mark> the certificate into container images, but it has some <mark>disadvantages</mark>:
 							<ul>
 								<li>It makes difficult to use the same image for testing with developer certificates</li>
 								<li>It makes difficult to use the same image for hosting with production certificates</li>
-								<li>There is significant risk of certificate disclosure</li>
+								<li>There is significant risk of certificate <mark>disclosure</mark></li>
 							</ul>
 						</li>
 						<li>When instatiating a container, use the following configuration
@@ -209,18 +209,18 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>Allows browser applications to make requests from one domain to another
+						<li>Allows browser applications to make <mark>requests</mark> from one domain to another
 							<ul>
-								<li>This is prevented by the Same-origin policy by default</li>
+								<li>This is prevented by the <mark>Same-origin</mark> policy by default</li>
 							</ul>
 						</li>
-						<li>The need to make cross-origin requests has become common with client-side sigle-page applications (SPAs)</li>
+						<li>The need to make <mark>cross-origin</mark> requests has become common with client-side single-page applications (SPAs)</li>
 					</ul>
 				</section>
 				<section>
 					<h2>Same-origin policy</h2>
 					<ul>
-						<li>Two URLs have the same origin if they have identical schemes, hosts, and ports</li>
+						<li>Two URLs have the same origin if they have <mark>identical</mark> schemes, hosts, and ports</li>
 						<li>These two URLs have the same origin
 							<ul>
 								<li><code>https://example.com/foo.html</code></li>

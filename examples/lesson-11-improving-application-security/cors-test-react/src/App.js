@@ -8,13 +8,24 @@ function App() {
   
   const [fetchStatus, setFetchStatus] = useState(null)
   const [axiosStatus, setAxiosStatus] = useState(null)
+  const [fetchNoCorsStatus, setFetchNoCorsStatus] = useState(null)
+  const [axiosNoCorsStatus, setAxiosNoCorsStatus] = useState(null)
+
   
   useEffect(() => {
-    usingFetch(setFetchStatus)
+    usingFetch(`${URL}/cors`,setFetchStatus)
   }, [])
 
   useEffect(() => {
-    usingAxios(setAxiosStatus)
+    usingAxios(`${URL}/cors`, setAxiosStatus)
+  }, [])
+
+  useEffect(() => {
+    usingFetch(`${URL}/nocors`,setFetchNoCorsStatus)
+  }, [])
+
+  useEffect(() => {
+    usingAxios(`${URL}/nocors`, setAxiosNoCorsStatus)
   }, [])
 
   let isFetchingAxios = ''
@@ -31,27 +42,51 @@ function App() {
     isFetchingFetch = fetchStatus ? 'Success': 'Fail'
   }
 
+  let isFetchingNoCorsAxios = ''
+  if(axiosNoCorsStatus === null) {
+    isFetchingNoCorsAxios = 'Loading...'
+  } else {
+    isFetchingNoCorsAxios = axiosNoCorsStatus ? 'Success': 'Fail'
+  }
+
+  let isFetchingNoCorsFetch = ''
+  if(fetchNoCorsStatus === null) {
+    isFetchingNoCorsFetch = 'Loading...'
+  } else {
+    isFetchingNoCorsFetch = fetchNoCorsStatus ? 'Success': 'Fail'
+  }
+
   return (
     <div className="App">
       <div>
         <h1>CORS test app</h1>
         <ul>
-          <li>Fetch: {isFetchingFetch}</li>
-          <li>Axios: {isFetchingAxios}</li>
+          <li>CORS configured
+            <ul>
+              <li>Fetch: {isFetchingFetch}</li>
+              <li>Axios: {isFetchingAxios}</li>
+            </ul>
+          </li>
+          <li>CORS not configured
+            <ul>
+              <li>Fetch: {isFetchingNoCorsFetch}</li>
+              <li>Axios: {isFetchingNoCorsAxios}</li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
   );
 }
 
-function usingFetch(handleStatusChange) {
+function usingFetch(url, handleStatusChange) {
 
   const HTTP_METHOD = 'POST' 
   const CONTENT_TYPE = {
     'Content-Type': 'application/json'
   }
 
-  fetch(URL, {
+  fetch(url, {
     method: HTTP_METHOD,
       headers: CONTENT_TYPE,
     body: JSON.stringify(HTTP_BODY)
@@ -67,8 +102,8 @@ function usingFetch(handleStatusChange) {
   })
 }
 
-function usingAxios(handleStatusChange) {
-  axios.post(URL, HTTP_BODY)
+function usingAxios(url, handleStatusChange) {
+  axios.post(url, HTTP_BODY)
   .then(function (response) {
     handleStatusChange(true)
     console.log(response);

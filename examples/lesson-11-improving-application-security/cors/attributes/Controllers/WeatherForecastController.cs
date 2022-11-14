@@ -39,8 +39,14 @@ namespace attributes.Controllers
     }
 
     [EnableCors("MyLocalhostPolicy")]
-    [HttpPost]
-    public ActionResult<Data> Post(Data myString)
+    [HttpPost("cors")]
+    public ActionResult<Data> PostCors([FromBody]Data myString)
+    {
+      return Ok(myString);
+    }
+
+    [HttpPost("nocors")]
+    public ActionResult<Data> PostNoCors([FromBody]Data myString)
     {
       return Ok(myString);
     }
