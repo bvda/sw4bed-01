@@ -8,12 +8,13 @@ namespace MTGCollection.Pages.Decks;
 public class IndexModel : PageModel
 {
     [BindProperty]
-    public InputModel? Input { get; set; }
+    public InputModel Input { get; set; }
     private readonly DeckService _service;
 
     public IList<Deck> Decks { get; set; } = new List<Deck>();
     public IndexModel(DeckService service) {
         _service = service;
+        Input = new InputModel();
     }
     public async Task<IActionResult> OnGet(string? id)
     {

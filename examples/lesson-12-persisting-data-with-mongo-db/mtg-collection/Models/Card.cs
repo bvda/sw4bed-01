@@ -20,7 +20,7 @@ public class Card {
   [JsonPropertyName("set_name")] 
   public string Set { get; set; } = "";
   [JsonPropertyName("set")]  
-  public string SetCode { get; set; }
+  public string? SetCode { get; set; }
   public string Rarity { get; set; } = "";
   public string Artist { get; set; } = "";
   [JsonPropertyName("image_uris")]
