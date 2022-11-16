@@ -221,13 +221,13 @@
 					<h2>Same-origin policy</h2>
 					<ul>
 						<li>Two URLs have the same origin if they have <mark>identical</mark> schemes, hosts, and ports</li>
-						<li>These two URLs have the same origin
+						<li>These two URLs have the <mark>same</mark> origin
 							<ul>
 								<li><code>https://example.com/foo.html</code></li>
 								<li><code>https://example.com/bar.html</code></li>
 							</ul>
 						</li>
-						<li>These URLs have different origins than the previous two URLs
+					<li>These URLs have <mark>different</mark> origins than the previous two URLs
 							<ul>
 								<li><code>https://example.net</code>—Different domain</li>
 								<li><code>https://www.example.com/foo.html</code>—Different subdomain</li>
@@ -248,13 +248,14 @@
 				<section>
 					<h2>Cross-origin resource sharing</h2>
 					<ul>
-						<li>Is a W3C standard that allows a server to <mark>relax</mark> the same-origin policy</li>
+						<li>World Wide Web Consortium (W3C) standard that allows a server to <mark>relax</mark> the same-origin policy</li>
 						<li>Is not a security feature, CORS relaxes security.
 							<ul>
 								<li>APIs is not safer by allowing cross-origin requests</li>
+								<li>APIs is not vulnerable by allowing cross-origin requests</li>
 							</ul>
 					</li>
-						<li>Allows a server to <mark>explicitly</mark> allow some cross-origin requests, while rejecting others</li>
+						<li>Allows a server to <mark>explicitly</mark> allow some (or all) cross-origin requests, while rejecting others</li>
 					</ul>
 				</section>
 				<section>
@@ -266,18 +267,18 @@
 					<ul>
 						<li>There are three different ways to enable CORS in a .NET application:
 							<ul>
-								<li>Middleware
+								<li><mark>Middleware</mark>
 									<ul>
 										<li>Apply default and named policies to all endpoints</li>
 									</ul>
 								</li>
-								<li>Endpoint routing
+								<li><mark>Endpoint routing</mark>
 									<ul>
 										<li>Apply policies on a per-endpoint basis</li>
 										<li>Does not support automatic pre-flight requests</li>
 									</ul>
 								</li>
-								<li>Attributes
+								<li><mark>Attributes</mark>
 									<ul>
 										<li>Apply named policies for selected endpoints</li>
 										<li>Different policies can be applied to controllers, page models, or action methods</li>
@@ -366,11 +367,31 @@
 					<small>examples/lesson-11-improving-application-security/cors/attributes/Startup.cs</small>
 				</section>
 				<section>
+					<h2>Controller</h2>
+					<pre><code class="cs" data-line-numbers="|6-7|" data-trim data-noescape><script type="text/template">
+					[ApiController]
+					[Route("[controller]")]
+					public class WeatherForecastController : ControllerBase
+					{
+						...						
+						[EnableCors("MyLocalhostPolicy")]
+						[HttpPost("cors")]
+						public ActionResult<Data> PostCors([FromBody]Data myString)
+						{
+							return Ok(myString);
+						}
+						...
+					}
+				}
+			</script></code></pre>
+					<small>examples/lesson-11-improving-application-security/cors/attributes/Controllers/WeatherForecastController.cs</small>
+				</section>
+				<section>
 					<h2>Wrap-up</h2>
 					<ul>
-						<li><mark>Remember</mark>It's the API that needs to add cors
+						<li>The API (server) need to configure CORS policies
 							<ul>
-								<li>Not the app making the request</li>
+								<li>Not the application (client) making the request</li>
 							</ul>
 						</li>
 						<li>Be very careful when defining policies
@@ -378,7 +399,7 @@
 								<li>Only allow what is needed and nothing more</li>
 							</ul>
 						</li>
-						<li>The order of the CORS middleware is important
+						<li>The order in which the CORS middleware is added to the pipeline is important
 							<ul>
 								<li>It should be after <code>UseRouting()</code> and before <code>UseEndpoints()</code></li>
 							</ul>
@@ -393,15 +414,15 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>A security vulnerability that enables bad actors to place client-side scripts into web pages</li>
+						<li>A security vulnerability that enables bad actors to place <mark>client-side</mark> scripts into web pages</li>
 						<li>When the page loads, the script could
 							<ul>
-								<li>Steal cookies and session tokens</li>
-								<li>Manipulate the DOM</li>
-								<li>Redirect to a malicious site</li>
+								<li>Steal <mark>cookies</mark> and session <mark>tokens</mark></li>
+								<li><mark>Manipulate</mark> the DOM</li>
+								<li><mark>Redirect</mark> to a malicious site</li>
 							</ul>
 						</li>
-						<li>Generally occurs when an application takes user input and outputs it to a page without validation</li>
+						<li>Generally occurs when an application takes user input and outputs it to a page <mark>without</mark> validation</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -452,12 +473,12 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>CSRF involves a malicious website making authenticated requests to an API on behalf of user
+						<li>CSRF involves a malicious website making <mark>authenticated</mark> requests to an API on behalf of user
 							<ul>
 								<li>Browsers sends cookies automatically on <code>GET</code> and <code>POST</code> requests</li>
 							</ul>
 						</li>
-						<li>Can be a problem for websites or APIs that use cookies for authentication</li>
+						<li>Can be a problem for websites or APIs that use <mark>cookies</mark> for authentication</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
@@ -469,17 +490,17 @@
 				<section>
 					<h2>Protecting against CSRF</h2>
 					<ul>
-						<li>Anti-forgery tokens are added to forms</li>
+						<li><mark>Anti-forgery</mark> tokens are added to forms</li>
 						<li>Tokens are stored in a cookie
 							<ul>
 								<li>Generated at runtime</li>
 								<li>Based on session information</li>
 							</ul>
-						</li>Should be used for <code>POST</code>, <code>DELETE</code> and other request types that mutate state</li>
+						</li>Should be used for <code>POST</code>, <code>DELETE</code> and other request types that <mark>mutate</mark> state</li>
 						<li>ASP.NET Core automatically adds anti-forgery to forms
 							<ul>
-								<li>Razor pages automatically validates them</li>
-								<li>MVC controller does NOT (should be decorated with the <code>[ValidateAntiForgeryToken]</code> attribute)</li>
+								<li>Razor pages <mark>automatically</mark> validates them</li>
+								<li>MVC controllers does <mark>NOT</mark> (should be decorated with the <code>[ValidateAntiForgeryToken]</code> attribute)</li>
 							</ul>
 						</li>
 					</ul>
@@ -523,14 +544,14 @@
 				<section>
 					<h2>Open redirect attacks</h2>
 					<ul>
-						<li>The user clicks a link in a safe application and gets redirected to a malicious site
+						<li>The user clicks a link in a safe application and get <mark>redirected</mark> to a malicious site
 							<ul>
 								<li>The <code>returnUrl</code> is typically parsed as a query string in the request</li>
 							</ul>
 						</li>
 						<li>Mitigation 
 							<ul>
-								<li>Validate the redirect URL (<code>returnUrl</code>) before the redirection</li>
+								<li><mark>Validate</mark> the redirect URL (<code>returnUrl</code>) before the redirection</li>
 							</ul>
 						</li>
 						<li>ASP.NET Core has built-in helper methods
@@ -553,18 +574,18 @@
 				<section>
 					<h2>SQL injection</h2>
 					<ul>
-						<li>Bad actors crafts malicious input that is processed to a vulnerable application
+						<li>Bad actors <mark>crafts</mark> malicious input that is processed to a vulnerable application
 							<ul>
 								<li>Submitted through a form</li>
 								<li>Passed in the URL as a query string</li>
 							</ul>
 						</li>
-						<li>Exposes data stored in the database</li>
+						<li><mark>Exposes</mark> data stored in the database</li>
 						<li>Mitigation
 							<ul>
 								<li>Use a Entity Framework Core (or any other ORM)</li>
-								<li>Use parameterized queries</li>
-								<li>Do not concatenate user input into crafted queries</li>
+								<li>Use <mark>parameterized</mark> queries</li>
+								<li>Do not <mark>concatenate</mark> user input into crafted queries</li>
 							</ul>
 						</li>
 						<li>Be very careful if using <code>FromSqlRaw()</code></li>
@@ -590,7 +611,7 @@
 								<li>Use resource-based authorization</li>
 							</ul>
 						</li>
-						<li>Can be sidestepped with pseudo-random generated IDs (but why not do it right from the start?)</li>
+						<li>Can be sidestepped with <mark>pseudo-random</mark> generated IDs (but why not do it right from the start?)</li>
 					</ul>
 					<aside class="notes" aria-label="notes">
 						<h4>References</h4>
