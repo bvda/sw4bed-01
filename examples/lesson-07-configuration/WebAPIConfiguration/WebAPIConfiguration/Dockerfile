@@ -4,16 +4,16 @@ WORKDIR /source
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY api/*.csproj ./api/
+COPY WebAPIConfiguration/*.csproj ./WebAPIConfiguration/
 RUN dotnet restore
 
 # copy everything else and build app
-COPY api/. ./api/
-WORKDIR /source/api
+COPY WebAPIConfiguration/. ./WebAPIConfiguration/
+WORKDIR /source/WebAPIConfiguration
 RUN dotnet publish -c release -o /app
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "api.dll"]
+ENTRYPOINT ["dotnet", "WebAPIConfiguration.dll"]
