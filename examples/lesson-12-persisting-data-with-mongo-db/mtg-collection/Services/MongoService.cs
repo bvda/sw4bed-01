@@ -8,7 +8,7 @@ public class MongoService {
   
   private readonly MongoClient _client;
   public MongoService() {
-    _client = new MongoClient("mongodb://root:example@localhost:27018");
+    _client = new MongoClient("mongodb://root:example@mongo:27017");
     var db = _client.GetDatabase("mtg");
     if(_client.GetDatabase("mtg").ListCollections().ToList().Count == 0) {
         var collection = db.GetCollection<Card>("cards");

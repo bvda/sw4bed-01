@@ -4,16 +4,16 @@ WORKDIR /source
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY WebAPIConfiguration/*.csproj ./WebAPIConfiguration/
+COPY mtg-collection/*.csproj ./mtg-collection/
 RUN dotnet restore
 
 # copy everything else and build app
-COPY WebAPIConfiguration/. ./WebAPIConfiguration/
-WORKDIR /source/WebAPIConfiguration
+COPY mtg-collection/. ./mtg-collection/
+WORKDIR /source/mtg-collection
 RUN dotnet publish -c release -o /app
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "WebAPIConfiguration.dll"]
+ENTRYPOINT ["dotnet", "mtg-collection.dll"]
