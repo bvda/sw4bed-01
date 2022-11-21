@@ -1,5 +1,6 @@
 # Lesson 12 exercises
 ## Extending MTG Collection Central
+One of the most (in)famous crypto currency exchanges Mt. Gox[^7] started out as a trading platform for Magic: The Gathering Online cards before pivoting into crypto. Check out the story[^8] while coding this exercise 
 
 ## Exercise 12-1
 ### Get up and running
@@ -38,3 +39,5 @@ If you are having too good of a day, check out the set(s) Apocalyse and/or Innis
 [^4]: https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/crud/reading/
 [^5]: https://hub.docker.com/_/mongo
 [^6]: https://hub.docker.com/_/mongo-express
+[^7]: https://en.wikipedia.org/wiki/Mt._Gox
+[^8]: https://darknetdiaries.com/episode/9/
