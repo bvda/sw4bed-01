@@ -42,6 +42,7 @@ _Hint: You will have to create response classes for some of the endpoints to ful
 ```csharp
 public class Card {
 	public int Id { get; set; }
+	public String Name { get; set; }
 	public int ClassId { get; set; }
 	public int TypeId { get; set; }
 	public int SetId { get; set; }
