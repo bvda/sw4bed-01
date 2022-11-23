@@ -52,7 +52,7 @@
 								<ul>
 									<li>More specifically: A <mark>document</mark> database</li>
 								</ul>
-									<li><mark>Document</mark> Store data
+									<li><mark>Documents</mark> store data
 										<ul>
 											<li>Set of <mark>key-value</mark> pairs</li>
 											<li>Documents are stored in <mark>collections</mark></li>
@@ -74,8 +74,8 @@
 					<section>
 						<h2>MongoDB Driver</h2>
 						<ul>
-							<li>MongoDB provides an official C# driver</li>
-							<li>Get the lastest version from NuGet
+							<li>MongoDB provides an <mark>official</mark> C# driver</li>
+							<li>Get the lastest and greatest version from NuGet
 								<ul>
 									<li>.NET CLI <code>dotnet add package MongoDB.Driver</code></li>
 									<li>Package Manager <code>Install-Package MongoDB.Driver</code></li>
@@ -114,7 +114,7 @@
 							using MongoDB.Driver;
 
 							var client = new MongoClient(
-								"mongodb://<username>:<password>@<host>:27017/test"
+								"mongodb://<username>:<password>@<host>:<port>/<db>"
 							);
 							var database = client.GetDatabase("test");
 						</script></code></pre>
@@ -125,8 +125,12 @@
 						<ul>
 							<li>Using <code>BsonDocument</code> provides a <mark>fluid</mark> and <mark>dynamic</mark> schema
 								<ul>
-									<li>Usually there is an application scheme</li>
-									<li>Application schemes are often implemented using POCOs</li>
+									<li>Usually there is an application <mark>scheme</mark></li>
+									<li>Application schemes are often implemented using POCOs
+										<ul>
+											<li>Plain Old CLR Objects</li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 							<li>The .NET BSON library supports <mark>mapping</mark> to and from BSON/JSON 
@@ -151,7 +155,7 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>Add new documents to a collection
+							<li>Add <mark>new</mark> documents to a collection
 								<ul>
 									<li>If the collection does not exist, it will be created</li>
 								</ul>
@@ -220,7 +224,7 @@
 								private readonly MongoClient _client;
 
 								public MongoService() {
-									_client = new MongoClient("mongodb://root:example@localhost:27018");
+									_client = new MongoClient("mongodb://root:example@localhost:27017");
 
 									var db = _client.GetDatabase("mtg");
 
@@ -365,6 +369,7 @@
 							<li>The .NET Driver contains an implementation of LINQ
 								<ul>
 									<li>Targets the aggregation framework</li>
+									<li></li>
 								</ul>
 							</li>
 							<li>The driver provides an <code>AsQueryable</code> extension method on <code>IMongoCollection</code></li>
@@ -382,6 +387,7 @@
 							<ul>
 								<li><a href="https://mongodb.github.io/mongo-csharp-driver/2.15/reference/driver/crud/linq/">LINQ</a></li>
 								<li><a href="https://www.mongodb.com/docs/manual/aggregation/">Aggregation Operations — MongoDB Manual</a></li>
+								<li><a href="https://www.mongodb.com/developer/products/mongodb/introduction-aggregation-framework/">Introduction to the MongoDB Aggregation Framework | MongoDB</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -401,7 +407,7 @@
 									<li><code>FindOneAndUpdate</code></li>
 								</ul>
 							</li>
-							<li>Returns either the original version or the new version
+							<li>Returns either the <mark>original</mark> version or the <mark>new</mark> version
 								<ul>
 									<li>The original version is return as default</li>
 									<li>Define <code>ReturnDocument</code> and other options in an options object
@@ -425,12 +431,12 @@
 					<section>
 						<h2>Update</h2>
 						<ul>
-							<li>To update at most one document
+							<li>To update at most <mark>one</mark> document
 								<ul>
 									<li>May be zero if none match the filter</li>
 								</ul>
 							</li>
-							<li>Here we update the first document that meets the filter <code>x == 10</code> and set the value of <code>i</code> to <code>110</code></li>
+							<li>Here we update the <mark>first</mark> document that meets the filter <code>x == 10</code> and set the value of <code>i</code> to <code>110</code></li>
 						</ul>
 						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
 							var filter = Builders<BsonDocument>.Filter.Eq("i", 10);
@@ -444,7 +450,7 @@
 					<section>
 						<h2>Update operators</h2>
 						<ul>
-							<li>There are numerous update operators Available
+							<li>There are numerous update <mark>operators</mark> available
 								<ul>
 									<li><code>$currentDate</code> Sets the value of field to current date</li>
 									<li><code>$inc</code> Increments the value of a field by specified amount</li>
@@ -469,12 +475,12 @@
 					<section>
 						<h2>Delete</h2>
 						<ul>
-							<li>To delete at most one document
+							<li><code>DeleteOne</code> delete at most <mark>one</mark> document
 								<ul>
 									<li>May be zero if none match the filter</li>
 								</ul>
 							</li>
-							<li>Here we delete all document that meets the filter <code>i</code> greater than or equal to <code>100</code></li>
+							<li>Here we delete all document that meets the filter <code>i</code> greater than or equal to <code>100</code> with <code>DeleteManyAsync</code></li>
 						</ul>
 						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
 							var filter = Builders<BsonDocument>.Filter.Gte("i", 100);
@@ -504,12 +510,12 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>GridFS is used for storing binary information
+							<li>GridFS is used for storing <mark>binary</mark> information
 								<ul>
 									<li>Maximum document size is 16 MB</li>
 								</ul>
 							</li>
-							<li>Files are broken into chunks
+							<li>Files are broken into <mark>chunks</mark>
 								<ul>
 									<li>Each chuck is individually uploaded</li>
 									<li>Files are reassembled from chunks when downloaded</li>
@@ -517,8 +523,8 @@
 							</li>
 							<li>Files a stored in two collections
 								<ul>
-									<li><code>fs.files</code> Each file has entry that contains metadata</li>
-									<li><code>fs.chunks</code> Each file has as many chunks as needed to store the file</li>
+									<li><code>fs.files</code> Each file has entry that contains <mark>metadata</mark></li>
+									<li><code>fs.chunks</code> Each file has as many <mark>chunks</mark> as needed to store the file</li>
 								</ul>
 							</li>
 						</ul>
@@ -535,7 +541,7 @@
 						<ul>
 							<li>A <code>GridFSBucket</code> object is the root object
 								<ul>
-									<li>You should always interact with GridFS through such an object</li>
+									<li>You should <mark>always</mark> interact with GridFS through such an object</li>
 								</ul>
 							</li>
 						</ul>
