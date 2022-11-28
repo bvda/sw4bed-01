@@ -101,7 +101,7 @@
 					<section>
 						<h2>Running on a timer</h2>
 						<ul>
-							<li>Register background services in <code>ConfigureServices</code>
+							<li><mark>Register</mark> background services in <code>ConfigureServices</code>
 								<ul>
 									<li>Just as with any other service</li>
 									<li>Use <code>AddHostedService()</code></li>
@@ -115,7 +115,7 @@
 							</li>
 							<li><code>BackgroundService</code> implements <code>IHostedService</code>
 								<ul>
-									<li>Abstracts away some pitfalls</li>
+									<li>Abstracts away some of the pitfalls</li>
 									<li>Makes it easier to run <code>async</code>/<code>await</code> and enforces <mark>best-pratices</mark> patterns</li>
 								</ul>
 							</li>
@@ -197,7 +197,7 @@
 							<li>The ASP.NET framework creates a new container <mark>scope</mark> every time a new request is received</li>
 							<li><code>IHostedService</code> services are created exactly <mark>once</mark> when the application starts
 								<ul>
-									<li>This can be a challenge, if we want to use a scoped service</li>
+									<li>This can be a <mark>challenge</mark>, if we want to use a scoped service</li>
 									<li>Any dependencies added to a service must have a <mark>lifetime</mark> that is <mark>equal</mark> or <mark>longer</mark> than that of service itself</li>
 								</ul>
 							<li>Create container scopes with <code>IServiceCollection.CreateScope()</code></li>
@@ -279,7 +279,7 @@
 					<section>
 						<h2>Problems</h2>
 						<ul>
-							<li>Typed clients are designed to be short-lived
+							<li>Typed clients are designed to be <mark>short-lived</mark>
 								<ul>
 									<li>To take advantage of <code>HttpClient</code> handler rotation</li>
 								</ul>
@@ -457,7 +457,7 @@
 					<section>
 						<h2>Overview</h2>
 						<ul>
-							<li>When more control over when specific tasks are scheduled</li>
+							<li>More control over when specific tasks are scheduled</li>
 							<li>Quartz.NET main concepts
 								<ul>
 									<li><mark>Jobs</mark> Background tasks that implements the logic</li>

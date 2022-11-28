@@ -13,7 +13,7 @@ services:
     volumes:
       - .:/https:ro
     ports:
-      - 5011:443
+      - 5000:443
       - 5010:80
   mongo:
     image: mongo
