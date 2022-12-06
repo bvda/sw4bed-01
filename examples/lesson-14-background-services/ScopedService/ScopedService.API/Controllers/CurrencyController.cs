@@ -32,7 +32,9 @@ public class CurrencyController : ControllerBase
     [HttpGet("single", Name = "GetSingle")]
     public ActionResult<Currency> GetSingle()
     {
-      return Currencies[new Random().Next(Currencies.Length)];
+      var result = Currencies[new Random().Next(Currencies.Length)];
+      _logger.LogInformation("GetSingle", result);
+      return result;
     }
 
     [HttpGet("", Name = "GetAll")]

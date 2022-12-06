@@ -20,7 +20,7 @@ public class CorrectWorker : BackgroundService
       var api = _factory.GetCurrencyService();
       var result = await api.GetRandomCurrency();
       _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-      await Task.Delay(1000, stoppingToken);
+      await Task.Delay(3500, stoppingToken);
     }
   }
 }
