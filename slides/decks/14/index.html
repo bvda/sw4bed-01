@@ -53,6 +53,16 @@
 									<li><code>BackgroundService</code></li>
 								</ul>
 							</li>
+							<li>
+								<ul>
+									<li>You have already made multiple background services
+										<ul>
+											<li>Krestel runs as an <code>IHostedService</code></li>
+											<li>ASP.NET apps is hosted in a Krestel service</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -197,7 +207,7 @@
 							<li>The ASP.NET framework creates a new container <mark>scope</mark> every time a new request is received</li>
 							<li><code>IHostedService</code> services are created exactly <mark>once</mark> when the application starts
 								<ul>
-									<li>This can be a <mark>challenge</mark>, if we want to use a scoped service</li>
+									<li>This can be a <mark>challenge</mark>, if we want to use a scoped service in a background task</li>
 									<li>Any dependencies added to a service must have a <mark>lifetime</mark> that is <mark>equal</mark> or <mark>longer</mark> than that of service itself</li>
 								</ul>
 							<li>Create container scopes with <code>IServiceCollection.CreateScope()</code></li>
