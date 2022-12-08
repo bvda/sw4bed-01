@@ -7,6 +7,10 @@ using Quartz.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("QuartzDB");
+Console.WriteLine(connectionString);
+if(connectionString is null) {
+    return;
+}
 // Add services to the container.
 builder.Services.AddDbContext<RandomNumberDbContext>(
     opts => opts
