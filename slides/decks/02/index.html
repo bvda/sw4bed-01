@@ -155,7 +155,7 @@
 						<h2>Dockerfiles</h2>
 						<pre><code class="dockerfile" data-line-numbers="|2|3|6|7|8|11|12|13|2,16|16|17|18|19|" data-trim data-noescape><script type="text/template">
 							# https://hub.docker.com/_/microsoft-dotnet
-							FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+							FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 							WORKDIR /source
 							
 							# copy csproj and restore as distinct layers
@@ -169,7 +169,7 @@
 							RUN dotnet publish -c release -o /app
 							
 							# final stage/image
-							FROM mcr.microsoft.com/dotnet/aspnet:6.0
+							FROM mcr.microsoft.com/dotnet/aspnet:7.0
 							WORKDIR /app
 							COPY --from=build /app ./
 							ENTRYPOINT ["dotnet", "api.dll"]
@@ -302,12 +302,12 @@
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
 							<ul>
-								<li><a href="https://docs.docker.com/engine/reference/commandline/port/"></a></li>
-								<li><a href="https://docs.docker.com/engine/reference/commandline/container_prune/"></a></li>
-								<li><a href="https://docs.docker.com/engine/reference/commandline/ps/"></a></li>
-								<li><a href="https://docs.docker.com/engine/reference/commandline/rmi/"></a></li>
-								<li><a href="https://docs.docker.com/engine/reference/commandline/rm/"></a></li>
-								<li><a href="https://docs.docker.com/engine/reference/commandline/images/"></a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/port/">docker port | Docker Documentation</a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/container_prune/">docker container prune | Docker Documentation</a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/ps/">docker ps | Docker Documentation</a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/rmi/">docker rmi | Docker Documentation</a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/rm/">docker | Docker Documentation</a></li>
+								<li><a href="https://docs.docker.com/engine/reference/commandline/images/">docker images | Docker Documentation</a></li>
 							</ul>
 						</aside>
 					</section>
