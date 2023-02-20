@@ -4,6 +4,7 @@ namespace BlockchainExplorer.Validation
 {
   public class BitcoinGenesisRangeAttribute : ValidationAttribute 
   {
+    public const int BitCoinGenesis = 1231006505;
     public BitcoinGenesisRangeAttribute()
     { 
     } 
@@ -14,7 +15,7 @@ namespace BlockchainExplorer.Validation
       if(value is not null) {
         dt = (int)value;
       }
-      return dt >= 1231006505 && dt <= DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+      return dt >= BitCoinGenesis && dt <= DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     }
   }
 }

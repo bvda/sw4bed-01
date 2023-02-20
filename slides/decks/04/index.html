@@ -74,7 +74,7 @@
 									<li><code>EndpointMiddleware</code> <mark>executes</mark> the endpoint</li>
 								</ul>
 							</li>
-							<li>The advantages of having two separate pieces of middleware:
+							<li>The <mark>advantages</mark> of having two separate pieces of middleware:
 								<ul>
 									<li>All middleware between <code>RoutingMiddleware</code> and <code>EndpointMiddleware</code> can see what is going to be executed</li>
 								</ul>
@@ -106,13 +106,17 @@
 						<h2>Attribute routing</h2>
 						<ul>
 							<li>Tie a given URL to a <mark>specific</mark> endpoint</li>
-							<li>More verbose–requires attributes for <mark>every</mark> action in the application</li>
+							<li>More verbose
+								<ul>
+									<li>Requires attributes for <mark>every</mark> action in the application</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 					<section>
 						<h2>Razor page routing</h2>
 						<ul>
-							<li>Uses Convention-based generation of attribute routes</li>
+							<li>Uses Convention-based <mark>generation</mark> of attribute routes</li>
 							<li>The best of both worlds:
 								<ul>
 									<li><mark>Predictability</mark> and terseness from convention-based routing</li>
@@ -142,7 +146,7 @@
 									<li>Path of page <mark>relative</mark> to the Razor Pages root directory (<code>/Pages</code>)</li>
 								</ul>
 							</li>
-							<li>Routing is not case sensitive</li>
+							<li>Routing is <mark>NOT</mark> case sensitive</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -528,8 +532,8 @@
 						<ul>
 							<li>Improve overall data quality
 								<ul>
-									<li>Accuracy—are users providing a usable value?</li>
-									<li>Completeness—are they providing all values needed?</li>
+									<li><mark>Accuracy</mark>—are users providing a usable value?</li>
+									<li><mark>Completeness</mark>—are they providing all values needed?</li>
 								</ul>
 							</li>
 							<li>Display useful messages to users
@@ -558,7 +562,7 @@
 									<li>They provide <mark>metadata</mark> for the model</li>
 								</ul>
 							</li>
-							<li>Set on properties as annotations
+							<li>Set on properties as <mark>annotations</mark>
 								<ul>
 									<li><code>[EmailAddress]</code>—validates that a property has a valid email address format</li>
 									<li><code>[Range(min, max)]</code>–validates that a property has a value between <code>min</code> and <code>max</code> </li>
@@ -659,7 +663,7 @@
 					<section>
 						<h2>Custom validation</h2>
 						<ul>
-							<li>Sometimes the built-in validators are not enough</li>
+							<li>Sometimes the <mark>built-in</mark> validators are not enough</li>
 							<li>Two options:
 								<ul>
 									<li>Create custom attributes</li>
@@ -682,21 +686,25 @@
 					</section>
 					<section>
 						<h2>Custom validation</h2>
-						<pre><code class="cs" data-line-numbers="|5|11-15|13|14|" data-trim data-noescape><script type="text/template">
+						<pre><code class="cs" data-line-numbers="|5|12-13,19|15-17|18|" data-trim data-noescape><script type="text/template">
 							using System.ComponentModel.DataAnnotations;
 
 							namespace BlockchainExplorer.Validation 
 							{
 								public class BitcoinGenesisRangeAttribute : ValidationAttribute 
 								{
+									public const int BitCoinGenesis = 1231006505;
 									public BitcoinGenesisRangeAttribute()
 									{ 
 									} 
-						
-									public override bool IsValid(object value) 
+							
+									public override bool IsValid(object? value = null) 
 									{
-										var dt = (int)value;
-										return dt >= 1231006505 && dt <= DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+										var dt = 0;
+										if(value is not null) {
+											dt = (int)value;
+										}
+										return dt >= BitCoinGenesis && dt <= DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 									}
 								}
 							}
