@@ -10,8 +10,8 @@
   "Fonts": {
     "Display": {
       "Name": "Display",
-      "Size": 48,
-      "Color": "skyblue"
+      "Size": 128,
+      "Color": "tomato"
     },
     "Body": {
       "Name": "Body",

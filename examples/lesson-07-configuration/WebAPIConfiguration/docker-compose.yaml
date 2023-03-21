@@ -1,16 +1,6 @@
 version: '3.9'
 
 services:
-  api:
-    build:
-      context: .
-    depends_on:
-      - db
-    ports:
-      - 5000:80
-      - 5001:443
-    environment:
-      ConnectionStrings__NetLogs: "Server=db,1433;Database=master;User=sa;Password=suchSecureVeryWordSoPassW0w!;"
   db:
     image: mcr.microsoft.com/mssql/server
     user: root
