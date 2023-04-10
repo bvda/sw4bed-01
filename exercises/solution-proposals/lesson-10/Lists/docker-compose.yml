@@ -1,5 +1,11 @@
 version: '3.9'
 services:
+  api:
+    build:
+      context: src/Lists
+      dockerfile: Dockerfile
+    ports:
+      - 5100:5237
   seq:
     image: datalust/seq
     restart: unless-stopped
