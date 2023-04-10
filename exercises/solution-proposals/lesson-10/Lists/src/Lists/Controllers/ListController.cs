@@ -18,9 +18,18 @@ public class ListController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<ListItem<string>>> Get()
+    public ActionResult<List<ListItem<string>>> Get(String index = "")
     {
         _logger.LogInformation("GetItems");
+        int value;
+        var parsed = int.TryParse(index, out value);
+        if(parsed) {
+            if(value >= _service.GetItems().Count) {
+                return BadRequest();
+            } else {
+                return Ok(_service.GetItems().ElementAt(value));
+            }
+        }
         return _service.GetItems();
     }
 
