@@ -4,7 +4,7 @@ For this exercise, you have been provided with some application code and test co
 
 ## Exercise 10-01 
 ### Write a controller from the provided unit tests
-A developer has written some unit test for `ListService` (located @ `exercises/lesson-10/Lists/src/Lists/Services/ListService.cs`).
+A developer has written some unit test for `ListService` (service located @ `exercises/lesson-10/Lists/src/Lists/Services/ListService.cs`, controller located @ `exercises/lesson-10/Lists/src/Lists/Controllers/ListController.cs`).
 
 1. Try to run `dotnet test` in `exercises/lesson-10/Lists/test/ListTests`
 2. Add the business logic in `exercises/lesson-10/Lists/src/Lists/Services/ListService.cs` to make the tests green!
