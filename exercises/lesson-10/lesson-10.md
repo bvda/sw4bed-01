@@ -8,6 +8,7 @@ A developer has written some unit test for `ListService` (service located @ `exe
 
 1. Try to run `dotnet test` in `exercises/lesson-10/Lists/test/ListTests`
 2. Add the business logic in `exercises/lesson-10/Lists/src/Lists/Services/ListService.cs` to make the tests green!
+3. Implement the methods in `exercises/lesson-10/Lists/src/Lists/Controllers/ListController.cs` (add `ListService` and implement business logic) to make the tests green!
 
 ## Exercise 10-02
 ### Logging with Serilog

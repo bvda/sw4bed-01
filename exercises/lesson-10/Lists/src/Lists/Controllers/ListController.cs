@@ -9,29 +9,27 @@ namespace Lists.Controllers;
 public class ListController : ControllerBase
 {
     private readonly ILogger<ListController> _logger;
-    private readonly ListService<string> _service;  
 
-    public ListController(ILogger<ListController> logger, ListService<string> service)
+    public ListController(ILogger<ListController> logger)
     {
         _logger = logger;
-        _service = service;
     }
 
     [HttpGet]
     public ActionResult<List<ListItem<string>>> Get()
     {
-        return _service.GetItems();
+        throw new NotImplementedException();
     }
 
     [HttpPost]
     public ActionResult<List<ListItem<string>>> Post(ListItem<string> item) {
-        return _service.AddItemToList(item);
+        throw new NotImplementedException();
     }
 
     [Route("{index}")]
     [HttpDelete]
     public ActionResult<List<ListItem<string>>> DeleteByIndex(int index) {
-        return _service.RemoveItem(index);
+        throw new NotImplementedException();
     }
 
 }
