@@ -18,19 +18,16 @@ public class ListController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<ListItem<string>>> Get(String index = "")
+    public ActionResult Get(int? index)
     {
-        _logger.LogInformation("GetItems");
-        int value;
-        var parsed = int.TryParse(index, out value);
-        if(parsed) {
-            if(value >= _service.GetItems().Count) {
+        var items = _service.GetItems();
+        if(index.HasValue) {
+            if(index >= items.Count || index < 0) {
                 return BadRequest();
-            } else {
-                return Ok(_service.GetItems().ElementAt(value));
             }
+            return Ok(items[index.Value]);
         }
-        return _service.GetItems();
+        return Ok(items);
     }
 
     [HttpPost]
