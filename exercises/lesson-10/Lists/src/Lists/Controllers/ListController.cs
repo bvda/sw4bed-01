@@ -16,7 +16,7 @@ public class ListController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<ListItem<string>>> Get()
+    public ActionResult Get()
     {
         throw new NotImplementedException();
     }
