@@ -7,6 +7,9 @@ namespace GoodSite.Pages
     public class TransferModel : PageModel
     {
 
+        [BindProperty]
+        public TransferRequest? TransferDTO { get; set; }
+
         private readonly ILogger<TransferModel> _logger;
 
         public TransferModel(ILogger<TransferModel> logger) {
@@ -17,9 +20,15 @@ namespace GoodSite.Pages
         {
         }
         
-        public void OnPost()
+        public void OnPost(TransferRequest request)
         {
-            _logger.LogDebug("OnTransferPost");
+        _logger.LogWarning($"OnTransferPost {request.Transaction} {request.Amount} to {request.Account}");
         }
+    }
+
+    public class TransferRequest {
+        public required string Transaction { get; set; }
+        public decimal Amount { get; set; }
+        public required string Account { get; set; }
     }
 }

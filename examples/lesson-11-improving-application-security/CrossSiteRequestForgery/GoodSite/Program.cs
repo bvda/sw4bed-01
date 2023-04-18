@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddRazorPages(options => {
     options.Conventions.AuthorizePage("/Transfer");
 });
@@ -15,6 +14,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         return Task.CompletedTask;
     };
 });
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 

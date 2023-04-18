@@ -1,8 +1,17 @@
 ﻿@page
 @model IndexModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
 @{
     ViewData["Title"] = "Home page";
 }
+
+@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
+{
+    <small>Logged in!</small>
+} else {
+    <small>Not logged in!</small>
+}
+
 <form method="post">
     <input type="text" />
     <input type="submit" value="Submit" />
