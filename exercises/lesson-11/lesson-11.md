@@ -41,6 +41,14 @@ Next up, we have two new SPAs (written in Angular) that wants to communicate wit
     - An 'origin4300' policy that allows any headers, `POST` requests from origin `http://localhost:4300/` 
     - An 'both' policy that allows any headers, any method, and any origins
 
+## Play around with the examples
+The best to learn about security flaws is by exploiting them.
+
+1. Fire `examples/lesson-11-improving-application-security/CrossSiteRequestForgery` up!
+2. Check the developer tools in your browser, can you find the cookies? What happens if you delete them?
+3. Fire `examples/lesson-11-improving-application-security/CrossSiteScripting` up!
+4. Can you craft a script that executes automatically, when a user navigates to the site?
+
 [^1]: https://docs.microsoft.com/en-us/aspnet/core/security/docker-https
 [^2]: https://docs.microsoft.com/en-us/aspnet/core/security/docker-compose-https
 [^3]: https://docs.microsoft.com/en-us/aspnet/core/security/cors#cors-policy-options
