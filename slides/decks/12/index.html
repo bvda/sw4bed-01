@@ -95,7 +95,7 @@
 						<small><code>mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]</code></small>
 						<ul>
 							<li><code>mongodb://</code> Prefix to identify the string <sup>(required)</sup>	</li>
-							<li><code>username@password@</code> Authentication credentials <sup>(optional)</sup></li>
+							<li><code>username:password@</code> Authentication credentials <sup>(optional)</sup></li>
 							<li><code>host[:port]</code> Host and port for instance <sup>(host required, port optional (defaults to 27017))</sup></li>
 							<li><code>/defaultauthdb</code> Database to use for authentication <sup>(optional)</sup></li>
 							<li><code>?options</code> Query string for specific options in <code>&lt;name&gt;=&lt;name&gt;</code> format <sup>(optional)</sup></li>
@@ -369,10 +369,9 @@
 							<li>The .NET Driver contains an implementation of LINQ
 								<ul>
 									<li>Targets the aggregation framework</li>
-									<li></li>
+									<li>The driver provides an <code>AsQueryable</code> extension method on <code>IMongoCollection</code></li>
 								</ul>
 							</li>
-							<li>The driver provides an <code>AsQueryable</code> extension method on <code>IMongoCollection</code></li>
 						</ul>
 						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
 						var query = from p in collection.AsQueryable()
@@ -399,7 +398,7 @@
 					<section>
 						<h2><code>FindAndModify</code> methods</h2>
 						<ul>
-							<li>Finds and performs an operation on a documents</li>
+							<li>Finds and performs an <mark>operation</mark> on a documents</li>
 							<li>Available methods
 								<ul>
 									<li><code>FindOneAndDelete</code></li>
@@ -436,7 +435,7 @@
 									<li>May be zero if none match the filter</li>
 								</ul>
 							</li>
-							<li>Here we update the <mark>first</mark> document that meets the filter <code>x == 10</code> and set the value of <code>i</code> to <code>110</code></li>
+							<li>Here we update the <mark>first</mark> document that match the filter <code>x == 10</code> and set the value of <code>i</code> to <code>110</code></li>
 						</ul>
 						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
 							var filter = Builders<BsonDocument>.Filter.Eq("i", 10);
@@ -462,7 +461,11 @@
 									<li><code>$setOnInsert</code> Sets the value of field if an update results in an insert of a document</li>
 								</ul>
 							</li>
-							<li>All these operations are performed in the database</li>
+							<li>All these operations are performed in the database
+								<ul>
+									<li>Which <mark>increases</mark> performance</li>
+								</ul>
+							</li>
 						</ul>
 						<aside class="notes" aria-label="notes">
 							<h4>References</h4>
@@ -480,7 +483,7 @@
 									<li>May be zero if none match the filter</li>
 								</ul>
 							</li>
-							<li>Here we delete all document that meets the filter <code>i</code> greater than or equal to <code>100</code> with <code>DeleteManyAsync</code></li>
+							<li>Here we delete <mark>ALL</mark> document that match the filter <code>i >= 100</code> with <code>DeleteManyAsync</code></li>
 						</ul>
 						<pre><code class="cs" data-line-numbers data-trim data-noescape><script type="text/template">
 							var filter = Builders<BsonDocument>.Filter.Gte("i", 100);
@@ -492,7 +495,7 @@
 							Console.WriteLine(result.DeletedCount);
 						</script></code></pre>
 						<ul>
-							<li>The delete methods return <code>DeleteResult</code> which provides information about the operation</li>
+							<li>The delete methods return <code>DeleteResult</code> which provides <mark>information</mark> about the operation</li>
 						</ul>
 					</section>
 						<aside class="notes" aria-label="notes">
