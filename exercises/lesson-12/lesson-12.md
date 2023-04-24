@@ -8,7 +8,7 @@ Open the .NET project located in `examples/lesson-12-persisting-data-with-mongo-
 
 1. Start the database by running `docker compose up` in the project root
 2. The Docker stack contains a MongoDB[^5] running on port 27018 and Mongo Express[^6] instance running @ http://localhost:5050/. The user and password can be found in `examples/lesson-12-persisting-data-with-mongo-db/mtg-collection/docker-compose.yaml`
-3. Start the application. The database should be seeded automatically when navigating opening http://localhost:5000 in a browser
+3. Start the application. The database should be seeded automatically when navigating opening https://localhost:5000 in a browser
 
 ## Exercise 12-2
 ### Filter by artist
@@ -29,7 +29,7 @@ Add a search feature in the details page, where you can add cards to the deck.
 
 ## Exercise 12-5
 ### Add more cards
-Add the data in `exercises/lesson-12/drk.json`. You will have to fix the JSON before it will be processed. Remember to remove the database between each run in order to seed the database
+Add the data in `exercises/lesson-12/drk.json`. You will have to fix the JSON before it will be processed. Remember to remove the database between each run in order to seed the database. You can use the Mongo Express website @ http://localhost:5050 or MongoDB Compass (get it @ https://www.mongodb.com/try/download/compass)
 
 If you are having too good of a day, check out the set(s) Apocalyse and/or Innistrad on Scryfall[^1] (you can find more information about the model[^2] on their site)
 
