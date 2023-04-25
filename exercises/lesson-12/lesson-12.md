@@ -19,7 +19,7 @@ We want to be able to explore the awesome art of the game, so we need to be able
 
 ## Exercise 12-3
 ### Add pagination to `Index`
-Right now, everything is fine since we are only loading 783 cards. But there are more than 22.630 unique cards printed (in more than 49.900 variants). This would be a lot of data to handle for the browser, and does not exactly account for at great user experience, so we need to add pagination[^3]. You can find some information and inspiration[^4].
+Right now, everything is fine since we are only loading 783 cards. But there are more than 22.630 unique cards printed (in more than 49.900 variants). This would be a lot of data to handle for the browser, and does not exactly account for at great user experience, so we need to add pagination[^3]. You can find some information and inspiration[^4], and when you are ready add it to `Index.cshtml`[^9].
 
 1. Add (or update) a handler that will paginate the card collection so it only return at most 50 cards per page
 
@@ -41,3 +41,4 @@ If you are having too good of a day, check out the set(s) Apocalyse and/or Innis
 [^6]: https://hub.docker.com/_/mongo-express
 [^7]: https://en.wikipedia.org/wiki/Mt._Gox
 [^8]: https://darknetdiaries.com/episode/9/
+[^9]: https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page

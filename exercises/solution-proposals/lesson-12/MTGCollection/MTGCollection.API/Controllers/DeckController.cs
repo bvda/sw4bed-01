@@ -6,21 +6,21 @@ namespace MTGCollection.API;
 
 [ApiController]
 [Route("[controller]")]
-public class DecksController : ControllerBase {
+public class DeckController : ControllerBase {
 
-  private readonly ILogger<DecksController> _logger;
-  private readonly DecksService _service;
+  private readonly ILogger<DeckController> _logger;
+  private readonly DeckService _service;
 
-  public DecksController(ILogger<DecksController> logger, DecksService service) 
+  public DeckController(ILogger<DeckController> logger, DeckService service) 
   {
     _logger = logger;
     _service = service;
   }
 
-  [HttpGet(Name = "GetDecks")]
+  [HttpGet(Name = "GetDeck")]
   public async Task<IList<Deck>> GetAsync() 
   {
-    return await _service.GetDecks();
+    return await _service.GetDeck();
   }
 
   [HttpPost(Name = "PostDeck")]
